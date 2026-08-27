@@ -1,0 +1,81 @@
+import type { Metadata } from "next";
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { Heading } from "@/components/ui/Heading";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { testimonials } from "@/content/testimonials";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildMetadata({
+  title: "Testimonials",
+  description:
+    "What OEM partners say about working with Meridian Manufacturing.",
+  alternates: { canonical: "/testimonials" },
+});
+
+export default function TestimonialsPage() {
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", href: "/" },
+          { name: "Testimonials", href: "/testimonials" },
+        ])}
+      />
+
+      <Section padding="lg">
+        <Container size="wide">
+          <Heading as={1} eyebrow="Testimonials">
+            What OEM partners say.
+          </Heading>
+          <p className="mt-6 max-w-2xl text-lg text-steel-700">
+            Direct quotes from procurement, manufacturing, and supply chain
+            leaders at our customer companies. Shared with their
+            permission; names withheld where requested.
+          </p>
+        </Container>
+      </Section>
+
+      <Section tone="muted" padding="lg">
+        <Container size="full">
+          <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {testimonials.map((t, i) => (
+              <li key={i}>
+                <Card as="article" className="flex h-full flex-col p-8">
+                  <blockquote className="text-lg leading-relaxed text-steel-800">
+                    <p>&ldquo;{t.quote}&rdquo;</p>
+                  </blockquote>
+                  <figcaption className="mt-8 border-t border-steel-200 pt-4 text-sm">
+                    <p className="font-medium text-ink-900">{t.role}</p>
+                    <p className="text-steel-500">{t.company}</p>
+                  </figcaption>
+                </Card>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </Section>
+
+      <Section tone="inverted" padding="lg">
+        <Container size="prose">
+          <div className="text-center">
+            <h2 className="font-serif text-3xl font-semibold text-paper sm:text-4xl">
+              Become the next one.
+            </h2>
+            <p className="mt-4 text-lg text-steel-300">
+              We&rsquo;ll come back with a quote, a process plan, and a
+              quality plan within five business days.
+            </p>
+            <div className="mt-8">
+              <Button href="/contact" size="lg">
+                Request a quote
+              </Button>
+            </div>
+          </div>
+        </Container>
+      </Section>
+    </>
+  );
+}

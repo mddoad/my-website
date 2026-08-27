@@ -1,0 +1,154 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { Heading } from "@/components/ui/Heading";
+import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
+import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { caseStudies } from "@/content/case-studies";
+import { buildMetadata } from "@/lib/seo";
+
+type Params = { slug: string };
+
+export function generateStaticParams(): Params[] {
+  return caseStudies.map((c) => ({ slug: c.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<Params>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const study = caseStudies.find((c) => c.slug === slug);
+  if (!study) {
+    return buildMetadata({ title: "Case study not found" });
+  }
+  return buildMetadata({
+    title: study.title,
+    description: study.summary,
+    alternates: { canonical: `/case-studies/${study.slug}` },
+  });
+}
+
+export default async function CaseStudyDetailPage({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
+  const { slug } = await params;
+  const study = caseStudies.find((c) => c.slug === slug);
+  if (!study) notFound();
+
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", href: "/" },
+          { name: "Case Studies", href: "/case-studies" },
+          { name: study.title, href: `/case-studies/${study.slug}` },
+        ])}
+      />
+
+      {/* Hero with image */}
+      <section className="border-b border-steel-200 bg-steel-50">
+        <Container size="full" className="py-12 sm:py-16">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-steel-500">
+            <Link href="/case-studies" className="hover:text-ink-900">
+              Case Studies
+            </Link>{" "}
+            / <span className="text-ink-900">{study.client}</span>
+          </p>
+          <div className="mt-6 grid items-center gap-10 lg:grid-cols-2">
+            <div>
+              <Badge tone="default">
+                {study.industry} · {study.year}
+              </Badge>
+              <h1 className="mt-4 font-serif text-3xl font-semibold text-ink-900 sm:text-4xl lg:text-5xl">
+                {study.title}
+              </h1>
+              <p className="mt-5 text-lg text-steel-700">{study.summary}</p>
+            </div>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-steel-200 bg-steel-100">
+              <Image
+                src={study.image}
+                alt={study.title}
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Metrics */}
+      <Section padding="md" className="border-y border-steel-200">
+        <Container size="wide">
+          <dl className="grid grid-cols-2 gap-8 lg:grid-cols-3">
+            {study.metrics.map((m) => (
+              <div key={m.label} className="text-center sm:text-left">
+                <dt className="text-sm text-steel-500">{m.label}</dt>
+                <dd className="mt-1 font-serif text-4xl font-semibold text-ink-900 sm:text-5xl">
+                  {m.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Container>
+      </Section>
+
+      {/* Challenge / Approach / Result */}
+      <Section padding="lg">
+        <Container size="prose">
+          <div className="space-y-12">
+            <div>
+              <Heading as={2} eyebrow="Challenge">
+                What the customer was up against
+              </Heading>
+              <p className="mt-6 text-lg text-steel-700">{study.challenge}</p>
+            </div>
+            <div>
+              <Heading as={2} eyebrow="Approach">
+                What we changed
+              </Heading>
+              <p className="mt-6 text-lg text-steel-700">{study.approach}</p>
+            </div>
+            <div>
+              <Heading as={2} eyebrow="Result">
+                What happened next
+              </Heading>
+              <p className="mt-6 text-lg text-steel-700">{study.result}</p>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      <Section tone="inverted" padding="lg">
+        <Container size="prose">
+          <div className="text-center">
+            <h2 className="font-serif text-3xl font-semibold text-paper sm:text-4xl">
+              Want a result like this?
+            </h2>
+            <p className="mt-4 text-lg text-steel-300">
+              We&rsquo;ll come back with a quote, a process plan, and a
+              quality plan within five business days.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Button href="/contact" size="lg">
+                Request a quote
+              </Button>
+              <Button href="/case-studies" variant="secondary" size="lg">
+                More case studies
+              </Button>
+            </div>
+          </div>
+        </Container>
+      </Section>
+    </>
+  );
+}

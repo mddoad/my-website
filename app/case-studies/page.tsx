@@ -1,0 +1,110 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import Image from "next/image";
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { Heading } from "@/components/ui/Heading";
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
+import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { caseStudies } from "@/content/case-studies";
+import { buildMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildMetadata({
+  title: "Case Studies",
+  description:
+    "Real OEM programs: lead-time reductions, EV enclosures, wind turbine conversions, and the metrics behind them.",
+  alternates: { canonical: "/case-studies" },
+});
+
+export default function CaseStudiesPage() {
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", href: "/" },
+          { name: "Case Studies", href: "/case-studies" },
+        ])}
+      />
+
+      <Section padding="lg">
+        <Container size="wide">
+          <Heading as={1} eyebrow="Case Studies">
+            Programs, not pitches.
+          </Heading>
+          <p className="mt-6 max-w-2xl text-lg text-steel-700">
+            Three real programs — the brief, what we changed, and the
+            numbers. Clients are anonymized where requested.
+          </p>
+        </Container>
+      </Section>
+
+      <Section tone="muted" padding="lg">
+        <Container size="full">
+          <ul className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {caseStudies.map((cs) => (
+              <li key={cs.slug} className="h-full">
+                <Card as="article" className="flex h-full flex-col overflow-hidden p-0">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-steel-100">
+                    <Image
+                      src={cs.image}
+                      alt={cs.title}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col p-6">
+                    <Badge tone="default">
+                      {cs.industry} · {cs.year}
+                    </Badge>
+                    <h3 className="mt-4 font-serif text-xl font-semibold text-ink-900">
+                      {cs.title}
+                    </h3>
+                    <p className="mt-3 text-sm text-steel-700">{cs.summary}</p>
+                    <dl className="mt-5 grid grid-cols-3 gap-3 border-t border-steel-200 pt-4 text-xs">
+                      {cs.metrics.map((m) => (
+                        <div key={m.label}>
+                          <dt className="text-steel-500">{m.label}</dt>
+                          <dd className="mt-1 font-serif text-base font-semibold text-ink-900">
+                            {m.value}
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                    <Link
+                      href={`/case-studies/${cs.slug}`}
+                      className="mt-6 inline-flex text-sm font-medium text-ink-900 hover:text-accent-600"
+                    >
+                      Read the story →
+                    </Link>
+                  </div>
+                </Card>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </Section>
+
+      <Section tone="inverted" padding="lg">
+        <Container size="prose">
+          <div className="text-center">
+            <h2 className="font-serif text-3xl font-semibold text-paper sm:text-4xl">
+              Want a program like this on your side?
+            </h2>
+            <p className="mt-4 text-lg text-steel-300">
+              Tell us about your program. We&rsquo;ll come back with a quote,
+              a process plan, and a quality plan within five business days.
+            </p>
+            <div className="mt-8">
+              <Button href="/contact" size="lg">
+                Request a quote
+              </Button>
+            </div>
+          </div>
+        </Container>
+      </Section>
+    </>
+  );
+}

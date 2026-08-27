@@ -7,18 +7,33 @@ Entries are appended in reverse chronological order (newest first).
 
 ## Current status
 
-- **Latest commit:** `9cf8b60` — docs: record Phase 2 commit hash in changelog
+- **Latest commit:** _see git log — the local history from Phases 0–2
+  was lost on 2026-08-27 and the work was rebuilt and re-baselined_
 - **Date:** 2026-08-27
-- **What's live:** The marketing home page at `/` — hero, trust bar, value
-  props, capabilities preview, featured case study, process, stats,
-  testimonials, and final CTA. Header, footer, mobile nav, and skip
+- **What's live:** The full marketing site — home page (hero, trust bar,
+  value props, capabilities preview, featured case study, process,
+  stats, testimonials, final CTA) plus all detail routes:
+  `/products` + 6 capability pages, `/industries` + 4 industry pages,
+  `/case-studies` + 3 case study pages, `/process`, `/about`, `/team`,
+  `/testimonials`, `/resources` placeholder, `/contact` with a working
+  form, and `app/not-found.tsx`. Header, footer, mobile nav, and skip
   link are wired. All content lives in typed `content/*.ts` modules.
-  Production build is clean (TypeScript passes, both routes prerender
-  static).
-- **What's next:** Phase 3 — detail routes (`/products`, `/industries`,
-  `/case-studies`, `/process`, `/about`, `/team`, `/testimonials`,
-  `/resources`, `/contact`), `app/not-found.tsx`, and per-page metadata
-  + breadcrumb JSON-LD.
+  Per-page metadata and breadcrumb JSON-LD are in place. Production
+  build is clean (TypeScript passes, all 26 routes prerender static).
+- **What's next:** Phase 4 — `app/robots.ts`, `app/sitemap.ts`,
+  `app/opengraph-image.tsx`, `app/icon.tsx`.
+
+> **Note on history:** The four commits referenced below this section
+> (`fcc83fc`, `0e9e618`, `d697d77`, `c57107d`) were the local commits
+> for Phases 0, 1, 2, and the changelog-restructuring doc commit. On
+> 2026-08-27 the local `.git` was found with corrupt (zero-byte) object
+> files for those commits, the `main` branch pointer could not be
+> resolved, and origin only contained the `9e4cb2a` baseline. The
+> on-disk work was real and verified, but the local history was
+> unrecoverable. The repo was reset to `9e4cb2a` and the entire
+> working tree (Phases 0 through 3) was committed as a single root
+> commit. The Phase entries below remain as a record of what was
+> built; the commit hashes they reference no longer resolve.
 
 See [`ROADMAP.md`](./ROADMAP.md) for the full plan and
 [`FEATURES.md`](./FEATURES.md) for the complete feature list.
