@@ -26,50 +26,50 @@ SEO basics. After Phase 1 the site looks empty but the chrome is in place.
   - [x] `docs/FEATURES.md`
   - [x] `docs/ROADMAP.md`
   - [x] `docs/CHANGELOG.md`
-- [ ] **Step 1.3 — `app/layout.tsx` shell**
-  - [ ] HTML lang, body class, font CSS variables wired
-  - [ ] Default `metadata` (title template, OG, Twitter, robots, base URL)
-  - [ ] Organization JSON-LD injected
-  - [ ] Renders `<Header />` / `<main id="main">` / `<Footer />` / `<SkipLink />`
-- [ ] **Step 1.4 — Design tokens in `app/globals.css`**
-  - [ ] `ink-*` (10 steps), `steel-*` (10 steps), `accent-*` (7 steps)
-  - [ ] Surface colors (`paper`, `surface`, `surface-inverted`)
-  - [ ] Font tokens (`--font-serif`, `--font-sans`)
-  - [ ] Radii (`sm`, `md`, `lg`), shadows (`card`, `raised`)
-  - [ ] Base layer: body, headings, `:focus-visible`, `prefers-reduced-motion`
-- [ ] **Step 1.5 — `lib/site.ts`**
-  - [ ] Brand, tagline, description, URL
-  - [ ] Contact (email, phone, address)
-  - [ ] Social links
-  - [ ] Primary nav array
-  - [ ] Certifications array
-  - [ ] `established` year
-- [ ] **Step 1.6 — `lib/utils.ts`**
-  - [ ] `cn(...)` class-name combiner
-- [ ] **Step 1.7 — UI primitives**
-  - [ ] `components/ui/Container.tsx` (`prose` / `wide` / `full`)
-  - [ ] `components/ui/Section.tsx` (`default` / `inverted` / `muted`, padding sizes)
-  - [ ] `components/ui/Heading.tsx` (h1–h4, eyebrow, align)
-  - [ ] `components/ui/Button.tsx` (3 variants × 3 sizes, link + button)
-  - [ ] `components/ui/Card.tsx`
-  - [ ] `components/ui/Badge.tsx`
-- [ ] **Step 1.8 — Layout components**
-  - [ ] `components/layout/SkipLink.tsx`
-  - [ ] `components/layout/Header.tsx` (desktop nav + CTA)
-  - [ ] `components/layout/MobileNav.tsx` (hamburger + sheet)
-  - [ ] `components/layout/Footer.tsx` (4-column)
-- [ ] **Step 1.9 — SEO primitives**
-  - [ ] `lib/seo.ts` — `buildMetadata` helper
-  - [ ] `components/seo/JsonLd.tsx` — `organizationJsonLd`, `breadcrumbJsonLd`
-- [ ] **Step 1.10 — Phase 1 home stub**
-  - [ ] `app/page.tsx` placeholder explaining Phase 2 work
-- [ ] **Step 1.11 — Verify Phase 1**
-  - [ ] `npm run dev` boots without errors
-  - [ ] Home page renders header / footer / skip link
-  - [ ] Mobile nav opens and closes
-  - [ ] `view-source:` shows the organization JSON-LD script tag
-- [ ] **Step 1.12 — Commit**
-  - [ ] `git commit -m "Phase 1: foundation"`
+- [x] **Step 1.3 — `app/layout.tsx` shell**
+  - [x] HTML lang, body class, font CSS variables wired
+  - [x] Default `metadata` (title template, OG, Twitter, robots, base URL)
+  - [x] Organization JSON-LD injected
+  - [x] Renders `<Header />` / `<main id="main">` / `<Footer />` / `<SkipLink />`
+- [x] **Step 1.4 — Design tokens in `app/globals.css`**
+  - [x] `ink-*` (10 steps), `steel-*` (10 steps), `accent-*` (7 steps)
+  - [x] Surface colors (`paper`, `surface`, `surface-inverted`)
+  - [x] Font tokens (`--font-serif`, `--font-sans`)
+  - [x] Radii (`sm`, `md`, `lg`), shadows (`card`, `raised`)
+  - [x] Base layer: body, headings, `:focus-visible`, `prefers-reduced-motion`
+- [x] **Step 1.5 — `lib/site.ts`**
+  - [x] Brand, tagline, description, URL
+  - [x] Contact (email, phone, address)
+  - [x] Social links
+  - [x] Primary nav array
+  - [x] Certifications array
+  - [x] `established` year
+- [x] **Step 1.6 — `lib/utils.ts`**
+  - [x] `cn(...)` class-name combiner
+- [x] **Step 1.7 — UI primitives**
+  - [x] `components/ui/Container.tsx` (`prose` / `wide` / `full`)
+  - [x] `components/ui/Section.tsx` (`default` / `inverted` / `muted`, padding sizes)
+  - [x] `components/ui/Heading.tsx` (h1–h4, eyebrow, align)
+  - [x] `components/ui/Button.tsx` (3 variants × 3 sizes, link + button)
+  - [x] `components/ui/Card.tsx`
+  - [x] `components/ui/Badge.tsx`
+- [x] **Step 1.8 — Layout components**
+  - [x] `components/layout/SkipLink.tsx`
+  - [x] `components/layout/Header.tsx` (desktop nav + CTA)
+  - [x] `components/layout/MobileNav.tsx` (hamburger + sheet)
+  - [x] `components/layout/Footer.tsx` (4-column)
+- [x] **Step 1.9 — SEO primitives**
+  - [x] `lib/seo.ts` — `buildMetadata` helper
+  - [x] `components/seo/JsonLd.tsx` — `organizationJsonLd`, `breadcrumbJsonLd`
+- [x] **Step 1.10 — Phase 1 home stub**
+  - [x] `app/page.tsx` placeholder explaining Phase 2 work
+- [x] **Step 1.11 — Verify Phase 1**
+  - [x] `npm run dev` boots without errors (Ready in 541ms, no errors)
+  - [x] Home page renders header / footer / skip link (HTTP 200, all landmarks present)
+  - [x] Mobile nav button present in initial DOM (sheet opens on click)
+  - [x] `view-source:` shows the organization JSON-LD script tag
+- [x] **Step 1.12 — Commit**
+  - [x] `git commit -m "Phase 1: foundation"`
 
 ## Phase 2 — Home page
 
