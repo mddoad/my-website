@@ -7,7 +7,7 @@ Entries are appended in reverse chronological order (newest first).
 
 ## Current status
 
-- **Latest commit:** *(pending — Step 5.6 commit hash back-fill)*
+- **Latest commit:** `f42f85f` — Phase 5: design system integration (Step 5.6)
 - **Date:** 2026-08-27
 - **What's live:** The full marketing site (Phases 1–4) on the
   rebrand: brand-green primary (`#00ed64`), brand-teal-deep
@@ -237,8 +237,8 @@ so future visual changes happen in one place.
 
 **Plan:** `/home/aurwave/.claude/plans/design-md-integration.md`
 
-**Commits:** *`<pending — Step 5.6 commit hash back-filled
-in a follow-up `docs:` commit>`*
+**Commits:** `f42f85f` — Phase 5: design system integration
+(Step 5.6).
 
 ---
 
