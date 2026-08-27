@@ -153,9 +153,14 @@ export default function AboutPage() {
       <Section tone="inverted" padding="lg">
         <Container size="prose">
           <div className="text-center">
-            <h2 className="text-3xl font-semibold text-on-dark sm:text-4xl">
+            <Heading
+              as={2}
+              align="center"
+              eyebrow="Visit us"
+              className="text-on-dark text-3xl font-semibold sm:text-4xl"
+            >
               Come see the floor.
-            </h2>
+            </Heading>
             <p className="mt-4 text-lg text-on-dark-muted">
               We host customer visits at our Cleveland facility by
               appointment. Send a note and we&rsquo;ll set one up.

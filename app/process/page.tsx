@@ -121,9 +121,14 @@ export default function ProcessPage() {
       <Section tone="inverted" padding="lg">
         <Container size="prose">
           <div className="text-center">
-            <h2 className="text-3xl font-semibold text-on-dark sm:text-4xl">
+            <Heading
+              as={2}
+              align="center"
+              eyebrow="Get started"
+              className="text-on-dark text-3xl font-semibold sm:text-4xl"
+            >
               Start with Discover.
-            </h2>
+            </Heading>
             <p className="mt-4 text-lg text-on-dark-muted">
               Send a drawing, a volume profile, and a target date. We&rsquo;ll
               come back with a quote, a process plan, and a quality plan

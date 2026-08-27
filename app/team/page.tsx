@@ -70,9 +70,14 @@ export default function TeamPage() {
       <Section tone="inverted" padding="lg">
         <Container size="prose">
           <div className="text-center">
-            <h2 className="text-3xl font-semibold text-on-dark sm:text-4xl">
+            <Heading
+              as={2}
+              align="center"
+              eyebrow="Talk to us"
+              className="text-on-dark text-3xl font-semibold sm:text-4xl"
+            >
               Want to talk to one of them directly?
-            </h2>
+            </Heading>
             <p className="mt-4 text-lg text-on-dark-muted">
               Tell us about your program and we&rsquo;ll route you to the
               right person.

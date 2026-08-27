@@ -86,12 +86,14 @@ export default function ProductsPage() {
       <Section tone="inverted" padding="lg">
         <Container size="prose">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-green">
-              Not sure where to start?
-            </p>
-            <h2 className="mt-4 text-3xl font-semibold text-on-dark sm:text-4xl">
+            <Heading
+              as={2}
+              align="center"
+              eyebrow="Not sure where to start?"
+              className="text-on-dark text-3xl font-semibold sm:text-4xl"
+            >
               Send a drawing. We&rsquo;ll route it.
-            </h2>
+            </Heading>
             <p className="mt-4 text-lg text-on-dark-muted">
               Every capability here is staffed. Send your print, your volume,
               and your target date — we&rsquo;ll come back with a quote, a

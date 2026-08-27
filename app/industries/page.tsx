@@ -75,9 +75,14 @@ export default function IndustriesPage() {
       <Section tone="inverted" padding="lg">
         <Container size="prose">
           <div className="text-center">
-            <h2 className="text-3xl font-semibold text-on-dark sm:text-4xl">
+            <Heading
+              as={2}
+              align="center"
+              eyebrow="Got something else?"
+              className="text-on-dark text-3xl font-semibold sm:text-4xl"
+            >
               Don&rsquo;t see your industry?
-            </h2>
+            </Heading>
             <p className="mt-4 text-lg text-on-dark-muted">
               We take on programs across adjacent verticals — heavy industrial,
               rail, semiconductor, and more. Tell us what you&rsquo;re building.
