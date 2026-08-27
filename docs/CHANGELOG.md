@@ -121,5 +121,4 @@ components, SEO basics, and a placeholder home page.
 
 **Roadmap:** [`ROADMAP.md` — Phase 1, Steps 1.3–1.11](./ROADMAP.md)
 
-**Not yet committed.** The Phase 1 work lands as a single commit in the
-next step.
+**Committed:** `0e9e618 — Phase 1: foundation`
