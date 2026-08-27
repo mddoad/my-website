@@ -46,6 +46,4 @@ roadmap step will be ticked when verified.
 
 **Roadmap:** [`ROADMAP.md` — Step 1.1, 1.2](./ROADMAP.md)
 
-**Not yet committed.** The reset + docs will be committed in a single
-"Phase 0: reset and documentation" commit as the next step, before any
-new code lands.
+**Committed:** `fcc83fc — Phase 0: reset working tree and add documentation set`
