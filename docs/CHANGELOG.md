@@ -7,7 +7,7 @@ Entries are appended in reverse chronological order (newest first).
 
 ## Current status
 
-- **Latest commit:** `f42f85f` — Phase 5: design system integration (Step 5.6)
+- **Latest commit:** `7527d4e` — refactor: upgrade CTA sections to `<Heading>` primitive
 - **Date:** 2026-08-27
 - **What's live:** The full marketing site (Phases 1–4) on the
   rebrand: brand-green primary (`#00ed64`), brand-teal-deep
@@ -15,7 +15,9 @@ Entries are appended in reverse chronological order (newest first).
   the 7-step `rounded` scale, the 13-step `spacing` scale.
   All 25 marketing routes prerender static, plus 4 metadata
   routes (`/icon`, `/opengraph-image`, `/robots.txt`,
-  `/sitemap.xml`).
+  `/sitemap.xml`). Every inverted closing CTA on the home
+  page and inner routes now uses the `<Heading>` primitive
+  with a centered eyebrow.
 - **What's next:** Phase 5 — polish + launch prep (continued).
   - **Step 5.1 (code shipped, verification pending user):** All
     planned accessibility fixes applied across 15 source files.
@@ -31,14 +33,21 @@ Entries are appended in reverse chronological order (newest first).
     social).
   - **Step 5.5:** Final commit — bundles all Phase 5 work per the
     project's "one real commit per phase" convention.
-  - **Step 5.6 (in progress → shipping this commit):** Design
-    system integration per `docs/design.md`. Tokens added to
-    `app/globals.css`, 6 UI primitives rebuilt, 9 home sections
-    and 13 page routes swept to the new palette. Build clean
-    (`npm run build` → 29 static pages, TypeScript clean).
-    Inter substitutes `Euclid Circular A` (paid font, not yet
-    licensed). Plan at
+  - **Step 5.6 (shipped `f42f85f`):** Design system integration
+    per `docs/design.md`. Tokens added to `app/globals.css`, 6 UI
+    primitives rebuilt, 9 home sections and 13 page routes swept
+    to the new palette. Build clean (`npm run build` → 29 static
+    pages, TypeScript clean). Inter substitutes `Euclid Circular A`
+    (paid font, not yet licensed). Plan at
     `/home/aurwave/.claude/plans/design-md-integration.md`.
+  - **CTA consistency pass (shipped `7527d4e`):** Every inverted
+    closing CTA on the home page and inner routes upgraded from
+    raw `<h2>` + eyebrow `<p>` to the `<Heading>` primitive. CTAs
+    that previously had no eyebrow gained one ("Visit us", "Your
+    move", "Talk to us", "Get started", "Got something else?",
+    "Let's go", "Your turn"). Visible title text unchanged;
+    structural swap so every title uses the same component and
+    benefits from any future Heading improvements.
 
 > **Note on history (2026-08-27):** During Phase 3 work the local
 > `.git/objects` store had four zero-byte loose-object files that
@@ -81,6 +90,91 @@ changes; they only touch this file.
 
 **Commit links** use the short hash (e.g. `9e4cb2a`). Run
 `git show <hash>` for the full diff.
+
+---
+
+## 2026-08-27 21:00 — CTA consistency: every closing CTA now uses `<Heading>`
+
+**Context:** After the Step 5.6 rebrand, the home page
+`FinalCta` and the closing CTA blocks on each inner route
+were inconsistent: some used the `<Heading>` primitive,
+others used a raw `<h2>` with a separate eyebrow `<p>`.
+Worse, the inner-route CTAs without an eyebrow (about,
+case-studies, case-studies/[slug], industries,
+industries/[slug], process, products/[slug], team,
+testimonials) had a visual gap next to the home page
+`FinalCta` and the `/products` CTA, both of which carry
+a brand-green eyebrow. This entry upgrades all of them to
+the same primitive and adds eyebrows where they were
+missing.
+
+**What changed:**
+
+- **Home `FinalCta`** (`components/sections/FinalCta.tsx`)
+  — raw `<h2>` + eyebrow `<p>` swapped for
+  `<Heading as={2} align="center" eyebrow="Ready when you are">`.
+  Visible title ("Tell us about your program.") unchanged.
+- **`/products` closing CTA** — same treatment. Eyebrow
+  "Not sure where to start?" preserved.
+- **9 inner-route CTAs gained an eyebrow and the
+  `<Heading>` primitive:**
+  - `/about` — eyebrow "Visit us" / "Come see the floor."
+  - `/case-studies` — eyebrow "Let's go" / "Want a program
+    like this on your side?"
+  - `/case-studies/[slug]` — eyebrow "Your move" / "Want a
+    result like this?"
+  - `/industries` — eyebrow "Got something else?" / "Don't
+    see your industry?"
+  - `/industries/[slug]` — eyebrow is the industry name
+    (e.g. "Aerospace & Defense") / "Building for aerospace
+    & defense?"
+  - `/process` — eyebrow "Get started" / "Start with
+    Discover."
+  - `/products/[slug]` — eyebrow is the service name
+    (e.g. "Precision Machining") / "Have a drawing for
+    precision machining?"
+  - `/team` — eyebrow "Talk to us" / "Want to talk to one
+    of them directly?"
+  - `/testimonials` — eyebrow "Your turn" / "Become the
+    next one."
+- Each `<Heading>` passes a `className` to keep the
+  previous CTA size (`text-3xl sm:text-4xl font-semibold`)
+  and the on-dark color (`text-on-dark`) so the inverted
+  brand-teal-deep section still reads correctly.
+- The home page `Process` section already used
+  `<Heading>` with eyebrow "Process" and title "How an OEM
+  program moves at Meridian", so it was left alone.
+
+**What this change is NOT:**
+
+- No new components, no new routes.
+- No content changes beyond the new eyebrow labels
+  listed above.
+- No type or layout changes — the title body and the
+  body paragraph below it are unchanged.
+
+**Why:** A single title primitive across the site means
+every CTA gets the same type ramp, the same heading
+spacing, and the same accessibility treatment (the
+`<Heading>` primitive already maps its `<div>` wrapper
+correctly for the eyebrow and centers on `align="center"`).
+A future change to the type scale or to the heading color
+on dark surfaces now lands in one component.
+
+**Verification:**
+
+- `npm run build` → **clean** (29 static pages, TypeScript
+  passes).
+- `grep -rEn 'tone="inverted"' app/ components/ -A 5 |
+  grep '<h2'` → **zero matches** — no raw `<h2>` remains
+  inside an inverted CTA section.
+
+**Roadmap:** Step 5.6 (`[x]`). No new step; this is
+refactor-only polish that lands inside the existing
+Step 5.6 ship.
+
+**Commits:** `7527d4e` — refactor: upgrade CTA sections
+to `<Heading>` primitive.
 
 ---
 
