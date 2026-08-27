@@ -112,18 +112,18 @@ authored in `content/*.ts` and consumed via small section components.
 Static and dynamic routes for the rest of the site. Most data already
 exists from Phase 2.
 
-- [ ] **Step 3.1 — `/products` index + `/products/[slug]` detail**
-- [ ] **Step 3.2 — `/industries` index + `/industries/[slug]` detail**
-- [ ] **Step 3.3 — `/case-studies` index + `/case-studies/[slug]` detail**
-- [ ] **Step 3.4 — `/process`**
-- [ ] **Step 3.5 — `/about` + `/team`**
-- [ ] **Step 3.6 — `/testimonials`**
-- [ ] **Step 3.7 — `/resources` (placeholder)**
-- [ ] **Step 3.8 — `/contact` + form**
-- [ ] **Step 3.9 — `app/not-found.tsx`**
-- [ ] **Step 3.10 — Per-page `generateMetadata` + breadcrumb JSON-LD**
-- [ ] **Step 3.11 — Commit**
-  - [ ] `git commit -m "Phase 3: detail routes"`
+- [x] **Step 3.1 — `/products` index + `/products/[slug]` detail**
+- [x] **Step 3.2 — `/industries` index + `/industries/[slug]` detail**
+- [x] **Step 3.3 — `/case-studies` index + `/case-studies/[slug]` detail**
+- [x] **Step 3.4 — `/process`**
+- [x] **Step 3.5 — `/about` + `/team`**
+- [x] **Step 3.6 — `/testimonials`**
+- [x] **Step 3.7 — `/resources` (placeholder)**
+- [x] **Step 3.8 — `/contact` + form**
+- [x] **Step 3.9 — `app/not-found.tsx`**
+- [x] **Step 3.10 — Per-page `generateMetadata` + breadcrumb JSON-LD**
+- [x] **Step 3.11 — Commit**
+  - [x] `git commit -m "Phase 3: detail routes"`
 
 ## Phase 4 — SEO + assets
 

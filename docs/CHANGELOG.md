@@ -66,6 +66,67 @@ changes; they only touch this file.
 
 ---
 
+## 2026-08-27 16:30 — Phase 3: detail routes
+
+**Context:** Phase 1 stood up the chrome and Phase 2 composed the home
+page from data in `content/*.ts`. Phase 3 is the rest of the marketing
+site — every other route a real visitor would click into, plus the
+404 page and the per-page metadata + breadcrumb JSON-LD that
+discoverability needs.
+
+**What changed:**
+
+- **9 static routes + 13 dynamic routes**:
+  - `/products` + `/products/[slug]` (6 capability pages)
+  - `/industries` + `/industries/[slug]` (4 industry pages)
+  - `/case-studies` + `/case-studies/[slug]` (3 case study pages)
+  - `/process` (long-form expansion of the 4-step process from
+    `content/stats.ts`)
+  - `/about` (history, stats, certifications, leadership preview) and
+    `/team` (full leadership grid)
+  - `/testimonials` (full quote list, beyond the 3 shown on home)
+  - `/resources` (placeholder index for upcoming insights / articles)
+  - `/contact` (sales contact details, facility address, hours, and a
+    working request-a-quote form)
+  - `app/not-found.tsx` (branded 404)
+- **Contact form**: `app/contact/ContactForm.tsx` (client component
+  using `useActionState`) + `app/contact/actions.ts` (server action
+  validating required fields and email shape; v1 just logs the
+  submission).
+- **Per-page metadata**: every static route exports a `metadata`
+  constant; every dynamic route exports `generateMetadata` and
+  `generateStaticParams`. Title template (`%s | Meridian
+  Manufacturing`) and OG defaults come from `lib/seo.ts` /
+  `app/layout.tsx`.
+- **Breadcrumb JSON-LD** on every detail page (Home → Section → Item)
+  via the existing `breadcrumbJsonLd()` helper.
+
+**Why:** The home page is the only route a serious buyer has been able
+to land on through Phases 1 and 2. With Phase 3 every capability,
+industry, and case study has its own discoverable URL with proper
+metadata — the marketing site is now a full funnel, not a single
+landing page.
+
+**Verification:**
+
+- All 24 in-app routes return 200; `/this-does-not-exist` returns
+  404 with the branded not-found page.
+- Page titles use the template: e.g. `Precision Machining | Meridian
+  Manufacturing`.
+- Breadcrumb JSON-LD on detail pages contains the expected
+  `BreadcrumbList` → `ListItem` chain (Home → Capabilities →
+  Precision Machining).
+- `npm run build`: TypeScript clean, all 26 routes prerender static.
+
+**Roadmap:** [`ROADMAP.md` — Phase 3, Steps 3.1–3.11](./ROADMAP.md)
+
+**Commits:**
+
+- [`d30624b`](https://github.com/mddoad/my-website/commit/d30624b) — Phase 3: detail routes
+- [`75dc0e7`](https://github.com/mddoad/my-website/commit/75dc0e7) — docs: record Phase 3 commit hash and history note in changelog
+
+---
+
 ## 2026-08-27 15:50 — Phase 2: home page
 
 **Context:** The home page is the route every visitor lands on first.
