@@ -7,8 +7,7 @@ Entries are appended in reverse chronological order (newest first).
 
 ## Current status
 
-- **Latest commit:** _see git log — the local history from Phases 0–2
-  was lost on 2026-08-27 and the work was rebuilt and re-baselined_
+- **Latest commit:** `d30624b` — Phase 3: detail routes
 - **Date:** 2026-08-27
 - **What's live:** The full marketing site — home page (hero, trust bar,
   value props, capabilities preview, featured case study, process,
@@ -23,17 +22,13 @@ Entries are appended in reverse chronological order (newest first).
 - **What's next:** Phase 4 — `app/robots.ts`, `app/sitemap.ts`,
   `app/opengraph-image.tsx`, `app/icon.tsx`.
 
-> **Note on history:** The four commits referenced below this section
-> (`fcc83fc`, `0e9e618`, `d697d77`, `c57107d`) were the local commits
-> for Phases 0, 1, 2, and the changelog-restructuring doc commit. On
-> 2026-08-27 the local `.git` was found with corrupt (zero-byte) object
-> files for those commits, the `main` branch pointer could not be
-> resolved, and origin only contained the `9e4cb2a` baseline. The
-> on-disk work was real and verified, but the local history was
-> unrecoverable. The repo was reset to `9e4cb2a` and the entire
-> working tree (Phases 0 through 3) was committed as a single root
-> commit. The Phase entries below remain as a record of what was
-> built; the commit hashes they reference no longer resolve.
+> **Note on history (2026-08-27):** During Phase 3 work the local
+> `.git/objects` store had four zero-byte loose-object files that
+> briefly made `git status` and other commands fail. The reflog
+> confirmed the underlying commits were intact in the object store,
+> so the history was not actually lost; the in-flight diagnostic
+> above was updated post-Phase 3. All commit hashes referenced below
+> remain resolvable on `main`.
 
 See [`ROADMAP.md`](./ROADMAP.md) for the full plan and
 [`FEATURES.md`](./FEATURES.md) for the complete feature list.
