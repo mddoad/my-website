@@ -76,35 +76,36 @@ SEO basics. After Phase 1 the site looks empty but the chrome is in place.
 The home page is the only route real visitors hit first. All data is
 authored in `content/*.ts` and consumed via small section components.
 
-- [ ] **Step 2.1 — `content/stats.ts`**
-  - [ ] 4 KPI entries + 4 process steps
-- [ ] **Step 2.2 — `content/services.ts`**
-  - [ ] 6 service entries with `slug`, `name`, `short`, `description`,
+- [x] **Step 2.1 — `content/stats.ts`**
+  - [x] 4 KPI entries + 4 process steps
+- [x] **Step 2.2 — `content/services.ts`**
+  - [x] 6 service entries with `slug`, `name`, `short`, `description`,
         `capabilities[]`
-- [ ] **Step 2.3 — `content/industries.ts`**
-  - [ ] 4 industry entries
-- [ ] **Step 2.4 — `content/case-studies.ts`**
-  - [ ] 3 case studies with challenge / approach / result + metrics
-- [ ] **Step 2.5 — `content/team.ts`**
-  - [ ] 4 leadership entries
-- [ ] **Step 2.6 — `content/testimonials.ts`**
-  - [ ] 3 quote entries
-- [ ] **Step 2.7 — Home sections**
-  - [ ] `components/sections/Hero.tsx`
-  - [ ] `components/sections/TrustBar.tsx`
-  - [ ] `components/sections/ValueProps.tsx`
-  - [ ] `components/sections/CapabilitiesPreview.tsx`
-  - [ ] `components/sections/FeaturedCaseStudy.tsx`
-  - [ ] `components/sections/Process.tsx`
-  - [ ] `components/sections/Stats.tsx`
-  - [ ] `components/sections/Testimonials.tsx`
-  - [ ] `components/sections/FinalCta.tsx`
-- [ ] **Step 2.8 — Compose home**
-  - [ ] `app/page.tsx` renders the sections in order
-- [ ] **Step 2.9 — Verify**
-  - [ ] Each section renders, breakpoints behave, links resolve
-- [ ] **Step 2.10 — Commit**
-  - [ ] `git commit -m "Phase 2: home page"`
+- [x] **Step 2.3 — `content/industries.ts`**
+  - [x] 4 industry entries
+- [x] **Step 2.4 — `content/case-studies.ts`**
+  - [x] 3 case studies with challenge / approach / result + metrics
+- [x] **Step 2.5 — `content/team.ts`**
+  - [x] 4 leadership entries
+- [x] **Step 2.6 — `content/testimonials.ts`**
+  - [x] 3 quote entries
+- [x] **Step 2.7 — Home sections**
+  - [x] `components/sections/Hero.tsx`
+  - [x] `components/sections/TrustBar.tsx`
+  - [x] `components/sections/ValueProps.tsx`
+  - [x] `components/sections/CapabilitiesPreview.tsx`
+  - [x] `components/sections/FeaturedCaseStudy.tsx`
+  - [x] `components/sections/Process.tsx`
+  - [x] `components/sections/Stats.tsx`
+  - [x] `components/sections/Testimonials.tsx`
+  - [x] `components/sections/FinalCta.tsx`
+- [x] **Step 2.8 — Compose home**
+  - [x] `app/page.tsx` renders the sections in order
+- [x] **Step 2.9 — Verify**
+  - [x] Each section renders, breakpoints behave, links resolve
+  - [x] `npm run build` clean (TypeScript, both routes prerender static)
+- [x] **Step 2.10 — Commit**
+  - [x] `git commit -m "Phase 2: home page"`
 
 ## Phase 3 — Detail routes
 

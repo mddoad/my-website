@@ -1,20 +1,25 @@
-/**
- * Phase 1 home stub. Section composition is built out in Phase 2.
- * The route exists now so the layout, header, footer, and JSON-LD are
- * all visible and verifiable end-to-end.
- */
+import { Hero } from "@/components/sections/Hero";
+import { TrustBar } from "@/components/sections/TrustBar";
+import { ValueProps } from "@/components/sections/ValueProps";
+import { CapabilitiesPreview } from "@/components/sections/CapabilitiesPreview";
+import { FeaturedCaseStudy } from "@/components/sections/FeaturedCaseStudy";
+import { Process } from "@/components/sections/Process";
+import { Stats } from "@/components/sections/Stats";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { FinalCta } from "@/components/sections/FinalCta";
+
 export default function HomePage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-24 sm:py-32">
-      <h1 className="text-4xl font-semibold text-ink-900 sm:text-5xl">
-        Phase 1 foundation is in place.
-      </h1>
-      <p className="mt-6 text-lg text-steel-700">
-        Header, footer, mobile navigation, design tokens, layout primitives,
-        and site-wide metadata are wired up. The full marketing site — hero,
-        trust bar, value props, featured work, process, stats, and
-        testimonials — is built in Phase 2.
-      </p>
-    </div>
+    <>
+      <Hero />
+      <TrustBar />
+      <ValueProps />
+      <CapabilitiesPreview />
+      <FeaturedCaseStudy />
+      <Process />
+      <Stats />
+      <Testimonials />
+      <FinalCta />
+    </>
   );
 }
