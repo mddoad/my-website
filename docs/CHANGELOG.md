@@ -123,6 +123,7 @@ and reinforces that the site is in scaffold mode.
 **Commits:**
 
 - [`289a92c`](https://github.com/mddoad/my-website/commit/289a92c) — Phase 4: SEO + assets
+- [`ae737e9`](https://github.com/mddoad/my-website/commit/ae737e9) — docs: tick Phase 4 in FEATURES and ROADMAP, add Phase 4 changelog entry
 
 ---
 

@@ -17,11 +17,11 @@ step is blocked, I will leave it `[ ]` and note the blocker in
 The smallest runnable site: layout, design tokens, primitives, site chrome,
 SEO basics. After Phase 1 the site looks empty but the chrome is in place.
 
-- [ ] **Step 1.1 — Reset the working tree**
+- [x] **Step 1.1 — Reset the working tree**
   - [x] Wipe untracked `app/`, `components/`, `content/`, `lib/`
   - [x] Revert modified files to the `create-next-app` baseline
   - [x] Working tree is clean
-- [ ] **Step 1.2 — Document the project**
+- [x] **Step 1.2 — Document the project**
   - [x] `docs/OVERVIEW.md`
   - [x] `docs/FEATURES.md`
   - [x] `docs/ROADMAP.md`
