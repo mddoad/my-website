@@ -50,12 +50,27 @@ Three jobs, in order of priority:
 
 ## Visual system
 
-- **Palette:** Industrial blue (`ink-*`) primary, steel neutral, single
-  warm accent (`accent-*`) used sparingly.
-- **Type:** Inter for body, Source Serif 4 for headlines. The serif is a
-  quiet nod to engineering drawing sets without leaning into "heritage".
-- **Density:** Marketing density, not dashboard density. Generous vertical
-  rhythm. Subtle elevation only.
+> **Note (2026-08-27):** Phase 5 Step 5.6 rebrand integrates
+> `docs/design.md` as the design-system source of truth. The
+> brand-green primary + brand-teal-deep surfaces (and the
+> supporting ink / charcoal / slate / steel / stone / muted
+> neutral scale, hairlines, full-radius buttons, and 13-step
+> spacing scale) come from that spec. The historic "industrial
+> blue 1972" description below is retained for context.
+
+- **Palette (current, per `docs/design.md`):** Brand green
+  (`brand-green` `#00ed64`) as the primary CTA color, brand teal
+  deep (`brand-teal-deep` `#001e2b`) for inverted sections and the
+  footer, hairline borders, single warm accent colors (orange,
+  purple, pink) reserved for badges. Neutral scale runs from
+  `ink` → `charcoal` → `slate` → `steel` → `stone` → `muted` for
+  body / secondary / tertiary text.
+- **Type:** Inter for everything (substitutes `Euclid Circular A`
+  from `design.md` — paid Krea font not yet licensed; one-line
+  swap to the real Euclid once available). Source Serif 4 was
+  dropped during the rebrand in favor of a single geometric sans.
+- **Density:** Marketing density, not dashboard density. Generous
+  vertical rhythm. Subtle elevation only.
 
 ## Out of scope
 

@@ -32,21 +32,21 @@ const sitemap = [
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-steel-200 bg-ink-900 text-steel-200">
-      <Container size="full" className="py-16">
+    <footer className="mt-auto bg-brand-teal-deep text-on-dark">
+      <Container size="full" className="py-[64px]">
         <div className="grid gap-10 lg:grid-cols-4">
           <div className="space-y-4">
-            <div className="flex items-center gap-2 font-serif text-lg font-semibold text-paper">
+            <div className="flex items-center gap-2 text-lg font-semibold text-on-dark">
               <span
                 aria-hidden
-                className="grid h-7 w-7 place-items-center rounded-sm bg-paper text-ink-900 text-sm font-bold"
+                className="grid h-8 w-8 place-items-center rounded-md bg-canvas text-brand-teal-deep text-sm font-bold"
               >
                 M
               </span>
               <span>{site.shortName}</span>
             </div>
-            <p className="max-w-sm text-sm text-steel-300">{site.description}</p>
-            <address className="not-italic text-sm text-steel-300">
+            <p className="max-w-sm text-sm text-on-dark-muted">{site.description}</p>
+            <address className="not-italic text-sm text-on-dark-muted">
               {site.address.street}
               <br />
               {site.address.city}, {site.address.region} {site.address.postal}
@@ -54,41 +54,45 @@ export function Footer() {
             <div className="space-y-1 text-sm">
               <a
                 href={`tel:${site.phone.replace(/[^+\d]/g, "")}`}
-                className="block text-steel-100 hover:text-paper"
+                className="block text-on-dark hover:text-brand-green"
               >
                 {site.phone}
               </a>
               <a
                 href={`mailto:${site.email}`}
-                className="block text-steel-100 hover:text-paper"
+                className="block text-on-dark hover:text-brand-green"
               >
                 {site.email}
               </a>
             </div>
           </div>
 
-          {sitemap.map((col) => (
-            <div key={col.heading}>
-              <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-steel-400">
-                {col.heading}
-              </h3>
-              <ul className="mt-4 space-y-2 text-sm">
-                {col.links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-steel-200 hover:text-paper"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          <nav aria-label="Footer" className="lg:col-span-3">
+            <div className="grid gap-10 sm:grid-cols-3">
+              {sitemap.map((col) => (
+                <div key={col.heading}>
+                  <h3 className="text-[11px] font-semibold uppercase tracking-[1px] text-on-dark-muted">
+                    {col.heading}
+                  </h3>
+                  <ul className="mt-4 space-y-2 text-sm">
+                    {col.links.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="text-on-dark-muted hover:text-on-dark"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
-          ))}
+          </nav>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-ink-700 pt-6 text-xs text-steel-400 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-4 border-t border-hairline-dark pt-6 text-xs text-on-dark-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>

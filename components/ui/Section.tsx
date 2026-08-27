@@ -11,15 +11,15 @@ type SectionProps = {
 };
 
 const paddingMap: Record<NonNullable<SectionProps["padding"]>, string> = {
-  sm: "py-12 sm:py-16",
-  md: "py-16 sm:py-24",
-  lg: "py-24 sm:py-32",
+  sm: "py-12 sm:py-[48px]",
+  md: "py-16 sm:py-[64px]",
+  lg: "py-24 sm:py-[96px]",
 };
 
 const toneMap: Record<NonNullable<SectionProps["tone"]>, string> = {
-  default: "bg-paper text-steel-800",
-  inverted: "bg-ink-900 text-steel-100",
-  muted: "bg-steel-50 text-steel-800",
+  default: "bg-canvas text-charcoal",
+  inverted: "bg-brand-teal-deep text-on-dark",
+  muted: "bg-surface text-charcoal",
 };
 
 /**

@@ -29,7 +29,7 @@ export default function ContactPage() {
           <Heading as={1} eyebrow="Contact">
             Tell us about your program.
           </Heading>
-          <p className="mt-6 max-w-2xl text-lg text-steel-700">
+          <p className="mt-6 max-w-2xl text-lg text-slate">
             Send a drawing, a volume profile, and a target date. We&rsquo;ll
             come back with a quote, a process plan, and a quality plan
             within five business days.
@@ -42,13 +42,13 @@ export default function ContactPage() {
           <div className="grid gap-10 lg:grid-cols-12">
             {/* Form column */}
             <div className="lg:col-span-7">
-              <div className="rounded-lg border border-steel-200 bg-paper p-8 shadow-card">
-                <h2 className="font-serif text-xl font-semibold text-ink-900">
+              <div className="rounded-lg border border-hairline bg-canvas p-8 shadow-card">
+                <h2 className="text-xl font-semibold text-ink">
                   Request a quote
                 </h2>
-                <p className="mt-2 text-sm text-steel-600">
-                  Required fields are marked. We never share your
-                  information.
+                <p className="mt-2 text-sm text-slate">
+                  We only ask for what we need to quote your program.
+                  We never share your information.
                 </p>
                 <div className="mt-6">
                   <ContactForm />
@@ -60,28 +60,28 @@ export default function ContactPage() {
             <aside className="lg:col-span-5">
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-steel-500">
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                     Sales
                   </h3>
                   <a
                     href={`mailto:${site.email}`}
-                    className="mt-2 block text-lg font-medium text-ink-900 hover:text-accent-600"
+                    className="mt-2 block text-lg font-medium text-ink hover:text-brand-green-dark"
                   >
                     {site.email}
                   </a>
                   <a
                     href={`tel:${site.phone.replace(/[^+\d]/g, "")}`}
-                    className="mt-1 block text-lg font-medium text-ink-900 hover:text-accent-600"
+                    className="mt-1 block text-lg font-medium text-ink hover:text-brand-green-dark"
                   >
                     {site.phone}
                   </a>
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-steel-500">
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                     Facility
                   </h3>
-                  <address className="mt-2 not-italic text-base text-steel-800">
+                  <address className="mt-2 not-italic text-base text-charcoal">
                     {site.name}
                     <br />
                     {site.address.street}
@@ -94,19 +94,19 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-steel-500">
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                     Hours
                   </h3>
-                  <p className="mt-2 text-base text-steel-800">
+                  <p className="mt-2 text-base text-charcoal">
                     Monday&ndash;Friday, 7:00 AM&ndash;5:00 PM ET
                   </p>
                 </div>
 
-                <div className="rounded-md border border-steel-200 bg-paper p-5">
-                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-steel-500">
+                <div className="rounded-md border border-hairline bg-canvas p-5">
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                     For urgent programs
                   </h3>
-                  <p className="mt-2 text-sm text-steel-700">
+                  <p className="mt-2 text-sm text-slate">
                     Call the sales line and ask for the engineering
                     manager on duty. We can usually respond same-day for
                     active quote requests.

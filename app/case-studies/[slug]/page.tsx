@@ -54,25 +54,25 @@ export default async function CaseStudyDetailPage({
       />
 
       {/* Hero with image */}
-      <section className="border-b border-steel-200 bg-steel-50">
+      <section className="border-b border-hairline bg-surface">
         <Container size="full" className="py-12 sm:py-16">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-steel-500">
-            <Link href="/case-studies" className="hover:text-ink-900">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+            <Link href="/case-studies" className="hover:text-ink">
               Case Studies
             </Link>{" "}
-            / <span className="text-ink-900">{study.client}</span>
+            / <span className="text-ink">{study.client}</span>
           </p>
           <div className="mt-6 grid items-center gap-10 lg:grid-cols-2">
             <div>
               <Badge tone="default">
                 {study.industry} · {study.year}
               </Badge>
-              <h1 className="mt-4 font-serif text-3xl font-semibold text-ink-900 sm:text-4xl lg:text-5xl">
+              <h1 className="mt-4 text-3xl font-semibold text-ink sm:text-4xl lg:text-5xl">
                 {study.title}
               </h1>
-              <p className="mt-5 text-lg text-steel-700">{study.summary}</p>
+              <p className="mt-5 text-lg text-slate">{study.summary}</p>
             </div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-steel-200 bg-steel-100">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-hairline bg-surface-soft">
               <Image
                 src={study.image}
                 alt={study.title}
@@ -87,13 +87,13 @@ export default async function CaseStudyDetailPage({
       </section>
 
       {/* Metrics */}
-      <Section padding="md" className="border-y border-steel-200">
+      <Section padding="md" className="border-y border-hairline">
         <Container size="wide">
           <dl className="grid grid-cols-2 gap-8 lg:grid-cols-3">
             {study.metrics.map((m) => (
               <div key={m.label} className="text-center sm:text-left">
-                <dt className="text-sm text-steel-500">{m.label}</dt>
-                <dd className="mt-1 font-serif text-4xl font-semibold text-ink-900 sm:text-5xl">
+                <dt className="text-sm text-muted">{m.label}</dt>
+                <dd className="mt-1 text-4xl font-semibold text-ink sm:text-5xl">
                   {m.value}
                 </dd>
               </div>
@@ -110,19 +110,19 @@ export default async function CaseStudyDetailPage({
               <Heading as={2} eyebrow="Challenge">
                 What the customer was up against
               </Heading>
-              <p className="mt-6 text-lg text-steel-700">{study.challenge}</p>
+              <p className="mt-6 text-lg text-slate">{study.challenge}</p>
             </div>
             <div>
               <Heading as={2} eyebrow="Approach">
                 What we changed
               </Heading>
-              <p className="mt-6 text-lg text-steel-700">{study.approach}</p>
+              <p className="mt-6 text-lg text-slate">{study.approach}</p>
             </div>
             <div>
               <Heading as={2} eyebrow="Result">
                 What happened next
               </Heading>
-              <p className="mt-6 text-lg text-steel-700">{study.result}</p>
+              <p className="mt-6 text-lg text-slate">{study.result}</p>
             </div>
           </div>
         </Container>
@@ -131,10 +131,10 @@ export default async function CaseStudyDetailPage({
       <Section tone="inverted" padding="lg">
         <Container size="prose">
           <div className="text-center">
-            <h2 className="font-serif text-3xl font-semibold text-paper sm:text-4xl">
+            <h2 className="text-3xl font-semibold text-on-dark sm:text-4xl">
               Want a result like this?
             </h2>
-            <p className="mt-4 text-lg text-steel-300">
+            <p className="mt-4 text-lg text-on-dark-muted">
               We&rsquo;ll come back with a quote, a process plan, and a
               quality plan within five business days.
             </p>

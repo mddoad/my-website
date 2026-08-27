@@ -9,13 +9,13 @@ export default function NotFound() {
     <Section padding="lg">
       <Container size="prose">
         <div className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-600">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-green-dark">
             404
           </p>
           <Heading as={1} className="mt-4">
             That page isn&rsquo;t here.
           </Heading>
-          <p className="mt-6 text-lg text-steel-700">
+          <p className="mt-6 text-lg text-slate">
             The link you followed may be outdated, or the page may have
             moved. From here you can head back to the home page or jump
             straight to our capabilities.
@@ -28,11 +28,11 @@ export default function NotFound() {
               See capabilities
             </Button>
           </div>
-          <p className="mt-10 text-sm text-steel-500">
+          <p className="mt-10 text-sm text-stone">
             Looking for something specific?{" "}
             <Link
               href="/contact"
-              className="font-medium text-ink-900 underline-offset-2 hover:underline"
+              className="font-medium text-ink underline-offset-2 hover:underline"
             >
               Get in touch
             </Link>

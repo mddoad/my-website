@@ -30,7 +30,7 @@ export default function TeamPage() {
           <Heading as={1} eyebrow="Team">
             Leadership.
           </Heading>
-          <p className="mt-6 max-w-2xl text-lg text-steel-700">
+          <p className="mt-6 max-w-2xl text-lg text-slate">
             The people accountable for your program. Average tenure at
             Meridian: 14 years.
           </p>
@@ -45,18 +45,18 @@ export default function TeamPage() {
                 <Card as="article" className="flex h-full gap-6 p-8">
                   <div
                     aria-hidden
-                    className="grid h-20 w-20 flex-shrink-0 place-items-center rounded-full bg-ink-900 font-serif text-2xl font-semibold text-paper"
+                    className="grid h-20 w-20 flex-shrink-0 place-items-center rounded-full bg-brand-teal-deep text-2xl font-semibold text-on-dark"
                   >
                     {m.initials}
                   </div>
                   <div>
-                    <p className="font-serif text-xl font-semibold text-ink-900">
+                    <p className="text-xl font-semibold text-ink">
                       {m.name}
                     </p>
-                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.15em] text-accent-600">
+                    <p className="mt-1 text-xs font-semibold uppercase tracking-[0.15em] text-brand-green-dark">
                       {m.role}
                     </p>
-                    <p className="mt-4 text-sm leading-relaxed text-steel-700">
+                    <p className="mt-4 text-sm leading-relaxed text-slate">
                       {m.bio}
                     </p>
                   </div>
@@ -70,10 +70,10 @@ export default function TeamPage() {
       <Section tone="inverted" padding="lg">
         <Container size="prose">
           <div className="text-center">
-            <h2 className="font-serif text-3xl font-semibold text-paper sm:text-4xl">
+            <h2 className="text-3xl font-semibold text-on-dark sm:text-4xl">
               Want to talk to one of them directly?
             </h2>
-            <p className="mt-4 text-lg text-steel-300">
+            <p className="mt-4 text-lg text-on-dark-muted">
               Tell us about your program and we&rsquo;ll route you to the
               right person.
             </p>

@@ -32,7 +32,7 @@ export default function ProductsPage() {
           <Heading as={1} eyebrow="Capabilities">
             What we manufacture
           </Heading>
-          <p className="mt-6 max-w-2xl text-lg text-steel-700">
+          <p className="mt-6 max-w-2xl text-lg text-slate">
             Six integrated capabilities under one roof — from raw stock to
             finished, tested, documented assemblies. Pick a capability for
             details, or send a drawing and we&rsquo;ll route it to the right
@@ -56,16 +56,14 @@ export default function ProductsPage() {
             {services.map((s) => (
               <li key={s.slug} className="h-full">
                 <Card as="article" className="flex h-full flex-col p-6">
-                  <Heading as={3} className="font-serif">
-                    {s.name}
-                  </Heading>
-                  <p className="mt-3 text-sm text-steel-600">{s.short}</p>
-                  <ul className="mt-5 space-y-1.5 text-sm text-steel-700">
+                  <Heading as={3}>{s.name}</Heading>
+                  <p className="mt-3 text-sm text-slate">{s.short}</p>
+                  <ul className="mt-5 space-y-1.5 text-sm text-slate">
                     {s.capabilities.slice(0, 4).map((c) => (
                       <li key={c} className="flex gap-2">
                         <span
                           aria-hidden
-                          className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-accent-500"
+                          className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-brand-green"
                         />
                         <span>{c}</span>
                       </li>
@@ -73,7 +71,7 @@ export default function ProductsPage() {
                   </ul>
                   <Link
                     href={`/products/${s.slug}`}
-                    className="mt-6 inline-flex text-sm font-medium text-ink-900 hover:text-accent-600"
+                    className="mt-6 inline-flex text-sm font-medium text-ink hover:text-brand-green-dark"
                   >
                     Details →
                   </Link>
@@ -88,13 +86,13 @@ export default function ProductsPage() {
       <Section tone="inverted" padding="lg">
         <Container size="prose">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-500">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-green">
               Not sure where to start?
             </p>
-            <h2 className="mt-4 font-serif text-3xl font-semibold text-paper sm:text-4xl">
+            <h2 className="mt-4 text-3xl font-semibold text-on-dark sm:text-4xl">
               Send a drawing. We&rsquo;ll route it.
             </h2>
-            <p className="mt-4 text-lg text-steel-300">
+            <p className="mt-4 text-lg text-on-dark-muted">
               Every capability here is staffed. Send your print, your volume,
               and your target date — we&rsquo;ll come back with a quote, a
               process plan, and a quality plan within five business days.

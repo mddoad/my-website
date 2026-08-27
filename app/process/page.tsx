@@ -74,7 +74,7 @@ export default function ProcessPage() {
           <Heading as={1} eyebrow="Process">
             How an OEM program moves at Meridian.
           </Heading>
-          <p className="mt-6 max-w-2xl text-lg text-steel-700">
+          <p className="mt-6 max-w-2xl text-lg text-slate">
             Four phases, each with its own deliverables and gates. We don&rsquo;t
             move to the next phase until the current one is signed off.
           </p>
@@ -88,24 +88,24 @@ export default function ProcessPage() {
             {processSteps.map((s, i) => (
               <li
                 key={s.step}
-                className="grid gap-6 rounded-lg border border-steel-200 bg-paper p-8 lg:grid-cols-12 lg:gap-10"
+                className="grid gap-6 rounded-lg border border-hairline bg-canvas p-8 lg:grid-cols-12 lg:gap-10"
               >
                 <div className="lg:col-span-3">
-                  <div className="font-serif text-5xl font-semibold text-accent-500">
+                  <div className="text-5xl font-semibold text-brand-green">
                     {s.step}
                   </div>
-                  <h2 className="mt-2 font-serif text-2xl font-semibold text-ink-900">
+                  <h2 className="mt-2 text-2xl font-semibold text-ink">
                     {s.title}
                   </h2>
                 </div>
                 <div className="lg:col-span-9">
-                  <p className="text-lg text-steel-700">{s.body}</p>
-                  <ul className="mt-6 space-y-3 border-t border-steel-200 pt-6 text-sm text-steel-800">
+                  <p className="text-lg text-slate">{s.body}</p>
+                  <ul className="mt-6 space-y-3 border-t border-hairline pt-6 text-sm text-charcoal">
                     {stepDetails[i].bullets.map((b) => (
                       <li key={b} className="flex gap-3">
                         <span
                           aria-hidden
-                          className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent-500"
+                          className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-brand-green"
                         />
                         <span>{b}</span>
                       </li>
@@ -121,10 +121,10 @@ export default function ProcessPage() {
       <Section tone="inverted" padding="lg">
         <Container size="prose">
           <div className="text-center">
-            <h2 className="font-serif text-3xl font-semibold text-paper sm:text-4xl">
+            <h2 className="text-3xl font-semibold text-on-dark sm:text-4xl">
               Start with Discover.
             </h2>
-            <p className="mt-4 text-lg text-steel-300">
+            <p className="mt-4 text-lg text-on-dark-muted">
               Send a drawing, a volume profile, and a target date. We&rsquo;ll
               come back with a quote, a process plan, and a quality plan
               within five business days.

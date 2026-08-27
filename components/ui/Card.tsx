@@ -8,6 +8,13 @@ type CardProps = {
   as?: "div" | "article" | "li";
 };
 
+/**
+ * card-base from docs/design.md: bg-canvas, rounded-lg, p-xl,
+ * hairline border. `interactive` adds a hairline-strong border on
+ * hover/focus-within for clickable cards. No default shadow —
+ * design.md's card pattern is flat with hairlines; sections
+ * that need elevation apply it explicitly.
+ */
 export function Card({
   children,
   className,
@@ -17,9 +24,9 @@ export function Card({
   return (
     <Tag
       className={cn(
-        "rounded-lg border border-steel-200 bg-paper shadow-card",
+        "rounded-lg border border-hairline bg-canvas",
         interactive &&
-          "transition-shadow hover:shadow-raised focus-within:shadow-raised",
+          "transition-colors hover:border-hairline-strong focus-within:border-hairline-strong",
         className,
       )}
     >

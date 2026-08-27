@@ -61,16 +61,16 @@ export default async function ProductDetailPage({
       {/* Hero */}
       <Section padding="lg">
         <Container size="wide">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-steel-500">
-            <Link href="/products" className="hover:text-ink-900">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+            <Link href="/products" className="hover:text-ink">
               Capabilities
             </Link>{" "}
-            / <span className="text-ink-900">{service.name}</span>
+            / <span className="text-ink">{service.name}</span>
           </p>
           <Heading as={1} className="mt-4">
             {service.name}
           </Heading>
-          <p className="mt-6 max-w-2xl text-lg text-steel-700">
+          <p className="mt-6 max-w-2xl text-lg text-slate">
             {service.description}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -94,13 +94,13 @@ export default async function ProductDetailPage({
             {service.capabilities.map((c) => (
               <li
                 key={c}
-                className="flex items-start gap-3 rounded-md border border-steel-200 bg-paper p-5"
+                className="flex items-start gap-3 rounded-md border border-hairline bg-canvas p-5"
               >
                 <span
                   aria-hidden
-                  className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-accent-500"
+                  className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-brand-green"
                 />
-                <span className="text-base text-steel-800">{c}</span>
+                <span className="text-base text-charcoal">{c}</span>
               </li>
             ))}
           </ul>
@@ -116,7 +116,7 @@ export default async function ProductDetailPage({
             </Heading>
             <Link
               href="/case-studies"
-              className="text-sm font-medium text-ink-900 hover:text-accent-600"
+              className="text-sm font-medium text-ink hover:text-brand-green-dark"
             >
               All case studies →
             </Link>
@@ -125,16 +125,16 @@ export default async function ProductDetailPage({
             {related.map((cs) => (
               <li key={cs.slug}>
                 <Card as="article" className="h-full p-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-steel-500">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                     {cs.industry} · {cs.year}
                   </p>
-                  <h3 className="mt-3 font-serif text-xl font-semibold text-ink-900">
+                  <h3 className="mt-3 text-xl font-semibold text-ink">
                     {cs.title}
                   </h3>
-                  <p className="mt-3 text-sm text-steel-700">{cs.summary}</p>
+                  <p className="mt-3 text-sm text-slate">{cs.summary}</p>
                   <Link
                     href={`/case-studies/${cs.slug}`}
-                    className="mt-5 inline-flex text-sm font-medium text-ink-900 hover:text-accent-600"
+                    className="mt-5 inline-flex text-sm font-medium text-ink hover:text-brand-green-dark"
                   >
                     Read the story →
                   </Link>
@@ -149,10 +149,10 @@ export default async function ProductDetailPage({
       <Section tone="inverted" padding="lg">
         <Container size="prose">
           <div className="text-center">
-            <h2 className="font-serif text-3xl font-semibold text-paper sm:text-4xl">
+            <h2 className="text-3xl font-semibold text-on-dark sm:text-4xl">
               Have a drawing for {service.name.toLowerCase()}?
             </h2>
-            <p className="mt-4 text-lg text-steel-300">
+            <p className="mt-4 text-lg text-on-dark-muted">
               We&rsquo;ll come back with a quote, a process plan, and a
               quality plan within five business days.
             </p>

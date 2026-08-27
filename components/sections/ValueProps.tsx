@@ -33,11 +33,11 @@ export function ValueProps() {
           <div className="lg:col-span-8">
             <dl className="grid gap-8 sm:grid-cols-2">
               {props.map((p) => (
-                <div key={p.title} className="border-t border-steel-200 pt-6">
-                  <dt className="font-serif text-lg font-semibold text-ink-900">
+                <div key={p.title} className="border-t border-hairline pt-6">
+                  <dt className="text-lg font-semibold text-ink">
                     {p.title}
                   </dt>
-                  <dd className="mt-3 text-base text-steel-700">{p.body}</dd>
+                  <dd className="mt-3 text-base text-slate">{p.body}</dd>
                 </div>
               ))}
             </dl>

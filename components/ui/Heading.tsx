@@ -11,15 +11,19 @@ type HeadingProps = {
   align?: "left" | "center";
 };
 
+// Type scale from docs/design.md. Mobile drops to the lower
+// end of each band via the existing sm:/lg: breakpoints so the
+// hero-display 72/1.10 doesn't overflow on phones.
 const sizeClasses: Record<HeadingLevel, string> = {
-  1: "text-4xl sm:text-5xl lg:text-6xl font-semibold",
-  2: "text-3xl sm:text-4xl lg:text-5xl font-semibold",
-  3: "text-2xl sm:text-3xl font-semibold",
-  4: "text-xl sm:text-2xl font-semibold",
+  1: "text-[40px] leading-[1.10] tracking-[-1.5px] sm:text-[56px] lg:text-[72px]",
+  2: "text-[32px] leading-[1.20] tracking-[-0.5px] sm:text-[40px] lg:text-[48px]",
+  3: "text-[24px] leading-[1.30] sm:text-[28px]",
+  4: "text-[20px] leading-[1.35] sm:text-[22px]",
 };
 
 /**
- * Consistent heading with optional eyebrow label.
+ * Consistent heading with optional eyebrow label. Inter sets the
+ * typeface (substitutes design.md's Euclid Circular A — paid).
  */
 export function Heading({
   children,
@@ -37,11 +41,17 @@ export function Heading({
       )}
     >
       {eyebrow && (
-        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-600">
+        <span className="text-[11px] font-semibold uppercase tracking-[1px] text-brand-green-dark">
           {eyebrow}
         </span>
       )}
-      <Tag className={cn("text-ink-900", sizeClasses[as], className)}>
+      <Tag
+        className={cn(
+          "text-ink font-medium",
+          sizeClasses[as],
+          className,
+        )}
+      >
         {children}
       </Tag>
     </div>

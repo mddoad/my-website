@@ -15,7 +15,7 @@ export function CapabilitiesPreview() {
           </Heading>
           <Link
             href="/products"
-            className="text-sm font-medium text-ink-900 hover:text-accent-600"
+            className="text-sm font-medium text-ink hover:text-brand-green-dark"
           >
             All capabilities →
           </Link>
@@ -25,16 +25,16 @@ export function CapabilitiesPreview() {
           {services.slice(0, 6).map((s) => (
             <li key={s.slug}>
               <Card as="article" className="h-full p-6">
-                <h3 className="font-serif text-lg font-semibold text-ink-900">
+                <h3 className="text-lg font-semibold text-ink">
                   {s.name}
                 </h3>
-                <p className="mt-2 text-sm text-steel-600">{s.short}</p>
-                <ul className="mt-4 space-y-1.5 text-sm text-steel-700">
+                <p className="mt-2 text-sm text-stone">{s.short}</p>
+                <ul className="mt-4 space-y-1.5 text-sm text-slate">
                   {s.capabilities.slice(0, 3).map((c) => (
                     <li key={c} className="flex gap-2">
                       <span
                         aria-hidden
-                        className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-accent-500"
+                        className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-brand-green"
                       />
                       <span>{c}</span>
                     </li>
@@ -42,7 +42,7 @@ export function CapabilitiesPreview() {
                 </ul>
                 <Link
                   href={`/products/${s.slug}`}
-                  className="mt-6 inline-flex text-sm font-medium text-ink-900 hover:text-accent-600"
+                  className="mt-6 inline-flex text-sm font-medium text-ink hover:text-brand-green-dark"
                 >
                   Details →
                 </Link>

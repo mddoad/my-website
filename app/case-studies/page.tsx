@@ -33,7 +33,7 @@ export default function CaseStudiesPage() {
           <Heading as={1} eyebrow="Case Studies">
             Programs, not pitches.
           </Heading>
-          <p className="mt-6 max-w-2xl text-lg text-steel-700">
+          <p className="mt-6 max-w-2xl text-lg text-slate">
             Three real programs — the brief, what we changed, and the
             numbers. Clients are anonymized where requested.
           </p>
@@ -46,7 +46,7 @@ export default function CaseStudiesPage() {
             {caseStudies.map((cs) => (
               <li key={cs.slug} className="h-full">
                 <Card as="article" className="flex h-full flex-col overflow-hidden p-0">
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-steel-100">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface-soft">
                     <Image
                       src={cs.image}
                       alt={cs.title}
@@ -59,15 +59,15 @@ export default function CaseStudiesPage() {
                     <Badge tone="default">
                       {cs.industry} · {cs.year}
                     </Badge>
-                    <h3 className="mt-4 font-serif text-xl font-semibold text-ink-900">
+                    <h3 className="mt-4 text-xl font-semibold text-ink">
                       {cs.title}
                     </h3>
-                    <p className="mt-3 text-sm text-steel-700">{cs.summary}</p>
-                    <dl className="mt-5 grid grid-cols-3 gap-3 border-t border-steel-200 pt-4 text-xs">
+                    <p className="mt-3 text-sm text-slate">{cs.summary}</p>
+                    <dl className="mt-5 grid grid-cols-3 gap-3 border-t border-hairline pt-4 text-xs">
                       {cs.metrics.map((m) => (
                         <div key={m.label}>
-                          <dt className="text-steel-500">{m.label}</dt>
-                          <dd className="mt-1 font-serif text-base font-semibold text-ink-900">
+                          <dt className="text-stone">{m.label}</dt>
+                          <dd className="mt-1 text-base font-semibold text-ink">
                             {m.value}
                           </dd>
                         </div>
@@ -75,7 +75,7 @@ export default function CaseStudiesPage() {
                     </dl>
                     <Link
                       href={`/case-studies/${cs.slug}`}
-                      className="mt-6 inline-flex text-sm font-medium text-ink-900 hover:text-accent-600"
+                      className="mt-6 inline-flex text-sm font-medium text-ink hover:text-brand-green-dark"
                     >
                       Read the story →
                     </Link>
@@ -90,10 +90,10 @@ export default function CaseStudiesPage() {
       <Section tone="inverted" padding="lg">
         <Container size="prose">
           <div className="text-center">
-            <h2 className="font-serif text-3xl font-semibold text-paper sm:text-4xl">
+            <h2 className="text-3xl font-semibold text-on-dark sm:text-4xl">
               Want a program like this on your side?
             </h2>
-            <p className="mt-4 text-lg text-steel-300">
+            <p className="mt-4 text-lg text-on-dark-muted">
               Tell us about your program. We&rsquo;ll come back with a quote,
               a process plan, and a quality plan within five business days.
             </p>

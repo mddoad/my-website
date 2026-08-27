@@ -15,7 +15,7 @@ export function MobileNav() {
         aria-expanded={open}
         aria-controls="mobile-nav"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-steel-200 text-ink-900"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-hairline text-ink"
       >
         <span
           aria-hidden
@@ -26,7 +26,7 @@ export function MobileNav() {
       {open && (
         <div
           id="mobile-nav"
-          className="fixed inset-0 top-16 z-50 border-t border-steel-200 bg-paper"
+          className="fixed inset-0 top-16 z-50 border-t border-hairline bg-canvas"
         >
           <nav
             aria-label="Mobile primary"
@@ -37,7 +37,7 @@ export function MobileNav() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-2 py-3 text-base text-steel-800 hover:bg-steel-50"
+                className="rounded-md px-2 py-3 text-base text-charcoal hover:bg-surface"
               >
                 {item.label}
               </Link>
@@ -45,7 +45,7 @@ export function MobileNav() {
             <Link
               href="/contact"
               onClick={() => setOpen(false)}
-              className="mt-4 inline-flex h-11 items-center justify-center rounded-md bg-ink-900 px-5 text-sm font-medium text-paper"
+              className="mt-4 inline-flex h-11 items-center justify-center rounded-full bg-brand-green px-5 text-sm font-semibold text-on-primary"
             >
               Request a quote
             </Link>

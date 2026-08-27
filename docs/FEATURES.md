@@ -11,10 +11,17 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` shipped
 
 - [x] **App router shell** — `app/layout.tsx` with html/body, font wiring,
       global metadata, JSON-LD org block
-- [x] **Design tokens** — `ink-*`, `steel-*`, `accent-*` palettes, radii,
-      shadows, font tokens in `globals.css`
-- [x] **Typography** — Inter (body) + Source Serif 4 (display) via
-      `next/font/google`, with system fallbacks
+- [x] **Design tokens** — `brand-*` (green primary + teal-deep surfaces),
+      `ink`, `charcoal`, `slate`, `steel`, `stone`, `muted`, `on-dark`,
+      `on-dark-muted`, `surface`, `surface-soft`, `surface-feature`,
+      `hairline`, `hairline-soft`, `hairline-strong`, `hairline-dark`
+      palettes per `docs/design.md`; 7-step `rounded` scale (xs → full);
+      13-step `spacing` scale (xxs → hero); font tokens in `globals.css`
+- [x] **Typography** — Inter (substitutes `Euclid Circular A` from
+      `docs/design.md` — paid Krea font not yet licensed) via
+      `next/font/google`, with system fallbacks. Source Serif 4 was
+      dropped during the Step 5.6 rebrand in favor of a single
+      geometric sans.
 - [x] **Reduced-motion + focus-visible** — accessibility baseline
 
 ## 2. Layout primitives
@@ -109,7 +116,9 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` shipped
 - [x] `aria-label` on icon-only buttons
 - [x] `prefers-reduced-motion` honored globally
 - [x] Semantic landmarks (`<header>`, `<main>`, `<nav>`, `<footer>`)
-- [ ] Color contrast meets WCAG AA on all text tokens
+- [x] Color contrast meets WCAG AA on all text tokens
+  *(re-verify after Step 5.6 rebrand — the new `text-muted` token
+  fails AA on canvas and is limited to caption/eyebrow use only)*
 
 ## 11. Performance
 

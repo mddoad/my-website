@@ -36,7 +36,7 @@ export default function AboutPage() {
           <Heading as={1} eyebrow="About">
             We&rsquo;ve been building OEM programs since {site.established}.
           </Heading>
-          <p className="mt-6 max-w-2xl text-lg text-steel-700">
+          <p className="mt-6 max-w-2xl text-lg text-slate">
             For {years} years, Meridian has been a Tier 1 supplier of
             precision-machined and fabricated components to OEM customers
             in aerospace, automotive, energy, and medical. We&rsquo;re
@@ -46,13 +46,13 @@ export default function AboutPage() {
       </Section>
 
       {/* Stats */}
-      <Section padding="md" className="border-y border-steel-200">
+      <Section padding="md" className="border-y border-hairline">
         <Container size="wide">
           <dl className="grid grid-cols-2 gap-8 lg:grid-cols-4">
             {stats.map((s) => (
               <div key={s.label} className="text-center sm:text-left">
-                <dt className="text-sm text-steel-500">{s.label}</dt>
-                <dd className="mt-1 font-serif text-4xl font-semibold text-ink-900 sm:text-5xl">
+                <dt className="text-sm text-muted">{s.label}</dt>
+                <dd className="mt-1 text-4xl font-semibold text-ink sm:text-5xl">
                   {s.value}
                 </dd>
               </div>
@@ -70,7 +70,7 @@ export default function AboutPage() {
                 Built one program at a time.
               </Heading>
             </div>
-            <div className="lg:col-span-8 space-y-6 text-lg text-steel-700">
+            <div className="lg:col-span-8 space-y-6 text-lg text-slate">
               <p>
                 Meridian was founded in {site.established} as a small
                 tool-and-die shop serving the Cleveland industrial base.
@@ -101,12 +101,12 @@ export default function AboutPage() {
             {site.certifications.map((c) => (
               <li
                 key={c.label}
-                className="rounded-md border border-steel-200 bg-paper p-6"
+                className="rounded-lg border border-hairline bg-canvas p-6"
               >
-                <p className="font-serif text-lg font-semibold text-ink-900">
+                <p className="text-lg font-semibold text-ink">
                   {c.label}
                 </p>
-                <p className="mt-2 text-sm text-steel-600">{c.note}</p>
+                <p className="mt-2 text-sm text-slate">{c.note}</p>
               </li>
             ))}
           </ul>
@@ -122,7 +122,7 @@ export default function AboutPage() {
             </Heading>
             <a
               href="/team"
-              className="text-sm font-medium text-ink-900 hover:text-accent-600"
+              className="text-sm font-medium text-ink hover:text-brand-green-dark"
             >
               Full team →
             </a>
@@ -133,14 +133,14 @@ export default function AboutPage() {
                 <Card as="article" className="h-full p-6">
                   <div
                     aria-hidden
-                    className="grid h-12 w-12 place-items-center rounded-full bg-ink-900 font-serif text-base font-semibold text-paper"
+                    className="grid h-12 w-12 place-items-center rounded-full bg-brand-teal-deep text-base font-semibold text-on-dark"
                   >
                     {m.initials}
                   </div>
-                  <p className="mt-4 font-serif text-base font-semibold text-ink-900">
+                  <p className="mt-4 text-base font-semibold text-ink">
                     {m.name}
                   </p>
-                  <p className="mt-1 text-xs uppercase tracking-[0.15em] text-steel-500">
+                  <p className="mt-1 text-xs uppercase tracking-[0.15em] text-brand-green-dark">
                     {m.role}
                   </p>
                 </Card>
@@ -153,10 +153,10 @@ export default function AboutPage() {
       <Section tone="inverted" padding="lg">
         <Container size="prose">
           <div className="text-center">
-            <h2 className="font-serif text-3xl font-semibold text-paper sm:text-4xl">
+            <h2 className="text-3xl font-semibold text-on-dark sm:text-4xl">
               Come see the floor.
             </h2>
-            <p className="mt-4 text-lg text-steel-300">
+            <p className="mt-4 text-lg text-on-dark-muted">
               We host customer visits at our Cleveland facility by
               appointment. Send a note and we&rsquo;ll set one up.
             </p>

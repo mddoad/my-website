@@ -13,7 +13,7 @@ export function FeaturedCaseStudy() {
     <Section padding="lg">
       <Container size="full">
         <div className="grid items-center gap-10 lg:grid-cols-2">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-steel-200 bg-steel-100">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-hairline bg-surface-soft">
             <Image
               src={study.image}
               alt={study.title}
@@ -24,15 +24,15 @@ export function FeaturedCaseStudy() {
           </div>
           <div>
             <Badge tone="default">Featured case study · {study.year}</Badge>
-            <h2 className="mt-4 font-serif text-3xl font-semibold text-ink-900 sm:text-4xl">
+            <h2 className="mt-4 text-3xl font-semibold text-ink sm:text-4xl">
               {study.title}
             </h2>
-            <p className="mt-4 text-lg text-steel-700">{study.summary}</p>
-            <dl className="mt-8 grid grid-cols-3 gap-6 border-t border-steel-200 pt-6">
+            <p className="mt-4 text-lg text-slate">{study.summary}</p>
+            <dl className="mt-8 grid grid-cols-3 gap-6 border-t border-hairline pt-6">
               {study.metrics.map((m) => (
                 <div key={m.label}>
-                  <dt className="text-xs text-steel-500">{m.label}</dt>
-                  <dd className="mt-1 font-serif text-2xl text-ink-900">
+                  <dt className="text-xs text-stone">{m.label}</dt>
+                  <dd className="mt-1 text-2xl text-ink">
                     {m.value}
                   </dd>
                 </div>
@@ -44,7 +44,7 @@ export function FeaturedCaseStudy() {
                 All case studies
               </Button>
             </div>
-            <p className="mt-6 text-sm text-steel-500">
+            <p className="mt-6 text-sm text-stone">
               <Link
                 href="/case-studies"
                 className="underline-offset-2 hover:underline"

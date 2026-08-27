@@ -5,6 +5,9 @@ import { submitContactForm, type ContactFormState } from "./actions";
 
 const initialState: ContactFormState = { ok: false };
 
+const inputClasses =
+  "mt-1.5 block w-full h-11 rounded-md border border-hairline-strong bg-canvas px-3 text-sm text-ink placeholder:text-muted focus:border-brand-green-dark focus:outline-none focus:ring-2 focus:ring-brand-green-dark";
+
 /**
  * Client form for /contact. Uses a server action so the form works
  * without JavaScript (server returns the state, page re-renders), and
@@ -20,10 +23,10 @@ export function ContactForm() {
     return (
       <div
         role="status"
-        className="rounded-md border border-ink-200 bg-ink-50 p-6 text-sm text-ink-900"
+        className="rounded-md border border-brand-green-soft bg-surface-feature p-6 text-sm text-ink"
       >
-        <p className="font-serif text-lg font-semibold">Thanks — we&rsquo;ll be in touch.</p>
-        <p className="mt-2 text-steel-700">
+        <p className="text-lg font-semibold">Thanks — we&rsquo;ll be in touch.</p>
+        <p className="mt-2 text-slate">
           Your note is in. A member of our engineering team will come back
           to you within one business day. If your program is time-sensitive,
           call us at the number on this page.
@@ -37,7 +40,7 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="name"
-          className="block text-sm font-medium text-ink-900"
+          className="block text-sm font-medium text-ink"
         >
           Name
         </label>
@@ -47,14 +50,14 @@ export function ContactForm() {
           type="text"
           required
           autoComplete="name"
-          className="mt-1.5 block w-full rounded-md border border-steel-300 bg-paper px-3 py-2 text-sm text-steel-900 placeholder:text-steel-400 focus:border-ink-900 focus:outline-none focus:ring-1 focus:ring-ink-900"
+          className={inputClasses}
         />
       </div>
 
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium text-ink-900"
+          className="block text-sm font-medium text-ink"
         >
           Work email
         </label>
@@ -64,14 +67,14 @@ export function ContactForm() {
           type="email"
           required
           autoComplete="email"
-          className="mt-1.5 block w-full rounded-md border border-steel-300 bg-paper px-3 py-2 text-sm text-steel-900 placeholder:text-steel-400 focus:border-ink-900 focus:outline-none focus:ring-1 focus:ring-ink-900"
+          className={inputClasses}
         />
       </div>
 
       <div>
         <label
           htmlFor="company"
-          className="block text-sm font-medium text-ink-900"
+          className="block text-sm font-medium text-ink"
         >
           Company
         </label>
@@ -80,14 +83,14 @@ export function ContactForm() {
           name="company"
           type="text"
           autoComplete="organization"
-          className="mt-1.5 block w-full rounded-md border border-steel-300 bg-paper px-3 py-2 text-sm text-steel-900 placeholder:text-steel-400 focus:border-ink-900 focus:outline-none focus:ring-1 focus:ring-ink-900"
+          className={inputClasses}
         />
       </div>
 
       <div>
         <label
           htmlFor="message"
-          className="block text-sm font-medium text-ink-900"
+          className="block text-sm font-medium text-ink"
         >
           Tell us about your program
         </label>
@@ -97,14 +100,14 @@ export function ContactForm() {
           required
           rows={5}
           placeholder="Part description, annual volume, target SOP, key tolerances or certifications…"
-          className="mt-1.5 block w-full rounded-md border border-steel-300 bg-paper px-3 py-2 text-sm text-steel-900 placeholder:text-steel-400 focus:border-ink-900 focus:outline-none focus:ring-1 focus:ring-ink-900"
+          className={`${inputClasses} h-auto py-2`}
         />
       </div>
 
       {state.error && (
         <p
           role="alert"
-          className="rounded-md border border-accent-200 bg-accent-100 px-3 py-2 text-sm text-accent-700"
+          className="rounded-md border border-warning bg-warning-bg px-3 py-2 text-sm text-warning-text"
         >
           {state.error}
         </p>
@@ -113,7 +116,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={isPending}
-        className="inline-flex h-11 items-center justify-center rounded-md bg-ink-900 px-5 text-sm font-medium text-paper transition-colors hover:bg-ink-700 disabled:opacity-60"
+        className="inline-flex h-11 items-center justify-center rounded-full bg-brand-green px-5 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-deep disabled:opacity-60"
       >
         {isPending ? "Sending…" : "Send"}
       </button>

@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Inter, Source_Serif_4 } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -12,11 +12,11 @@ const body = Inter({
   display: "swap",
 });
 
-const display = Source_Serif_4({
-  variable: "--font-display",
-  subsets: ["latin"],
-  display: "swap",
-});
+// Mobile browser chrome tinting. Brand teal deep (`#001e2b`) so the
+// Safari iOS / Chrome Android address bar matches the header.
+export const viewport: Viewport = {
+  themeColor: "#001e2b",
+};
 
 export const metadata: Metadata = {
   title: {
@@ -37,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${body.variable} ${display.variable} h-full antialiased`}
+      className={`${body.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <SkipLink />

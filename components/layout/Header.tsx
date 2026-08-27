@@ -1,20 +1,21 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
 import { MobileNav } from "@/components/layout/MobileNav";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-steel-200 bg-paper/90 backdrop-blur supports-[backdrop-filter]:bg-paper/80">
+    <header className="sticky top-0 z-40 border-b border-hairline bg-canvas/90 backdrop-blur supports-[backdrop-filter]:bg-canvas/80">
       <Container size="full" className="flex h-16 items-center justify-between">
         <Link
           href="/"
-          className="flex items-center gap-2 font-serif text-lg font-semibold text-ink-900"
+          className="flex items-center gap-2 text-lg font-semibold text-ink"
           aria-label={`${site.name} home`}
         >
           <span
             aria-hidden
-            className="grid h-7 w-7 place-items-center rounded-sm bg-ink-900 text-paper text-sm font-bold"
+            className="grid h-8 w-8 place-items-center rounded-md bg-brand-green text-on-primary text-sm font-bold"
           >
             M
           </span>
@@ -29,7 +30,7 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm text-steel-700 hover:text-ink-900"
+              className="text-sm text-slate hover:text-ink"
             >
               {item.label}
             </Link>
@@ -37,12 +38,9 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <Link
-            href="/contact"
-            className="inline-flex h-10 items-center justify-center rounded-md bg-ink-900 px-4 text-sm font-medium text-paper transition-colors hover:bg-ink-700"
-          >
+          <Button href="/contact" size="sm">
             Request a quote
-          </Link>
+          </Button>
         </div>
 
         <div className="lg:hidden">

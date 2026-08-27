@@ -6,18 +6,21 @@ type ButtonVariant = "primary" | "secondary" | "ghost";
 type ButtonSize = "sm" | "md" | "lg";
 
 const baseClasses =
-  "inline-flex items-center justify-center font-medium tracking-tight transition-colors disabled:opacity-50 disabled:pointer-events-none rounded-md";
+  "inline-flex items-center justify-center font-semibold leading-[1.30] transition-colors disabled:opacity-50 disabled:pointer-events-none";
 
+// Variants from docs/design.md. Primary/secondary are full-radius
+// (rounded-full); ghost keeps md-radius (8px) per design.md
+// button-ghost.
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-ink-900 text-paper hover:bg-ink-700 focus-visible:outline-ink-900",
+    "bg-brand-green text-on-primary rounded-full hover:bg-primary-deep focus-visible:outline-brand-green-dark",
   secondary:
-    "bg-paper text-ink-900 border border-ink-200 hover:border-ink-900",
-  ghost: "text-ink-900 hover:bg-steel-50",
+    "bg-transparent text-ink rounded-full border border-hairline-strong hover:border-ink",
+  ghost: "text-ink rounded-md px-3 py-2 hover:bg-surface",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: "h-9 px-3 text-sm",
+  sm: "h-9 px-4 text-sm",
   md: "h-11 px-5 text-sm",
   lg: "h-12 px-6 text-base",
 };

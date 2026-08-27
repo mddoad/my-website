@@ -30,7 +30,7 @@ export default function TestimonialsPage() {
           <Heading as={1} eyebrow="Testimonials">
             What OEM partners say.
           </Heading>
-          <p className="mt-6 max-w-2xl text-lg text-steel-700">
+          <p className="mt-6 max-w-2xl text-lg text-slate">
             Direct quotes from procurement, manufacturing, and supply chain
             leaders at our customer companies. Shared with their
             permission; names withheld where requested.
@@ -44,12 +44,12 @@ export default function TestimonialsPage() {
             {testimonials.map((t, i) => (
               <li key={i}>
                 <Card as="article" className="flex h-full flex-col p-8">
-                  <blockquote className="text-lg leading-relaxed text-steel-800">
+                  <blockquote className="text-lg leading-relaxed text-charcoal">
                     <p>&ldquo;{t.quote}&rdquo;</p>
                   </blockquote>
-                  <figcaption className="mt-8 border-t border-steel-200 pt-4 text-sm">
-                    <p className="font-medium text-ink-900">{t.role}</p>
-                    <p className="text-steel-500">{t.company}</p>
+                  <figcaption className="mt-8 border-t border-hairline pt-4 text-sm">
+                    <p className="font-medium text-ink">{t.role}</p>
+                    <p className="text-stone">{t.company}</p>
                   </figcaption>
                 </Card>
               </li>
@@ -61,10 +61,10 @@ export default function TestimonialsPage() {
       <Section tone="inverted" padding="lg">
         <Container size="prose">
           <div className="text-center">
-            <h2 className="font-serif text-3xl font-semibold text-paper sm:text-4xl">
+            <h2 className="text-3xl font-semibold text-on-dark sm:text-4xl">
               Become the next one.
             </h2>
-            <p className="mt-4 text-lg text-steel-300">
+            <p className="mt-4 text-lg text-on-dark-muted">
               We&rsquo;ll come back with a quote, a process plan, and a
               quality plan within five business days.
             </p>

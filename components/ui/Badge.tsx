@@ -7,10 +7,14 @@ type BadgeProps = {
   tone?: "default" | "inverted" | "accent";
 };
 
+// Tones from docs/design.md:
+//   default   → badge-green-soft   (brand-green-soft bg, brand-green-dark text)
+//   inverted  → ink bg, on-dark text, sm radius
+//   accent    → badge-popular       (brand-teal-deep bg, brand-green text, full radius)
 const toneClasses: Record<NonNullable<BadgeProps["tone"]>, string> = {
-  default: "bg-steel-100 text-ink-900 border border-steel-200",
-  inverted: "bg-ink-900 text-paper border border-ink-700",
-  accent: "bg-accent-100 text-accent-700 border border-accent-200",
+  default: "bg-brand-green-soft text-brand-green-dark rounded-full",
+  inverted: "bg-ink text-on-dark rounded-sm",
+  accent: "bg-brand-teal-deep text-brand-green rounded-full",
 };
 
 /**
@@ -20,7 +24,7 @@ export function Badge({ children, className, tone = "default" }: BadgeProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium",
+        "inline-flex items-center px-2.5 py-1 text-[13px] font-semibold leading-[1.40]",
         toneClasses[tone],
         className,
       )}

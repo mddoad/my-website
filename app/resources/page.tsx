@@ -48,7 +48,7 @@ export default function ResourcesPage() {
           <Heading as={1} eyebrow="Resources">
             Insights for OEM programs.
           </Heading>
-          <p className="mt-6 max-w-2xl text-lg text-steel-700">
+          <p className="mt-6 max-w-2xl text-lg text-slate">
             Whitepapers, articles, and reference material for the people
             running OEM programs — procurement, manufacturing engineering,
             and supply chain.
@@ -63,11 +63,11 @@ export default function ResourcesPage() {
               <li key={u.title}>
                 <Card as="article" className="flex h-full flex-col p-6">
                   <Badge tone="accent">{u.tag}</Badge>
-                  <h2 className="mt-4 font-serif text-xl font-semibold text-ink-900">
+                  <h2 className="mt-4 text-xl font-semibold text-ink">
                     {u.title}
                   </h2>
-                  <p className="mt-3 text-sm text-steel-700">{u.body}</p>
-                  <p className="mt-6 text-xs uppercase tracking-[0.15em] text-steel-500">
+                  <p className="mt-3 text-sm text-slate">{u.body}</p>
+                  <p className="mt-6 text-xs uppercase tracking-[0.15em] text-muted">
                     Coming soon
                   </p>
                 </Card>
@@ -79,14 +79,14 @@ export default function ResourcesPage() {
 
       <Section padding="lg">
         <Container size="prose">
-          <div className="rounded-lg border border-dashed border-steel-300 bg-steel-50 p-10 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-steel-500">
+          <div className="rounded-lg border border-dashed border-hairline-strong bg-surface-soft p-10 text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
               In the meantime
             </p>
-            <h2 className="mt-3 font-serif text-2xl font-semibold text-ink-900">
+            <h2 className="mt-3 text-2xl font-semibold text-ink">
               Have a question we can answer now?
             </h2>
-            <p className="mt-3 text-base text-steel-700">
+            <p className="mt-3 text-base text-slate">
               Skip the whitepaper. Send us a drawing and a target date,
               and we&rsquo;ll come back with a real answer.
             </p>

@@ -14,13 +14,13 @@ export function Process() {
         <ol className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {processSteps.map((s) => (
             <li key={s.step} className="relative">
-              <div className="font-serif text-5xl font-semibold text-accent-500">
+              <div className="text-5xl font-semibold text-brand-green">
                 {s.step}
               </div>
-              <h3 className="mt-4 font-serif text-xl font-semibold text-paper">
+              <h3 className="mt-4 text-xl font-semibold text-on-dark">
                 {s.title}
               </h3>
-              <p className="mt-3 text-base text-steel-300">{s.body}</p>
+              <p className="mt-3 text-base text-on-dark-muted">{s.body}</p>
             </li>
           ))}
         </ol>
