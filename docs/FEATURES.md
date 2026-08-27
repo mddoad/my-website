@@ -44,10 +44,10 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` shipped
       robots, `metadataBase`)
 - [x] `buildMetadata` helper for per-page overrides
 - [x] `JsonLd` component — `organizationJsonLd`, `breadcrumbJsonLd`
-- [ ] `app/robots.ts`
-- [ ] `app/sitemap.ts` (static + content-derived routes)
-- [ ] `app/opengraph-image.tsx` for default OG card
-- [ ] `app/icon.tsx` (replace stock favicon with brand mark)
+- [x] `app/robots.ts`
+- [x] `app/sitemap.ts` (static + content-derived routes)
+- [x] `app/opengraph-image.tsx` for default OG card
+- [x] `app/icon.tsx` (replace stock favicon with brand mark)
 
 ## 5. Content model
 

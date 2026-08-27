@@ -7,20 +7,16 @@ Entries are appended in reverse chronological order (newest first).
 
 ## Current status
 
-- **Latest commit:** `d30624b` — Phase 3: detail routes
+- **Latest commit:** `289a92c` — Phase 4: SEO + assets
 - **Date:** 2026-08-27
-- **What's live:** The full marketing site — home page (hero, trust bar,
-  value props, capabilities preview, featured case study, process,
-  stats, testimonials, final CTA) plus all detail routes:
-  `/products` + 6 capability pages, `/industries` + 4 industry pages,
-  `/case-studies` + 3 case study pages, `/process`, `/about`, `/team`,
-  `/testimonials`, `/resources` placeholder, `/contact` with a working
-  form, and `app/not-found.tsx`. Header, footer, mobile nav, and skip
-  link are wired. All content lives in typed `content/*.ts` modules.
-  Per-page metadata and breadcrumb JSON-LD are in place. Production
-  build is clean (TypeScript passes, all 26 routes prerender static).
-- **What's next:** Phase 4 — `app/robots.ts`, `app/sitemap.ts`,
-  `app/opengraph-image.tsx`, `app/icon.tsx`.
+- **What's live:** The full marketing site (Phases 1–3) plus the SEO
+  and asset layer (Phase 4): `/robots.txt`, `/sitemap.xml` (23 URLs),
+  a default Open Graph image, and a generated brand favicon. Home page
+  `<head>` references the new assets. All 25 marketing routes
+  prerender static, plus 4 metadata routes (`/icon`,
+  `/opengraph-image`, `/robots.txt`, `/sitemap.xml`).
+- **What's next:** Phase 5 — accessibility audit, mobile audit,
+  Lighthouse pass, and replacing the placeholder brand contact info.
 
 > **Note on history (2026-08-27):** During Phase 3 work the local
 > `.git/objects` store had four zero-byte loose-object files that
@@ -63,6 +59,70 @@ changes; they only touch this file.
 
 **Commit links** use the short hash (e.g. `9e4cb2a`). Run
 `git show <hash>` for the full diff.
+
+---
+
+## 2026-08-27 17:00 — Phase 4: SEO + assets
+
+**Context:** Phases 1–3 left the site complete from a content and
+routes perspective, but the SEO and asset layer that wraps a real
+production site — `robots.txt`, `sitemap.xml`, an Open Graph image,
+and a brand favicon — was still the create-next-app default. Phase 4
+adds those four pieces and removes the stale `favicon.ico` so the
+generated icon is the single source of truth.
+
+**What changed:**
+
+- **`app/robots.ts`** — `MetadataRoute.Robots` with `Allow: /` for
+  every user agent, plus `Sitemap` and `Host` directives pointing at
+  `site.url` from `lib/site.ts`. Renders to `/robots.txt`.
+- **`app/sitemap.ts`** — `MetadataRoute.Sitemap` enumerating 10
+  static routes (home, about, team, products, industries,
+  case-studies, process, testimonials, resources, contact) plus 13
+  content-derived dynamic routes (6 capabilities, 4 industries, 3
+  case studies). Priority and `changeFrequency` are set per route
+  based on how often the underlying content changes in practice.
+  Renders to `/sitemap.xml`.
+- **`app/opengraph-image.tsx`** — `ImageResponse` from `next/og`.
+  1200×630 PNG: industrial-blue background, "M" brand mark, full
+  brand name, the tagline, the cert line, and the bare site URL.
+  This is the fallback OG card; per-page OG overrides can be added
+  later in route-specific `opengraph-image.tsx` files.
+- **`app/icon.tsx`** — `ImageResponse`, 32×32 PNG. The "M" glyph on
+  `ink-900` (the same brand mark as the header logo). Replaces the
+  create-next-app default.
+- **`app/favicon.ico`** removed. The static ICO would have
+  shadowed the generated icon and carried an unrelated image.
+
+**Why:** Crawlers need a `robots.txt` and `sitemap.xml` to know what
+to crawl and at what cadence. Open Graph and Twitter meta tags drive
+the social-card preview when a buyer pastes a Meridian URL into a
+message; without an OG image, links render as grey boxes. The favicon
+is a smaller fix, but the stock one looks unprofessional in the tab
+and reinforces that the site is in scaffold mode.
+
+**Verification:**
+
+- `npm run build`: TypeScript clean, 29 routes prerender (25
+  marketing + 4 metadata: `/icon`, `/opengraph-image`, `/robots.txt`,
+  `/sitemap.xml`).
+- `GET /robots.txt` → 200. Body: `User-Agent: *`, `Allow: /`,
+  `Host: https://example.com`, `Sitemap: https://example.com/sitemap.xml`.
+- `GET /sitemap.xml` → 200. 23 `<url>` entries, valid
+  `sitemaps.org/schemas/sitemap/0.9` XML.
+- `GET /opengraph-image` → 200, 62 KB PNG, valid signature, sized
+  1200×630.
+- `GET /icon` → 200, 590 B PNG, valid signature, sized 32×32.
+- Home page `<head>` references both: `<link rel="icon"
+  href="/icon?…" type="image/png" sizes="32x32">` and
+  `<meta property="og:image" content="…/opengraph-image?…">`.
+- All Phase 1–3 routes still return 200; the 404 still works.
+
+**Roadmap:** [`ROADMAP.md` — Phase 4, Steps 4.1–4.6](./ROADMAP.md)
+
+**Commits:**
+
+- [`289a92c`](https://github.com/mddoad/my-website/commit/289a92c) — Phase 4: SEO + assets
 
 ---
 

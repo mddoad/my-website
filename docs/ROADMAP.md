@@ -127,16 +127,16 @@ exists from Phase 2.
 
 ## Phase 4 — SEO + assets
 
-- [ ] **Step 4.1 — `app/robots.ts`**
-- [ ] **Step 4.2 — `app/sitemap.ts`** (static + content-derived)
-- [ ] **Step 4.3 — `app/opengraph-image.tsx`**
-- [ ] **Step 4.4 — `app/icon.tsx`**
-- [ ] **Step 4.5 — Verify**
-  - [ ] `/robots.txt` resolves
-  - [ ] `/sitemap.xml` resolves and includes all routes
-  - [ ] OG image renders
-- [ ] **Step 4.6 — Commit**
-  - [ ] `git commit -m "Phase 4: SEO + assets"`
+- [x] **Step 4.1 — `app/robots.ts`**
+- [x] **Step 4.2 — `app/sitemap.ts`** (static + content-derived)
+- [x] **Step 4.3 — `app/opengraph-image.tsx`**
+- [x] **Step 4.4 — `app/icon.tsx`**
+- [x] **Step 4.5 — Verify**
+  - [x] `/robots.txt` resolves
+  - [x] `/sitemap.xml` resolves and includes all routes
+  - [x] OG image renders
+- [x] **Step 4.6 — Commit**
+  - [x] `git commit -m "Phase 4: SEO + assets"`
 
 ## Phase 5 — Polish
 
