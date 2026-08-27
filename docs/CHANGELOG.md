@@ -198,5 +198,4 @@ both routes (`/`, `/_not-found`) prerender as static.
 
 **Roadmap:** [`ROADMAP.md` — Phase 2, Steps 2.1–2.10](./ROADMAP.md)
 
-**Not yet committed.** Phase 2 lands as a single commit in the next
-step.
+**Committed:** `d697d77 — Phase 2: home page`
