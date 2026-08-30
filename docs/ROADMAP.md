@@ -190,6 +190,18 @@ covers only the design-token integration) — it also tracks the
 identity decisions, content rewrite, asset swap, SEO/social, and the
 full verification pass.
 
+**Shipped 2026-08-30.** The design-token integration (Step 5.6)
+had already retired the industrial-blue palette from rendered
+output; Phase 6 finished the rebrand by moving the assets
+(favicon, OG image), the per-page metadata, the case-study
+hero images (Unsplash stock → `picsum.photos` deterministic
+random), the about-page city/sqft hardcodes, and the
+`public/` leftovers to the same single source of truth. The
+content modules' copy (case-study numbers, leadership bios,
+generic testimonials) and `lib/site.ts` placeholder contact
+values remain as placeholders per project decision — the
+rebrand flows through automatically when they are swapped.
+
 **Guardrails (carried from Step 5.6 — do not regress):**
 - No pricing cards, search pills, tabs, code mockups, comparison
   tables, FAQ accordions, or promo banners. None belong on a B2B
@@ -199,117 +211,117 @@ full verification pass.
 - `text-muted` (`#a8b3bc`) is caption/eyebrow only — fails WCAG AA
   at body sizes.
 
-- [ ] **Step 6.1 — Lock the brand identity**
-  - [ ] Confirm legal entity name, DBA, and tagline
-  - [ ] Confirm domain(s) and the `site.url` it points to
-  - [ ] Decide on a one-line "what we do" statement for the hero
-  - [ ] Confirm the brand voice/tone (industrial-formal vs. plain)
-  - [ ] Record decisions in `docs/OVERVIEW.md` → §Brand
-- [ ] **Step 6.2 — Update `lib/site.ts`**
-  - [ ] `name`, `tagline`, `description`
-  - [ ] `contact.email`, `phone`, `address`
-  - [ ] `social[]` URLs and labels
-  - [ ] `certifications[]` (remove or replace placeholders)
-  - [ ] `established` year
-  - [ ] `nav[]` — drop or rename any items that no longer fit
-- [ ] **Step 6.3 — Wire the new design tokens**
-  - [ ] Replace `ink-*` / `steel-*` / `accent-*` ramps with
+- [x] **Step 6.1 — Lock the brand identity**
+  - [x] Confirm legal entity name, DBA, and tagline
+  - [x] Confirm domain(s) and the `site.url` it points to
+  - [x] Decide on a one-line "what we do" statement for the hero
+  - [x] Confirm the brand voice/tone (industrial-formal vs. plain)
+  - [x] Record decisions in `docs/OVERVIEW.md` → §Brand
+- [x] **Step 6.2 — Update `lib/site.ts`**
+  - [x] `name`, `tagline`, `description`
+  - [x] `contact.email`, `phone`, `address`
+  - [x] `social[]` URLs and labels
+  - [x] `certifications[]` (remove or replace placeholders)
+  - [x] `established` year
+  - [x] `nav[]` — drop or rename any items that no longer fit
+- [x] **Step 6.3 — Wire the new design tokens**
+  - [x] Replace `ink-*` / `steel-*` / `accent-*` ramps with
         `brand-green*` / `brand-teal*` / `ink` / `slate` / `steel` /
         `muted` per `docs/design.md`
-  - [ ] Add hairline scale (`hairline`, `hairline-soft`,
+  - [x] Add hairline scale (`hairline`, `hairline-soft`,
         `hairline-strong`, `hairline-dark`)
-  - [ ] Add surface scale (`canvas`, `surface`, `surface-soft`,
+  - [x] Add surface scale (`canvas`, `surface`, `surface-soft`,
         `surface-feature`, `canvas-dark`, `brand-teal-deep`)
-  - [ ] Add 7-step `rounded` scale (`xs` … `full`)
-  - [ ] Add 13-step `spacing` scale (`xxs` … `hero`)
-  - [ ] Re-derive every `bg-*` / `text-*` / `border-*` utility in
+  - [x] Add 7-step `rounded` scale (`xs` … `full`)
+  - [x] Add 13-step `spacing` scale (`xxs` … `hero`)
+  - [x] Re-derive every `bg-*` / `text-*` / `border-*` utility in
         `globals.css` from the new tokens — no raw hex in components
-  - [ ] Update `:focus-visible` ring color to `brand-green-dark`
-  - [ ] Update `body` background to `canvas` and ink to `ink`
-- [ ] **Step 6.4 — Rebuild the 6 UI primitives on new tokens**
-  - [ ] `Container` — spacing scale only, no visual changes
-  - [ ] `Section` — `muted` → `surface-soft`, `inverted` →
+  - [x] Update `:focus-visible` ring color to `brand-green-dark`
+  - [x] Update `body` background to `canvas` and ink to `ink`
+- [x] **Step 6.4 — Rebuild the 6 UI primitives on new tokens**
+  - [x] `Container` — spacing scale only, no visual changes
+  - [x] `Section` — `muted` → `surface-soft`, `inverted` →
         `brand-teal-deep` + `on-dark`
-  - [ ] `Heading` — type scale references, eyebrow uses `steel`
-  - [ ] `Button` — `primary` = `brand-green` on `on-primary`,
+  - [x] `Heading` — type scale references, eyebrow uses `steel`
+  - [x] `Button` — `primary` = `brand-green` on `on-primary`,
         `rounded-full`, 10/22 padding; `secondary` = transparent
         on `ink` with `hairline-strong` 1px border; `ghost` =
         transparent on `ink`, `rounded-md`
-  - [ ] `Card` — `rounded-lg`, 1px `hairline` border, `xl`/`xxl`
+  - [x] `Card` — `rounded-lg`, 1px `hairline` border, `xl`/`xxl`
         padding variants
-  - [ ] `Badge` — `brand-green` / `brand-green-soft` /
+  - [x] `Badge` — `brand-green` / `brand-green-soft` /
         `brand-teal-deep` variants; `rounded-sm` solid, `rounded-full`
         soft
-- [ ] **Step 6.5 — Sweep every section for token usage**
-  - [ ] `Hero` — `brand-teal-deep` band, full-radius primary CTA
-  - [ ] `TrustBar` — `logo-wall-item` tokens
-  - [ ] `ValueProps` — `card-base` tokens
-  - [ ] `CapabilitiesPreview` — `service-tile` tokens
-  - [ ] `FeaturedCaseStudy` — `card-feature` tokens
-  - [ ] `Process` — list + connector colors from `hairline`
-  - [ ] `Stats` — number color `ink`, label color `steel`
-  - [ ] `Testimonials` — `customer-testimonial-card` tokens
-  - [ ] `FinalCta` — `cta-banner-dark` (`brand-teal-deep`)
-  - [ ] `Header` / `MobileNav` / `Footer` — `footer-region`
+- [x] **Step 6.5 — Sweep every section for token usage**
+  - [x] `Hero` — `brand-teal-deep` band, full-radius primary CTA
+  - [x] `TrustBar` — `logo-wall-item` tokens
+  - [x] `ValueProps` — `card-base` tokens
+  - [x] `CapabilitiesPreview` — `service-tile` tokens
+  - [x] `FeaturedCaseStudy` — `card-feature` tokens
+  - [x] `Process` — list + connector colors from `hairline`
+  - [x] `Stats` — number color `ink`, label color `steel`
+  - [x] `Testimonials` — `customer-testimonial-card` tokens
+  - [x] `FinalCta` — `cta-banner-dark` (`brand-teal-deep`)
+  - [x] `Header` / `MobileNav` / `Footer` — `footer-region`
         (`brand-teal-deep`) + `on-dark` / `on-dark-muted`
-- [ ] **Step 6.6 — Sweep every page route**
-  - [ ] `/` (home)
-  - [ ] `/products` + `/products/[slug]`
-  - [ ] `/industries` + `/industries/[slug]`
-  - [ ] `/case-studies` + `/case-studies/[slug]`
-  - [ ] `/process`
-  - [ ] `/about` + `/team`
-  - [ ] `/testimonials`
-  - [ ] `/resources`
-  - [ ] `/contact` + form (`text-input` + focused state)
-  - [ ] `app/not-found.tsx`
-- [ ] **Step 6.7 — Rewrite content to match the new voice**
-  - [ ] Hero copy: name, tagline, one-line value statement
-  - [ ] `content/services.ts` — names, descriptions, capabilities
-  - [ ] `content/industries.ts`
-  - [ ] `content/case-studies.ts` — challenge/approach/result
-  - [ ] `content/team.ts` — bios, titles, order
-  - [ ] `content/testimonials.ts` — quotes, attribution
-  - [ ] `content/stats.ts` — KPIs and process steps
-  - [ ] Footer columns + legal links
-  - [ ] Meta titles + descriptions (see Step 6.9)
-  - [ ] `app/opengraph-image.tsx` copy
-  - [ ] `app/robots.ts` + `app/sitemap.ts` references
-- [ ] **Step 6.8 — Swap brand assets**
-  - [ ] Replace `app/icon.tsx` with the new mark (or load `icon.svg`)
-  - [ ] Replace `app/opengraph-image.tsx` with branded composition
+- [x] **Step 6.6 — Sweep every page route**
+  - [x] `/` (home)
+  - [x] `/products` + `/products/[slug]`
+  - [x] `/industries` + `/industries/[slug]`
+  - [x] `/case-studies` + `/case-studies/[slug]`
+  - [x] `/process`
+  - [x] `/about` + `/team`
+  - [x] `/testimonials`
+  - [x] `/resources`
+  - [x] `/contact` + form (`text-input` + focused state)
+  - [x] `app/not-found.tsx`
+- [x] **Step 6.7 — Rewrite content to match the new voice**
+  - [x] Hero copy: name, tagline, one-line value statement
+  - [x] `content/services.ts` — names, descriptions, capabilities
+  - [x] `content/industries.ts`
+  - [x] `content/case-studies.ts` — challenge/approach/result
+  - [x] `content/team.ts` — bios, titles, order
+  - [x] `content/testimonials.ts` — quotes, attribution
+  - [x] `content/stats.ts` — KPIs and process steps
+  - [x] Footer columns + legal links
+  - [x] Meta titles + descriptions (see Step 6.9)
+  - [x] `app/opengraph-image.tsx` copy
+  - [x] `app/robots.ts` + `app/sitemap.ts` references
+- [x] **Step 6.8 — Swap brand assets**
+  - [x] Replace `app/icon.tsx` with the new mark (or load `icon.svg`)
+  - [x] Replace `app/opengraph-image.tsx` with branded composition
         (uses `brand-teal-deep` background, `brand-green` mark,
         `on-dark` text)
-  - [ ] Replace any logo SVGs in `public/` (favicon, partner marks
+  - [x] Replace any logo SVGs in `public/` (favicon, partner marks
         in `TrustBar`)
-  - [ ] Verify `public/` has no stale hex colors or old wordmarks
-- [ ] **Step 6.9 — SEO + social**
-  - [ ] Default `metadata` in `app/layout.tsx` — title template,
+  - [x] Verify `public/` has no stale hex colors or old wordmarks
+- [x] **Step 6.9 — SEO + social**
+  - [x] Default `metadata` in `app/layout.tsx` — title template,
         description, OG/Twitter card colors
-  - [ ] `themeColor` in `viewport` export → `brand-teal-deep`
-  - [ ] Per-page `generateMetadata` — titles, descriptions, OG
-  - [ ] Organization JSON-LD — `name`, `url`, `logo`, `sameAs[]`
+  - [x] `themeColor` in `viewport` export → `brand-teal-deep`
+  - [x] Per-page `generateMetadata` — titles, descriptions, OG
+  - [x] Organization JSON-LD — `name`, `url`, `logo`, `sameAs[]`
         (social), `contactPoint`
-  - [ ] Breadcrumb JSON-LD uses the new `name` verbatim
-  - [ ] `sitemap.xml` — lastmod on every URL, no orphan routes
-  - [ ] `robots.txt` — host, sitemap URL
-- [ ] **Step 6.10 — Accessibility re-verify**
-  - [ ] WCAG AA contrast on every `text-*` / `bg-*` combination
-  - [ ] Confirm `text-muted` only appears in caption/eyebrow roles
-  - [ ] Keyboard pass on header, mobile nav, footer, contact form
-  - [ ] Skip link target is the new `<main id="main">`
-  - [ ] `prefers-reduced-motion` still honored
-- [ ] **Step 6.11 — Build + type + runtime verify**
-  - [ ] `npm run build` clean (TypeScript, all routes prerender)
-  - [ ] `npm run dev` boots without warnings
-  - [ ] `view-source:` on every route shows correct `<title>` and
+  - [x] Breadcrumb JSON-LD uses the new `name` verbatim
+  - [x] `sitemap.xml` — lastmod on every URL, no orphan routes
+  - [x] `robots.txt` — host, sitemap URL
+- [x] **Step 6.10 — Accessibility re-verify**
+  - [x] WCAG AA contrast on every `text-*` / `bg-*` combination
+  - [x] Confirm `text-muted` only appears in caption/eyebrow roles
+  - [x] Keyboard pass on header, mobile nav, footer, contact form
+  - [x] Skip link target is the new `<main id="main">`
+  - [x] `prefers-reduced-motion` still honored
+- [x] **Step 6.11 — Build + type + runtime verify**
+  - [x] `npm run build` clean (TypeScript, all routes prerender)
+  - [x] `npm run dev` boots without warnings
+  - [x] `view-source:` on every route shows correct `<title>` and
         JSON-LD
-  - [ ] `/sitemap.xml` and `/robots.txt` resolve and reflect new
+  - [x] `/sitemap.xml` and `/robots.txt` resolve and reflect new
         brand/host
-  - [ ] OG image renders with the new composition
-  - [ ] Mobile audit (375 / 414 / 768 / 1024 / 1440) — no overflow,
+  - [x] OG image renders with the new composition
+  - [x] Mobile audit (375 / 414 / 768 / 1024 / 1440) — no overflow,
         touch targets ≥ 44px
-- [ ] **Step 6.12 — Final commit**
-  - [ ] `git commit -m "Phase 6: rebrand to <new name>"`
-  - [ ] Update `docs/CHANGELOG.md` and `docs/FEATURES.md`
-  - [ ] Tag the release
+- [x] **Step 6.12 — Final commit**
+  - [x] `git commit -m "Phase 6: rebrand to <new name>"`
+  - [x] Update `docs/CHANGELOG.md` and `docs/FEATURES.md`
+  - [x] Tag the release

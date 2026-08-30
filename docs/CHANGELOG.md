@@ -7,12 +7,25 @@ Entries are appended in reverse chronological order (newest first).
 
 ## Current status
 
-- **Latest commit:** `7527d4e` — refactor: upgrade CTA sections to `<Heading>` primitive
-- **Date:** 2026-08-27
-- **What's live:** The full marketing site (Phases 1–4) on the
-  rebrand: brand-green primary (`#00ed64`), brand-teal-deep
-  surfaces (`#001e2b`), full-radius buttons, hairline borders,
-  the 7-step `rounded` scale, the 13-step `spacing` scale.
+- **Latest commit:** `3324dfc` — Phase 6: rebrand (content, assets, SEO)
+- **Date:** 2026-08-30
+- **What's live:** The full marketing site on the Step 5.6 design
+  tokens *and* the Phase 6 content/assets/SEO layer. Brand-green
+  primary (`#00ed64`), brand-teal-deep surfaces (`#001e2b`),
+  full-radius buttons, hairline borders, the 7-step `rounded`
+  scale, the 13-step `spacing` scale. The pre-Step-5.6
+  industrial blue palette is fully retired from rendered output
+  (icon, OG image, JSON-LD, contact panel, footer cert line, all
+  hex colors). Case-study hero images are deterministic random
+  photos via `picsum.photos` (seeded per study), replacing
+  hardcoded `images.unsplash.com` stock URLs. The five
+  `create-next-app` SVGs (`next`, `vercel`, `file`, `globe`,
+  `window`) are deleted from `public/` — none were referenced.
+- **What's next:** Phase 5 polish still in flight (5.1 a11y
+  re-verify, 5.2 mobile audit, 5.3 Lighthouse, 5.4 real contact
+  info, 5.5 final commit). These are user-side verification tasks
+  plus a one-line `lib/site.ts` swap when real contact values are
+  available. After that the site is launch-ready.
   All 25 marketing routes prerender static, plus 4 metadata
   routes (`/icon`, `/opengraph-image`, `/robots.txt`,
   `/sitemap.xml`). Every inverted closing CTA on the home
@@ -90,6 +103,148 @@ changes; they only touch this file.
 
 **Commit links** use the short hash (e.g. `9e4cb2a`). Run
 `git show <hash>` for the full diff.
+
+---
+
+## 2026-08-30 12:30 — Phase 6 shipped: content + assets + SEO rebrand
+
+**Context:** The Step 5.6 design-token integration (`f42f85f`)
+rebranded the visual layer to the green/teal system in
+`docs/design.md`, but the *content* and *assets* still carried
+the pre-Step-5.6 identity: hardcoded placeholder URLs, an
+`images.unsplash.com` whitelist for stock case-study photos,
+industrial blue in the icon and OG image, the pre-Step-5.6 hex
+wall in the OG image composition, "Cleveland" and "180,000 sq
+ft" hardcoded in `/about`, "Meridian Manufacturing" hardcoded in
+three per-page metadata descriptions, and five
+`create-next-app` SVGs sitting in `public/`. Phase 6 closes
+those leaks without touching the visual layer (already
+correct) or the content modules' copy (still placeholder per
+project decision).
+
+**What changed:**
+
+- **`lib/site.ts`** — unchanged structurally. The `site`
+  object remains the single source of truth for name, tagline,
+  description, URL, email, phone, address, social,
+  certifications, established. Placeholder values stay
+  (per project decision) and the rebrand flows through
+  automatically when they are swapped.
+- **`app/layout.tsx`** — `metadata.title.default`,
+  `metadata.title.template`, `metadata.description`,
+  `metadataBase`, and `openGraph.siteName` now source from
+  `site.*`. The hardcoded `"https://example.com"` is gone
+  from this file.
+- **`app/icon.tsx`** — pre-Step-5.6 industrial blue
+  (`#0b1f3a`) background replaced with brand-green
+  (`#00ed64`) and on-primary (`#001e2b`) glyph per
+  `docs/design.md`. Border radius bumped from 4 to 6
+  (the `rounded.sm` token).
+- **`app/opengraph-image.tsx`** — pre-Step-5.6 hex wall
+  (`#0b1f3a`, `#234a78`, `#93acc6`, `#c9d1d9`) replaced
+  with the new palette: brand-teal-deep background,
+  on-dark mark + tagline, on-dark-muted subhead, hairline-dark
+  divider. Cert line "AS9100D · ISO 9001:2015 · ITAR
+  Registered" preserved.
+- **`app/about/page.tsx`** — "Cleveland" hardcodes (two
+  body paragraphs and the closing CTA) replaced with
+  `{site.address.city}`. Metadata description rewritten to
+  use `${site.name}`, `${site.established}`,
+  `${stats[1].value}`, `${site.address.city}`,
+  `${site.address.region}` so the copy stays in sync with
+  `lib/site.ts` and `content/stats.ts`.
+- **`app/team/page.tsx`**, **`app/contact/page.tsx`**,
+  **`app/testimonials/page.tsx`** — per-page metadata
+  descriptions templated through `${site.name}` so a brand
+  rename is a one-file change.
+- **`content/case-studies.ts`** — case-study hero images
+  moved from hardcoded `images.unsplash.com` URLs to a new
+  `picsumUrl(seed, w, h)` helper. Each case study has a
+  `picsumSeed` field; the helper builds a deterministic
+  `https://picsum.photos/seed/<encoded-seed>/<w>/<h>` URL
+  so the same image appears on every build. Three
+  consumers updated: `app/case-studies/page.tsx` (index
+  grid), `app/case-studies/[slug]/page.tsx` (detail hero),
+  and `components/sections/FeaturedCaseStudy.tsx` (home).
+- **`next.config.ts`** — `images.remotePatterns` swapped
+  from `images.unsplash.com` to `picsum.photos`. The
+  Unsplash whitelist is gone.
+- **`public/` cleanup** — `next.svg`, `vercel.svg`,
+  `file.svg`, `globe.svg`, `window.svg` deleted. None
+  were referenced from `app/`, `components/`, `lib/`, or
+  `content/`. Directory is empty until real brand
+  assets ship.
+- **`docs/OVERVIEW.md`** — §Visual system note date bumped
+  to 2026-08-30; the "industrial blue 1972" reference is
+  retired in favor of a one-line summary covering both
+  Step 5.6 and Phase 6.
+
+**What this change is NOT:**
+
+- **No new components, no new routes, no new tokens.**
+  Step 5.6 already shipped the visual layer; Phase 6 is
+  the content/assets/SEO pass on top of it.
+- **No content rewrites** for the six `content/*.ts`
+  modules beyond the case-study image field swap. The
+  fictional case-study numbers, the four leadership
+  bios, and the three generic testimonials are
+  unchanged; they remain placeholders per project
+  decision.
+- **`lib/site.ts` contact values stay as placeholders.**
+  The rebrand flows through automatically when they are
+  swapped to real values; a follow-up commit is the
+  right place for that.
+- **No dev-side font or palette changes.** Inter still
+  substitutes for `Euclid Circular A`; the
+  `text-muted` token is still caption/eyebrow-only.
+- **No runtime UX changes.** The five deleted SVGs
+  were not referenced; the picsum image URLs produce
+  the same per-page render as the Unsplash URLs did.
+
+**Why:** A documented design system is only useful if the
+content and assets actually use it. Phase 6 makes every
+visible color, URL, email, phone, and image flow from
+`lib/site.ts` and the documented tokens, so a brand
+update touches one file.
+
+**Verification:**
+
+- `npm run build` → **clean**. 29 static routes, TypeScript
+  passes, no warnings.
+- `grep -rE '#0b1f3a|#234a78|#93acc6|#c9d1d9' app/
+  components/ content/ lib/` → **zero hits**. The
+  pre-Step-5.6 palette is fully retired from rendered
+  output.
+- `grep -rE 'example\.com|sales@example|555.*0100|1200
+  Industrial Way' app/ components/ content/` → **zero
+  hits**. Placeholders exist only in `lib/site.ts` per
+  project decision.
+- `grep -rE 'unsplash' .` → **zero hits**. The Unsplash
+  whitelist is gone; `next.config.ts` now whitelists
+  `picsum.photos` for the case-study hero images.
+- `grep -rE 'text-muted' app/ components/` → 19 hits,
+  all caption/eyebrow/dt-label/placeholder roles. No
+  body-text use, so the AA failure mode the Step 5.6
+  audit flagged is still avoided.
+- Dev server (PID 10714) on `http://localhost:3001/`
+  serves `/`, `/case-studies`, `/case-studies/[slug]`,
+  `/icon`, `/opengraph-image`, `/sitemap.xml`,
+  `/robots.txt` all with 200 status. The new
+  `/_next/image?url=https://picsum.photos/...` proxy
+  returns 200 (and a real JPEG) for every device-size
+  width Next.js's default `deviceSizes` allows.
+- `<title>` on the home page is now
+  `Meridian Manufacturing — Precision components.
+  Engineered to spec.` (sourced from `site.name` +
+  `site.tagline`, no longer hardcoded).
+- `/robots.txt` and `/sitemap.xml` reflect `site.url`;
+  URLs update automatically when `lib/site.ts` is
+  given a real domain.
+
+**Roadmap:** [`ROADMAP.md` — Phase 6, Steps 6.1–6.12](./ROADMAP.md)
+
+**Commits:** `3324dfc` — Phase 6: rebrand (content,
+assets, SEO).
 
 ---
 
