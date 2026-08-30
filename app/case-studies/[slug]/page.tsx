@@ -148,7 +148,12 @@ export default async function CaseStudyDetailPage({
               <Button href="/contact" size="lg">
                 Request a quote
               </Button>
-              <Button href="/case-studies" variant="secondary" size="lg">
+              <Button
+                href="/case-studies"
+                variant="secondary"
+                size="lg"
+                tone="inverted"
+              >
                 More case studies
               </Button>
             </div>

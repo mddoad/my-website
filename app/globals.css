@@ -125,7 +125,13 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  color: var(--color-ink);
+  /* Inherit color from the parent so inverted sections
+   * (text-on-dark) override the default ink color. Hardcoding
+   * var(--color-ink) here wins the cascade over a single-class
+   * utility like `text-on-dark` (element selector outranks a
+   * class selector), which made titles invisible on dark
+   * sections. */
+  color: inherit;
   letter-spacing: -0.01em;
   line-height: 1.20;
   font-weight: 500;
