@@ -5,6 +5,8 @@ import { Section } from "@/components/ui/Section";
 import { Heading } from "@/components/ui/Heading";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/motion/Reveal";
+import { Stagger } from "@/components/motion/Stagger";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { services } from "@/content/services";
 import { buildMetadata } from "@/lib/seo";
@@ -52,9 +54,12 @@ export default function ProductsPage() {
       {/* Capability index */}
       <Section tone="muted" padding="lg">
         <Container size="full">
-          <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <Stagger
+            as="ul"
+            className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          >
             {services.map((s) => (
-              <li key={s.slug} className="h-full">
+              <Reveal as="li" key={s.slug} className="h-full">
                 <Card as="article" className="flex h-full flex-col p-6">
                   <Heading as={3}>{s.name}</Heading>
                   <p className="mt-3 text-sm text-slate">{s.short}</p>
@@ -76,36 +81,38 @@ export default function ProductsPage() {
                     Details →
                   </Link>
                 </Card>
-              </li>
+              </Reveal>
             ))}
-          </ul>
+          </Stagger>
         </Container>
       </Section>
 
       {/* Closing CTA — same shape as FinalCta but tailored */}
       <Section tone="inverted" padding="lg">
         <Container size="prose">
-          <div className="text-center">
-            <Heading
-              as={2}
-              align="center"
-              eyebrow="Not sure where to start?"
-              tone="inverted"
-              className="text-3xl font-semibold sm:text-4xl"
-            >
-              Send a drawing. We&rsquo;ll route it.
-            </Heading>
-            <p className="mt-4 text-lg text-on-dark-muted">
-              Every capability here is staffed. Send your print, your volume,
-              and your target date — we&rsquo;ll come back with a quote, a
-              process plan, and a quality plan within five business days.
-            </p>
-            <div className="mt-8">
-              <Button href="/contact" size="lg">
-                Request a quote
-              </Button>
+          <Reveal>
+            <div className="text-center">
+              <Heading
+                as={2}
+                align="center"
+                eyebrow="Not sure where to start?"
+                tone="inverted"
+                className="text-3xl font-semibold sm:text-4xl"
+              >
+                Send a drawing. We&rsquo;ll route it.
+              </Heading>
+              <p className="mt-4 text-lg text-on-dark-muted">
+                Every capability here is staffed. Send your print, your volume,
+                and your target date — we&rsquo;ll come back with a quote, a
+                process plan, and a quality plan within five business days.
+              </p>
+              <div className="mt-8">
+                <Button href="/contact" size="lg">
+                  Request a quote
+                </Button>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </Section>
     </>

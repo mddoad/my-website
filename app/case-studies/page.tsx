@@ -7,6 +7,8 @@ import { Heading } from "@/components/ui/Heading";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
+import { Reveal } from "@/components/motion/Reveal";
+import { Stagger } from "@/components/motion/Stagger";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { caseStudies, picsumUrl } from "@/content/case-studies";
 import { buildMetadata } from "@/lib/seo";
@@ -42,9 +44,12 @@ export default function CaseStudiesPage() {
 
       <Section tone="muted" padding="lg">
         <Container size="full">
-          <ul className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <Stagger
+            as="ul"
+            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+          >
             {caseStudies.map((cs) => (
-              <li key={cs.slug} className="h-full">
+              <Reveal as="li" key={cs.slug} className="h-full">
                 <Card as="article" className="flex h-full flex-col overflow-hidden p-0">
                   <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface-soft">
                     <Image
@@ -81,34 +86,36 @@ export default function CaseStudiesPage() {
                     </Link>
                   </div>
                 </Card>
-              </li>
+              </Reveal>
             ))}
-          </ul>
+          </Stagger>
         </Container>
       </Section>
 
       <Section tone="inverted" padding="lg">
         <Container size="prose">
-          <div className="text-center">
-            <Heading
-              as={2}
-              align="center"
-              eyebrow="Let&rsquo;s go"
-              tone="inverted"
-              className="text-3xl font-semibold sm:text-4xl"
-            >
-              Want a program like this on your side?
-            </Heading>
-            <p className="mt-4 text-lg text-on-dark-muted">
-              Tell us about your program. We&rsquo;ll come back with a quote,
-              a process plan, and a quality plan within five business days.
-            </p>
-            <div className="mt-8">
-              <Button href="/contact" size="lg">
-                Request a quote
-              </Button>
+          <Reveal>
+            <div className="text-center">
+              <Heading
+                as={2}
+                align="center"
+                eyebrow="Let&rsquo;s go"
+                tone="inverted"
+                className="text-3xl font-semibold sm:text-4xl"
+              >
+                Want a program like this on your side?
+              </Heading>
+              <p className="mt-4 text-lg text-on-dark-muted">
+                Tell us about your program. We&rsquo;ll come back with a quote,
+                a process plan, and a quality plan within five business days.
+              </p>
+              <div className="mt-8">
+                <Button href="/contact" size="lg">
+                  Request a quote
+                </Button>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </Section>
     </>

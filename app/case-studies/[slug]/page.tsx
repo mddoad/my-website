@@ -7,9 +7,13 @@ import { Section } from "@/components/ui/Section";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
+import { Reveal } from "@/components/motion/Reveal";
+import { Stagger } from "@/components/motion/Stagger";
+import { Counter } from "@/components/motion/Counter";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { caseStudies, picsumUrl } from "@/content/case-studies";
 import { buildMetadata } from "@/lib/seo";
+import { parseStat } from "@/lib/utils";
 
 type Params = { slug: string };
 
@@ -89,75 +93,96 @@ export default async function CaseStudyDetailPage({
       {/* Metrics */}
       <Section padding="md" className="border-y border-hairline">
         <Container size="wide">
-          <dl className="grid grid-cols-2 gap-8 lg:grid-cols-3">
-            {study.metrics.map((m) => (
-              <div key={m.label} className="text-center sm:text-left">
-                <dt className="text-sm text-muted">{m.label}</dt>
-                <dd className="mt-1 text-4xl font-semibold text-ink sm:text-5xl">
-                  {m.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <Stagger
+            as="dl"
+            className="grid grid-cols-2 gap-8 lg:grid-cols-3"
+          >
+            {study.metrics.map((m) => {
+              const stat = parseStat(m.value);
+              return (
+                <Reveal
+                  as="div"
+                  key={m.label}
+                  className="text-center sm:text-left"
+                >
+                  <dt className="text-sm text-muted">{m.label}</dt>
+                  <dd className="mt-1 text-4xl font-semibold text-ink sm:text-5xl">
+                    {stat ? (
+                      <Counter
+                        value={stat.value}
+                        decimals={stat.decimals}
+                        prefix={stat.prefix}
+                        suffix={stat.suffix}
+                      />
+                    ) : (
+                      m.value
+                    )}
+                  </dd>
+                </Reveal>
+              );
+            })}
+          </Stagger>
         </Container>
       </Section>
 
       {/* Challenge / Approach / Result */}
       <Section padding="lg">
         <Container size="prose">
-          <div className="space-y-12">
-            <div>
+          <Stagger className="space-y-12">
+            <Reveal as="div">
               <Heading as={2} eyebrow="Challenge">
                 What the customer was up against
               </Heading>
               <p className="mt-6 text-lg text-slate">{study.challenge}</p>
-            </div>
-            <div>
+            </Reveal>
+            <Reveal as="div">
               <Heading as={2} eyebrow="Approach">
                 What we changed
               </Heading>
               <p className="mt-6 text-lg text-slate">{study.approach}</p>
-            </div>
-            <div>
+            </Reveal>
+            <Reveal as="div">
               <Heading as={2} eyebrow="Result">
                 What happened next
               </Heading>
               <p className="mt-6 text-lg text-slate">{study.result}</p>
-            </div>
-          </div>
+            </Reveal>
+          </Stagger>
         </Container>
       </Section>
 
       <Section tone="inverted" padding="lg">
         <Container size="prose">
-          <div className="text-center">
-            <Heading
-              as={2}
-              align="center"
-              eyebrow="Your move"
-              tone="inverted"
-              className="text-3xl font-semibold sm:text-4xl"
-            >
-              Want a result like this?
-            </Heading>
-            <p className="mt-4 text-lg text-on-dark-muted">
-              We&rsquo;ll come back with a quote, a process plan, and a
-              quality plan within five business days.
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Button href="/contact" size="lg">
-                Request a quote
-              </Button>
-              <Button
-                href="/case-studies"
-                variant="secondary"
-                size="lg"
+          <Reveal>
+            <div className="text-center">
+              <Heading
+                as={2}
+                align="center"
+                eyebrow="Your move"
                 tone="inverted"
+                className="text-3xl font-semibold sm:text-4xl"
               >
-                More case studies
-              </Button>
+                Want a result like this?
+              </Heading>
+              <p className="mt-4 text-lg text-on-dark-muted">
+                We&rsquo;ll come back with a quote, a process plan, and a
+                quality plan within five business days.
+              </p>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <Button href="/contact" size="lg">
+                  Request a quote
+                </Button>
+                <Button
+                  href="/case-studies"
+                  variant="secondary"
+                  size="lg"
+                  tone="inverted"
+                >
+                  More case studies
+                </Button>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </Section>
     </>

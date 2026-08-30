@@ -3,6 +3,8 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/motion/Reveal";
+import { Stagger } from "@/components/motion/Stagger";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { processSteps } from "@/content/stats";
 import { buildMetadata } from "@/lib/seo";
@@ -84,9 +86,10 @@ export default function ProcessPage() {
       {/* Steps */}
       <Section tone="muted" padding="lg">
         <Container size="wide">
-          <ol className="space-y-12">
+          <Stagger as="ol" className="space-y-12">
             {processSteps.map((s, i) => (
-              <li
+              <Reveal
+                as="li"
                 key={s.step}
                 className="grid gap-6 rounded-lg border border-hairline bg-canvas p-8 lg:grid-cols-12 lg:gap-10"
               >
@@ -112,35 +115,37 @@ export default function ProcessPage() {
                     ))}
                   </ul>
                 </div>
-              </li>
+              </Reveal>
             ))}
-          </ol>
+          </Stagger>
         </Container>
       </Section>
 
       <Section tone="inverted" padding="lg">
         <Container size="prose">
-          <div className="text-center">
-            <Heading
-              as={2}
-              align="center"
-              eyebrow="Get started"
-              tone="inverted"
-              className="text-3xl font-semibold sm:text-4xl"
-            >
-              Start with Discover.
-            </Heading>
-            <p className="mt-4 text-lg text-on-dark-muted">
-              Send a drawing, a volume profile, and a target date. We&rsquo;ll
-              come back with a quote, a process plan, and a quality plan
-              within five business days.
-            </p>
-            <div className="mt-8">
-              <Button href="/contact" size="lg">
-                Request a quote
-              </Button>
+          <Reveal>
+            <div className="text-center">
+              <Heading
+                as={2}
+                align="center"
+                eyebrow="Get started"
+                tone="inverted"
+                className="text-3xl font-semibold sm:text-4xl"
+              >
+                Start with Discover.
+              </Heading>
+              <p className="mt-4 text-lg text-on-dark-muted">
+                Send a drawing, a volume profile, and a target date. We&rsquo;ll
+                come back with a quote, a process plan, and a quality plan
+                within five business days.
+              </p>
+              <div className="mt-8">
+                <Button href="/contact" size="lg">
+                  Request a quote
+                </Button>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </Section>
     </>

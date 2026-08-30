@@ -6,6 +6,8 @@ import { Section } from "@/components/ui/Section";
 import { Heading } from "@/components/ui/Heading";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/motion/Reveal";
+import { Stagger } from "@/components/motion/Stagger";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { industries } from "@/content/industries";
 import { caseStudies } from "@/content/case-studies";
@@ -91,9 +93,13 @@ export default async function IndustryDetailPage({
           <Heading as={2} eyebrow="What it gets you">
             Program outcomes
           </Heading>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+          <Stagger
+            as="ul"
+            className="mt-10 grid gap-4 sm:grid-cols-2"
+          >
             {industry.outcomes.map((o) => (
-              <li
+              <Reveal
+                as="li"
                 key={o}
                 className="flex items-start gap-3 rounded-md border border-hairline bg-canvas p-5"
               >
@@ -102,9 +108,9 @@ export default async function IndustryDetailPage({
                   className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-brand-green"
                 />
                 <span className="text-base text-charcoal">{o}</span>
-              </li>
+              </Reveal>
             ))}
-          </ul>
+          </Stagger>
         </Container>
       </Section>
 
@@ -122,9 +128,12 @@ export default async function IndustryDetailPage({
                 All case studies →
               </Link>
             </div>
-            <ul className="mt-10 grid gap-6 md:grid-cols-2">
+            <Stagger
+              as="ul"
+              className="mt-10 grid gap-6 md:grid-cols-2"
+            >
               {related.map((cs) => (
-                <li key={cs.slug}>
+                <Reveal as="li" key={cs.slug}>
                   <Card as="article" className="h-full p-6">
                     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                       {cs.industry} · {cs.year}
@@ -140,35 +149,37 @@ export default async function IndustryDetailPage({
                       Read the story →
                     </Link>
                   </Card>
-                </li>
+                </Reveal>
               ))}
-            </ul>
+            </Stagger>
           </Container>
         </Section>
       )}
 
       <Section tone="inverted" padding="lg">
         <Container size="prose">
-          <div className="text-center">
-            <Heading
-              as={2}
-              align="center"
-              eyebrow={industry.name}
-              tone="inverted"
-              className="text-3xl font-semibold sm:text-4xl"
-            >
-              Building for {industry.name.toLowerCase()}?
-            </Heading>
-            <p className="mt-4 text-lg text-on-dark-muted">
-              We&rsquo;ll come back with a quote, a process plan, and a
-              quality plan within five business days.
-            </p>
-            <div className="mt-8">
-              <Button href="/contact" size="lg">
-                Request a quote
-              </Button>
+          <Reveal>
+            <div className="text-center">
+              <Heading
+                as={2}
+                align="center"
+                eyebrow={industry.name}
+                tone="inverted"
+                className="text-3xl font-semibold sm:text-4xl"
+              >
+                Building for {industry.name.toLowerCase()}?
+              </Heading>
+              <p className="mt-4 text-lg text-on-dark-muted">
+                We&rsquo;ll come back with a quote, a process plan, and a
+                quality plan within five business days.
+              </p>
+              <div className="mt-8">
+                <Button href="/contact" size="lg">
+                  Request a quote
+                </Button>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </Section>
     </>

@@ -2,6 +2,8 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Heading } from "@/components/ui/Heading";
 import { Card } from "@/components/ui/Card";
+import { Reveal } from "@/components/motion/Reveal";
+import { Stagger } from "@/components/motion/Stagger";
 import { testimonials } from "@/content/testimonials";
 
 export function Testimonials() {
@@ -12,9 +14,12 @@ export function Testimonials() {
           What OEM partners say
         </Heading>
 
-        <ul className="mt-12 grid gap-6 lg:grid-cols-3">
+        <Stagger
+          as="ul"
+          className="mt-12 grid gap-6 lg:grid-cols-3"
+        >
           {testimonials.map((t, i) => (
-            <li key={i}>
+            <Reveal as="li" key={i}>
               <Card as="article" className="h-full p-6">
                 <blockquote className="text-base text-charcoal">
                   <p>“{t.quote}”</p>
@@ -24,9 +29,9 @@ export function Testimonials() {
                   <p className="text-stone">{t.company}</p>
                 </figcaption>
               </Card>
-            </li>
+            </Reveal>
           ))}
-        </ul>
+        </Stagger>
       </Container>
     </Section>
   );

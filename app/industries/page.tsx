@@ -5,6 +5,8 @@ import { Section } from "@/components/ui/Section";
 import { Heading } from "@/components/ui/Heading";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/motion/Reveal";
+import { Stagger } from "@/components/motion/Stagger";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { industries } from "@/content/industries";
 import { buildMetadata } from "@/lib/seo";
@@ -41,9 +43,12 @@ export default function IndustriesPage() {
 
       <Section tone="muted" padding="lg">
         <Container size="full">
-          <ul className="grid gap-6 md:grid-cols-2">
+          <Stagger
+            as="ul"
+            className="grid gap-6 md:grid-cols-2"
+          >
             {industries.map((i) => (
-              <li key={i.slug} className="h-full">
+              <Reveal as="li" key={i.slug} className="h-full">
                 <Card as="article" className="flex h-full flex-col p-8">
                   <Heading as={3}>{i.name}</Heading>
                   <p className="mt-3 text-base text-slate">{i.short}</p>
@@ -66,34 +71,36 @@ export default function IndustriesPage() {
                     Industry detail →
                   </Link>
                 </Card>
-              </li>
+              </Reveal>
             ))}
-          </ul>
+          </Stagger>
         </Container>
       </Section>
 
       <Section tone="inverted" padding="lg">
         <Container size="prose">
-          <div className="text-center">
-            <Heading
-              as={2}
-              align="center"
-              eyebrow="Got something else?"
-              tone="inverted"
-              className="text-3xl font-semibold sm:text-4xl"
-            >
-              Don&rsquo;t see your industry?
-            </Heading>
-            <p className="mt-4 text-lg text-on-dark-muted">
-              We take on programs across adjacent verticals — heavy industrial,
-              rail, semiconductor, and more. Tell us what you&rsquo;re building.
-            </p>
-            <div className="mt-8">
-              <Button href="/contact" size="lg">
-                Request a quote
-              </Button>
+          <Reveal>
+            <div className="text-center">
+              <Heading
+                as={2}
+                align="center"
+                eyebrow="Got something else?"
+                tone="inverted"
+                className="text-3xl font-semibold sm:text-4xl"
+              >
+                Don&rsquo;t see your industry?
+              </Heading>
+              <p className="mt-4 text-lg text-on-dark-muted">
+                We take on programs across adjacent verticals — heavy industrial,
+                rail, semiconductor, and more. Tell us what you&rsquo;re building.
+              </p>
+              <div className="mt-8">
+                <Button href="/contact" size="lg">
+                  Request a quote
+                </Button>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </Section>
     </>

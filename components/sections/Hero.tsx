@@ -2,7 +2,11 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
+import { Reveal } from "@/components/motion/Reveal";
+import { Stagger } from "@/components/motion/Stagger";
+import { Counter } from "@/components/motion/Counter";
 import { site } from "@/lib/site";
+import { parseStat } from "@/lib/utils";
 
 export function Hero() {
   return (
@@ -15,44 +19,73 @@ export function Hero() {
 
       <Container size="full" className="relative pt-20 pb-24 sm:pt-28 sm:pb-32">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-7">
-            <Badge tone="accent">Precision manufacturing since {site.established}</Badge>
-            <h1 className="mt-6 text-[40px] font-medium leading-[1.10] tracking-[-1.5px] text-ink sm:text-[56px] lg:text-[72px]">
-              Precision components.{" "}
-              <span className="text-charcoal">Engineered to spec.</span>
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg text-slate sm:text-xl">
-              Meridian Manufacturing is a Tier 1 supplier of precision-machined
-              and fabricated components for OEM customers in aerospace,
-              automotive, energy, and medical. AS9100D, ISO 9001:2015, and
-              ITAR registered.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/contact" size="lg">
-                Request a quote
-              </Button>
-              <Button href="/case-studies" variant="secondary" size="lg">
-                See our work
-              </Button>
-            </div>
-            <dl className="mt-12 grid max-w-xl grid-cols-3 gap-6 border-t border-hairline pt-8 text-sm">
-              <div>
-                <dt className="text-muted">On-time delivery</dt>
-                <dd className="mt-1 text-2xl text-ink">99.2%</dd>
+          <Stagger className="lg:col-span-7">
+            <Reveal>
+              <Badge tone="accent">Precision manufacturing since {site.established}</Badge>
+            </Reveal>
+            <Reveal>
+              <h1 className="mt-6 text-[40px] font-medium leading-[1.10] tracking-[-1.5px] text-ink sm:text-[56px] lg:text-[72px]">
+                Precision components.{" "}
+                <span className="text-charcoal">Engineered to spec.</span>
+              </h1>
+            </Reveal>
+            <Reveal>
+              <p className="mt-6 max-w-2xl text-lg text-slate sm:text-xl">
+                Meridian Manufacturing is a Tier 1 supplier of precision-machined
+                and fabricated components for OEM customers in aerospace,
+                automotive, energy, and medical. AS9100D, ISO 9001:2015, and
+                ITAR registered.
+              </p>
+            </Reveal>
+            <Reveal>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Button href="/contact" size="lg">
+                  Request a quote
+                </Button>
+                <Button href="/case-studies" variant="secondary" size="lg">
+                  See our work
+                </Button>
               </div>
-              <div>
-                <dt className="text-muted">Active part numbers</dt>
-                <dd className="mt-1 text-2xl text-ink">2,400</dd>
-              </div>
-              <div>
-                <dt className="text-muted">Years in business</dt>
-                <dd className="mt-1 text-2xl text-ink">50+</dd>
-              </div>
-            </dl>
-          </div>
+            </Reveal>
+            <Reveal>
+              <dl className="mt-12 grid max-w-xl grid-cols-3 gap-6 border-t border-hairline pt-8 text-sm">
+                {(
+                  [
+                    ["99.2%", "On-time delivery"],
+                    ["2,400", "Active part numbers"],
+                    ["50+", "Years in business"],
+                  ] as const
+                ).map(([raw, label]) => {
+                  // parseStat returns null for unparseable strings.
+                  // We control the input, so this never triggers;
+                  // the fallback renders the raw text in case the
+                  // shape ever changes.
+                  const stat = parseStat(raw);
+                  return (
+                    <div key={label}>
+                      <dt className="text-muted">{label}</dt>
+                      <dd className="mt-1 text-2xl text-ink">
+                        {stat ? (
+                          <Counter
+                            value={stat.value}
+                            decimals={stat.decimals}
+                            prefix={stat.prefix}
+                            suffix={stat.suffix}
+                          />
+                        ) : (
+                          raw
+                        )}
+                      </dd>
+                    </div>
+                  );
+                })}
+              </dl>
+            </Reveal>
+          </Stagger>
 
-          {/* Visual block — diagram-style card */}
-          <div className="lg:col-span-5">
+          {/* Visual block — diagram-style card. Revealed on a
+              small delay so it lands just after the headline. */}
+          <Reveal className="lg:col-span-5" delay={0.15}>
             <div className="relative rounded-lg border border-hairline bg-surface p-6">
               <div className="absolute -top-3 left-6 inline-flex h-6 items-center rounded-sm bg-brand-teal-deep px-2 text-[11px] font-semibold uppercase tracking-[1px] text-on-dark">
                 Capabilities
@@ -90,7 +123,7 @@ export function Hero() {
                 </Link>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </Container>
     </section>

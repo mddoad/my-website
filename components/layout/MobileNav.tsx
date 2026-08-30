@@ -26,7 +26,7 @@ export function MobileNav() {
       {open && (
         <div
           id="mobile-nav"
-          className="fixed inset-0 top-16 z-50 border-t border-hairline bg-canvas"
+          className="fixed inset-x-0 top-16 z-50 border-t border-hairline bg-canvas shadow-raised"
         >
           <nav
             aria-label="Mobile primary"

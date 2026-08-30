@@ -4,11 +4,15 @@ import { Section } from "@/components/ui/Section";
 import { Heading } from "@/components/ui/Heading";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/motion/Reveal";
+import { Stagger } from "@/components/motion/Stagger";
+import { Counter } from "@/components/motion/Counter";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/lib/site";
 import { stats } from "@/content/stats";
 import { team } from "@/content/team";
 import { buildMetadata } from "@/lib/seo";
+import { parseStat } from "@/lib/utils";
 
 export const metadata: Metadata = buildMetadata({
   title: "About",
@@ -47,16 +51,35 @@ export default function AboutPage() {
       {/* Stats */}
       <Section padding="md" className="border-y border-hairline">
         <Container size="wide">
-          <dl className="grid grid-cols-2 gap-8 lg:grid-cols-4">
-            {stats.map((s) => (
-              <div key={s.label} className="text-center sm:text-left">
-                <dt className="text-sm text-muted">{s.label}</dt>
-                <dd className="mt-1 text-4xl font-semibold text-ink sm:text-5xl">
-                  {s.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <Stagger
+            as="dl"
+            className="grid grid-cols-2 gap-8 lg:grid-cols-4"
+          >
+            {stats.map((s) => {
+              const stat = parseStat(s.value);
+              return (
+                <Reveal
+                  as="div"
+                  key={s.label}
+                  className="text-center sm:text-left"
+                >
+                  <dt className="text-sm text-muted">{s.label}</dt>
+                  <dd className="mt-1 text-4xl font-semibold text-ink sm:text-5xl">
+                    {stat ? (
+                      <Counter
+                        value={stat.value}
+                        decimals={stat.decimals}
+                        prefix={stat.prefix}
+                        suffix={stat.suffix}
+                      />
+                    ) : (
+                      s.value
+                    )}
+                  </dd>
+                </Reveal>
+              );
+            })}
+          </Stagger>
         </Container>
       </Section>
 
@@ -97,9 +120,13 @@ export default function AboutPage() {
           <Heading as={2} eyebrow="Certifications">
             Registered and certified.
           </Heading>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger
+            as="ul"
+            className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {site.certifications.map((c) => (
-              <li
+              <Reveal
+                as="li"
                 key={c.label}
                 className="rounded-lg border border-hairline bg-canvas p-6"
               >
@@ -107,9 +134,9 @@ export default function AboutPage() {
                   {c.label}
                 </p>
                 <p className="mt-2 text-sm text-slate">{c.note}</p>
-              </li>
+              </Reveal>
             ))}
-          </ul>
+          </Stagger>
         </Container>
       </Section>
 
@@ -127,9 +154,12 @@ export default function AboutPage() {
               Full team →
             </a>
           </div>
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <Stagger
+            as="ul"
+            className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          >
             {team.map((m) => (
-              <li key={m.name}>
+              <Reveal as="li" key={m.name}>
                 <Card as="article" className="h-full p-6">
                   <div
                     aria-hidden
@@ -144,34 +174,36 @@ export default function AboutPage() {
                     {m.role}
                   </p>
                 </Card>
-              </li>
+              </Reveal>
             ))}
-          </ul>
+          </Stagger>
         </Container>
       </Section>
 
       <Section tone="inverted" padding="lg">
         <Container size="prose">
-          <div className="text-center">
-            <Heading
-              as={2}
-              align="center"
-              eyebrow="Visit us"
-              tone="inverted"
-              className="text-3xl font-semibold sm:text-4xl"
-            >
-              Come see the floor.
-            </Heading>
-            <p className="mt-4 text-lg text-on-dark-muted">
-              We host customer visits at our {site.address.city} facility
-              by appointment. Send a note and we&rsquo;ll set one up.
-            </p>
-            <div className="mt-8">
-              <Button href="/contact" size="lg">
-                Request a visit
-              </Button>
+          <Reveal>
+            <div className="text-center">
+              <Heading
+                as={2}
+                align="center"
+                eyebrow="Visit us"
+                tone="inverted"
+                className="text-3xl font-semibold sm:text-4xl"
+              >
+                Come see the floor.
+              </Heading>
+              <p className="mt-4 text-lg text-on-dark-muted">
+                We host customer visits at our {site.address.city} facility
+                by appointment. Send a note and we&rsquo;ll set one up.
+              </p>
+              <div className="mt-8">
+                <Button href="/contact" size="lg">
+                  Request a visit
+                </Button>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </Section>
     </>

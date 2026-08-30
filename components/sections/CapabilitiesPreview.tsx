@@ -3,6 +3,8 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Heading } from "@/components/ui/Heading";
 import { Card } from "@/components/ui/Card";
+import { Reveal } from "@/components/motion/Reveal";
+import { Stagger } from "@/components/motion/Stagger";
 import { services } from "@/content/services";
 
 export function CapabilitiesPreview() {
@@ -21,9 +23,12 @@ export function CapabilitiesPreview() {
           </Link>
         </div>
 
-        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <Stagger
+          as="ul"
+          className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+        >
           {services.slice(0, 6).map((s) => (
-            <li key={s.slug}>
+            <Reveal as="li" key={s.slug}>
               <Card as="article" className="h-full p-6">
                 <h3 className="text-lg font-semibold text-ink">
                   {s.name}
@@ -47,9 +52,9 @@ export function CapabilitiesPreview() {
                   Details →
                 </Link>
               </Card>
-            </li>
+            </Reveal>
           ))}
-        </ul>
+        </Stagger>
       </Container>
     </Section>
   );

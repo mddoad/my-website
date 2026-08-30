@@ -4,6 +4,8 @@ import { Section } from "@/components/ui/Section";
 import { Heading } from "@/components/ui/Heading";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/motion/Reveal";
+import { Stagger } from "@/components/motion/Stagger";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { team } from "@/content/team";
 import { site } from "@/lib/site";
@@ -39,9 +41,12 @@ export default function TeamPage() {
 
       <Section tone="muted" padding="lg">
         <Container size="full">
-          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
+          <Stagger
+            as="ul"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2"
+          >
             {team.map((m) => (
-              <li key={m.name}>
+              <Reveal as="li" key={m.name}>
                 <Card as="article" className="flex h-full gap-6 p-8">
                   <div
                     aria-hidden
@@ -61,34 +66,36 @@ export default function TeamPage() {
                     </p>
                   </div>
                 </Card>
-              </li>
+              </Reveal>
             ))}
-          </ul>
+          </Stagger>
         </Container>
       </Section>
 
       <Section tone="inverted" padding="lg">
         <Container size="prose">
-          <div className="text-center">
-            <Heading
-              as={2}
-              align="center"
-              eyebrow="Talk to us"
-              tone="inverted"
-              className="text-3xl font-semibold sm:text-4xl"
-            >
-              Want to talk to one of them directly?
-            </Heading>
-            <p className="mt-4 text-lg text-on-dark-muted">
-              Tell us about your program and we&rsquo;ll route you to the
-              right person.
-            </p>
-            <div className="mt-8">
-              <Button href="/contact" size="lg">
-                Request a quote
-              </Button>
+          <Reveal>
+            <div className="text-center">
+              <Heading
+                as={2}
+                align="center"
+                eyebrow="Talk to us"
+                tone="inverted"
+                className="text-3xl font-semibold sm:text-4xl"
+              >
+                Want to talk to one of them directly?
+              </Heading>
+              <p className="mt-4 text-lg text-on-dark-muted">
+                Tell us about your program and we&rsquo;ll route you to the
+                right person.
+              </p>
+              <div className="mt-8">
+                <Button href="/contact" size="lg">
+                  Request a quote
+                </Button>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </Section>
     </>

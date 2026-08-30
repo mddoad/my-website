@@ -4,6 +4,8 @@ import { Section } from "@/components/ui/Section";
 import { Heading } from "@/components/ui/Heading";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/motion/Reveal";
+import { Stagger } from "@/components/motion/Stagger";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { testimonials } from "@/content/testimonials";
 import { site } from "@/lib/site";
@@ -40,9 +42,12 @@ export default function TestimonialsPage() {
 
       <Section tone="muted" padding="lg">
         <Container size="full">
-          <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <Stagger
+            as="ul"
+            className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          >
             {testimonials.map((t, i) => (
-              <li key={i}>
+              <Reveal as="li" key={i}>
                 <Card as="article" className="flex h-full flex-col p-8">
                   <blockquote className="text-lg leading-relaxed text-charcoal">
                     <p>&ldquo;{t.quote}&rdquo;</p>
@@ -52,34 +57,36 @@ export default function TestimonialsPage() {
                     <p className="text-stone">{t.company}</p>
                   </figcaption>
                 </Card>
-              </li>
+              </Reveal>
             ))}
-          </ul>
+          </Stagger>
         </Container>
       </Section>
 
       <Section tone="inverted" padding="lg">
         <Container size="prose">
-          <div className="text-center">
-            <Heading
-              as={2}
-              align="center"
-              eyebrow="Your turn"
-              tone="inverted"
-              className="text-3xl font-semibold sm:text-4xl"
-            >
-              Become the next one.
-            </Heading>
-            <p className="mt-4 text-lg text-on-dark-muted">
-              We&rsquo;ll come back with a quote, a process plan, and a
-              quality plan within five business days.
-            </p>
-            <div className="mt-8">
-              <Button href="/contact" size="lg">
-                Request a quote
-              </Button>
+          <Reveal>
+            <div className="text-center">
+              <Heading
+                as={2}
+                align="center"
+                eyebrow="Your turn"
+                tone="inverted"
+                className="text-3xl font-semibold sm:text-4xl"
+              >
+                Become the next one.
+              </Heading>
+              <p className="mt-4 text-lg text-on-dark-muted">
+                We&rsquo;ll come back with a quote, a process plan, and a
+                quality plan within five business days.
+              </p>
+              <div className="mt-8">
+                <Button href="/contact" size="lg">
+                  Request a quote
+                </Button>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </Section>
     </>

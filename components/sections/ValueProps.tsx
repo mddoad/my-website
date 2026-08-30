@@ -1,6 +1,8 @@
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Heading } from "@/components/ui/Heading";
+import { Reveal } from "@/components/motion/Reveal";
+import { Stagger } from "@/components/motion/Stagger";
 
 const props = [
   {
@@ -31,16 +33,23 @@ export function ValueProps() {
             </Heading>
           </div>
           <div className="lg:col-span-8">
-            <dl className="grid gap-8 sm:grid-cols-2">
+            <Stagger
+              as="dl"
+              className="grid gap-8 sm:grid-cols-2"
+            >
               {props.map((p) => (
-                <div key={p.title} className="border-t border-hairline pt-6">
+                <Reveal
+                  as="div"
+                  key={p.title}
+                  className="border-t border-hairline pt-6"
+                >
                   <dt className="text-lg font-semibold text-ink">
                     {p.title}
                   </dt>
                   <dd className="mt-3 text-base text-slate">{p.body}</dd>
-                </div>
+                </Reveal>
               ))}
-            </dl>
+            </Stagger>
           </div>
         </div>
       </Container>

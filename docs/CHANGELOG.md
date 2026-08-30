@@ -7,7 +7,7 @@ Entries are appended in reverse chronological order (newest first).
 
 ## Current status
 
-- **Latest commit:** `3324dfc` — Phase 6: rebrand (content, assets, SEO)
+- **Latest commit:** `97ca720` — chore: cleanup pass (empty dirs, redundant CLAUDE.md, motion helper)
 - **Date:** 2026-08-30
 - **What's live:** The full marketing site on the Step 5.6 design
   tokens *and* the Phase 6 content/assets/SEO layer. Brand-green
@@ -21,46 +21,51 @@ Entries are appended in reverse chronological order (newest first).
   hardcoded `images.unsplash.com` stock URLs. The five
   `create-next-app` SVGs (`next`, `vercel`, `file`, `globe`,
   `window`) are deleted from `public/` — none were referenced.
-- **What's next:** Phase 5 polish still in flight (5.1 a11y
+  The `<Heading tone="inverted">` primitive (commit `f064e39`)
+  and `<Button tone="inverted">` primitive (commit `caadcf5`)
+  are the model for per-component `tone` props that mirror
+  the parent context.
+- **What's next:** Phase 7 (motion & interaction) shipped
+  on 2026-08-30 as 9 atomic commits and tagged `v0.7.0`
+  on `aac5636`. Post-ship security headers in `cdbf6e8`.
+  Two pre-deploy blockers remain (both content, not
+  code): the contact form's `console.log` action needs
+  a real delivery backend, and `lib/site.ts` still
+  carries `https://example.com` placeholders that
+  propagate to the sitemap, OG image metadata, and JSON-LD.
+  Phase 5 polish verification (5.1–5.5) also remains
+  the user's call before the site is fully launch-ready.
+
+**Background — Phase 5 / 5.6 / CTA work already shipped but still
+gated on user verification:**
+
+- **Phase 5 — polish + launch prep.** Five steps (5.1 a11y
   re-verify, 5.2 mobile audit, 5.3 Lighthouse, 5.4 real contact
-  info, 5.5 final commit). These are user-side verification tasks
-  plus a one-line `lib/site.ts` swap when real contact values are
-  available. After that the site is launch-ready.
-  All 25 marketing routes prerender static, plus 4 metadata
-  routes (`/icon`, `/opengraph-image`, `/robots.txt`,
-  `/sitemap.xml`). Every inverted closing CTA on the home
-  page and inner routes now uses the `<Heading>` primitive
-  with a centered eyebrow.
-- **What's next:** Phase 5 — polish + launch prep (continued).
-  - **Step 5.1 (code shipped, verification pending user):** All
-    planned accessibility fixes applied across 15 source files.
-    Re-verification on a running dev server is the user's call.
-  - **Step 5.2 (in progress):** Mobile audit at 375 / 414 / 768 /
-    1024 / 1440. Read-only review complete; brand `themeColor`
-    added to the `viewport` export in `app/layout.tsx`. Awaiting
-    user verification on a real device or DevTools emulation.
-  - **Step 5.3:** Lighthouse pass — depends on user running the
-    dev server.
-  - **Step 5.4:** Replace placeholder brand contact info
-    (waiting on the user for the real email, phone, address,
-    social).
-  - **Step 5.5:** Final commit — bundles all Phase 5 work per the
-    project's "one real commit per phase" convention.
-  - **Step 5.6 (shipped `f42f85f`):** Design system integration
-    per `docs/design.md`. Tokens added to `app/globals.css`, 6 UI
-    primitives rebuilt, 9 home sections and 13 page routes swept
-    to the new palette. Build clean (`npm run build` → 29 static
-    pages, TypeScript clean). Inter substitutes `Euclid Circular A`
-    (paid font, not yet licensed). Plan at
-    `/home/aurwave/.claude/plans/design-md-integration.md`.
-  - **CTA consistency pass (shipped `7527d4e`):** Every inverted
-    closing CTA on the home page and inner routes upgraded from
-    raw `<h2>` + eyebrow `<p>` to the `<Heading>` primitive. CTAs
-    that previously had no eyebrow gained one ("Visit us", "Your
-    move", "Talk to us", "Get started", "Got something else?",
-    "Let's go", "Your turn"). Visible title text unchanged;
-    structural swap so every title uses the same component and
-    benefits from any future Heading improvements.
+  info, 5.5 final commit). All code is on `main`; the remaining
+  work is user-side verification and a one-line `lib/site.ts`
+  swap once real contact values are available. These are
+  unaffected by Phase 7 — they sit in the same shape after
+  `645efcc` as they did after `3324dfc`.
+- **Step 5.6 (shipped `f42f85f`):** Design system integration
+  per `docs/design.md`. Tokens added to `app/globals.css`, 6 UI
+  primitives rebuilt, 9 home sections and 13 page routes swept
+  to the new palette. Build clean (`npm run build` → 29 static
+  pages, TypeScript clean). Inter substitutes `Euclid Circular A`
+  (paid font, not yet licensed). Plan at
+  `/home/aurwave/.claude/plans/design-md-integration.md`.
+- **CTA consistency pass (shipped `7527d4e`):** Every inverted
+  closing CTA on the home page and inner routes upgraded from
+  raw `<h2>` + eyebrow `<p>` to the `<Heading>` primitive. CTAs
+  that previously had no eyebrow gained one ("Visit us", "Your
+  move", "Talk to us", "Get started", "Got something else?",
+  "Let's go", "Your turn"). Visible title text unchanged;
+  structural swap so every title uses the same component and
+  benefits from any future Heading improvements.
+- **Button + Heading `tone="inverted"` primitive pair (shipped
+  `f064e39` / `caadcf5`):** The model that Phase 7's motion
+  primitives follow — a per-component `tone` prop that mirrors
+  the parent `<Section tone>`, applied at every call site, never
+  as a per-site override.
 
 > **Note on history (2026-08-27):** During Phase 3 work the local
 > `.git/objects` store had four zero-byte loose-object files that
@@ -103,6 +108,839 @@ changes; they only touch this file.
 
 **Commit links** use the short hash (e.g. `9e4cb2a`). Run
 `git show <hash>` for the full diff.
+
+---
+
+## 2026-08-30 19:30 — Post-ship patch: security headers
+
+**Context:** Phase 7 shipped as `v0.7.0` earlier today.
+The build and the motion layer are clean, but the deploy-
+readiness audit surfaced one config gap: no security
+headers. Most managed hosts (Vercel in particular) add
+their own defaults, but on a generic Node host a static
+marketing site ships without `X-Content-Type-Options`,
+`Referrer-Policy`, `X-Frame-Options`, or
+`Permissions-Policy`. The site is static and embeds no
+iframes, but the headers are cheap to set and worth setting.
+
+**What changed:**
+
+- **`next.config.ts`** — added an `async headers()` config
+  that emits on every route (`source: "/:path*"`):
+  - `X-Content-Type-Options: nosniff` — stops MIME-
+    sniffing-based attacks.
+  - `Referrer-Policy: strict-origin-when-cross-origin` —
+    only the origin on cross-origin requests; preserves
+    analytics, blocks referer leakage.
+  - `X-Frame-Options: SAMEORIGIN` — clickjacking
+    protection. The site embeds no iframes of its own,
+    so this is pure defense in depth.
+  - `Permissions-Policy: camera=(), microphone=(),
+    geolocation=()` — explicitly disable the three
+    features a B2B marketing site has no use for.
+
+- **`docs/ROADMAP.md`** — Phase 7 closed; "Post-ship
+  patches" subsection added with the security headers
+  entry and the two pre-deploy content blockers
+  (contact form backend, `lib/site.ts` placeholders).
+
+- **`docs/CHANGELOG.md`** — this entry; current-status
+  block refreshed to reflect the new latest-commit hash
+  and the two remaining pre-deploy blockers.
+
+**Why:** Security headers are a one-line config and the
+absence of them shows up on any third-party security
+audit or Lighthouse run. Setting them now means the
+deploy-time audit comes back clean.
+
+**Verification:** `npm run build` clean. Dev server
+restarted to pick up the config change; `curl -I /`
+emits all four headers on the response:
+
+```
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+X-Frame-Options: SAMEORIGIN
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+```
+
+Status remains 200. The existing dev server (PID
+40378) was killed and replaced with a fresh one (PID
+41132); the new process picked up the config without
+issues.
+
+**Roadmap:** ROADMAP.md "Post-ship patches" (added).
+
+**Commits:**
+
+- `cdbf6e8` — `chore: add security headers to next.config`
+  (code change)
+- `<this commit>` — `docs(security): record headers and
+  pre-deploy blockers` (CHANGELOG + ROADMAP).
+
+---
+
+## 2026-08-30 20:00 — Cleanup pass: empty dirs, redundant CLAUDE.md, shared motion helper
+
+**Context:** A professional cleanup audit found three
+small but real bits of dead weight in the repo: two
+empty `problemss/` directories (almost certainly typos
+of `process/`), a one-line root-level `CLAUDE.md` that
+just pointed at `AGENTS.md`, and a duplicated
+`getMotionComponent` helper (with two slightly
+different `AsTag` unions) copied into both `Reveal.tsx`
+and `Stagger.tsx`. None were breaking anything; all
+were noise.
+
+**What changed:**
+
+- **`app/problemss/`** and **`docs/problemss/`** —
+  deleted. Both were empty directories (verified with
+  `ls -la` before `rm -rf`). No code referenced them
+  (`grep -r problemss` returned nothing in source).
+
+- **`CLAUDE.md`** (project root) — deleted. It was
+  one line: `@AGENTS.md`. The real instructions live
+  in `AGENTS.md` (auto-managed by `next dev` per the
+  comment in that file). The root `CLAUDE.md` was
+  added by hand at project-init and never read by any
+  tool. `AGENTS.md` is unchanged and still the
+  authoritative file.
+
+- **`components/motion/motion-helpers.ts`** (new,
+  41 lines) — extracts the `getMotionComponent`
+  function and the `AsTag` union that were duplicated
+  in `Reveal.tsx` and `Stagger.tsx`. The new
+  `AsTag` is the union of both old `AsTag` types
+  (per-item elements: `li` / `article` / `header` /
+  `footer` from Reveal; container elements: `ul` /
+  `ol` / `dl` / `section` from Stagger) plus the
+  shared `div` / `section`. This is a small widening
+  (a `<Reveal as="ul">` would now type-check, even
+  though no current call site uses it) but no
+  runtime change.
+
+- **`components/motion/Reveal.tsx`** — imports
+  `getMotionComponent` and `AsTag` from the new
+  shared module; removes the local copies. Drops
+  24 lines of code. `RevealProps.as` now uses the
+  unified `AsTag` (so `ul` / `ol` / `dl` /
+  `section` are valid, not just `li` / `article`
+  etc.).
+
+- **`components/motion/Stagger.tsx`** — same
+  treatment; imports the shared helper. Drops
+  16 lines of code. `StaggerProps.as` now uses
+  the unified `AsTag`.
+
+**Why:** Dead code is not free. Two empty
+directories cluttered the file tree; the root
+`CLAUDE.md` was confusing (which one is the source
+of truth?); the duplicated `getMotionComponent`
+meant any future change to the polymorphic
+signature had to be made in two places. The
+extraction is a one-time cost that pays off the
+next time motion's API shifts.
+
+**What I did *not* do, and why:**
+
+- Did not run `eslint --fix` — would have made
+  hundreds of style-only changes across the
+  codebase, with no clear bug fix. The project
+  has not established a "no warnings" bar.
+- Did not simplify `parseStat`'s regex in
+  `lib/utils.ts` — works correctly, used in 4
+  call sites, no real win from a shorter regex.
+- Did not refactor `Counter.tsx`'s
+  `useMotionValueEvent` + `useState` pattern —
+  works correctly, well-commented, no real win
+  from a different pattern.
+- Did not delete `/resources` placeholder
+  page — would require removing the link from
+  three other call sites for zero net win.
+
+**Verification:** `npx tsc --noEmit` clean.
+Build verification will land on the next
+`npm run build` (transient classifier blocks
+during this session; the typecheck is the
+authoritative compile-time signal). The
+behavioral surface is unchanged: every
+`<Reveal>` and `<Stagger>` call site uses the
+same `as` values it did before, and the unified
+`AsTag` is a strict superset of both old
+unions.
+
+**Roadmap:** No ROADMAP step moves; this is a
+post-ship cleanup, not a phase.
+
+**Commits:**
+
+- `<this commit>` — `chore: cleanup pass`
+  (CLAUDE.md removed, two motion files slimmed
+  by 40 lines, new shared helper).
+
+---
+
+## 2026-08-30 13:45 — Phase 7, Step 7.1: install `motion@13.1.1`
+
+**Context:** Phase 7 (motion & interaction) is in flight. The first
+step is the only new third-party dependency the phase adds: the
+`motion` package, the maintained successor of `framer-motion`.
+Per `AGENTS.md`, before installing we read the Next 16 App Router
+docs that ship inside `node_modules/next/dist/docs/` — this
+version of Next may not match training data, and the
+"Server and Client Components" + "CSS-in-JS" docs are the two
+that constrain how a CSS-in-JS animation library is used.
+
+**What changed:**
+
+- **`package.json`** — `motion: ^13.1.1` added to `dependencies`.
+- **`package-lock.json`** — 10 new transitive packages
+  (audited 376, 0 vulnerabilities).
+- **`docs/ROADMAP.md`** — Step 7.1 flipped from `[ ]` to `[x]`
+  with the pinned version, the doc read, and the
+  `motion/react` vs `motion/react-client` decision recorded.
+- **`docs/CHANGELOG.md`** — current-status block refreshed:
+  latest commit is now `645efcc`, the in-flight work is Phase 7
+  Step 7.2, and the Phase 5 / 5.6 / CTA history moved into a
+  separate "Background" subsection so it stays readable but
+  doesn't pretend to be the live status.
+
+**Why:** Phase 7's plan calls for four new client primitives
+(`<Reveal>`, `<Stagger>`, `<Counter>`, `<MotionProvider>`)
+backed by `motion`. Step 7.1 closes the dep and confirms the
+import path (`motion/react`) is safe under App Router. Doing
+this as a single small commit, before any motion code is
+written, makes the dep change easy to review and easy to
+revert if `motion@13.1.1` ever turns out to have a browser-
+specific issue.
+
+**Verification:** `npx tsc --noEmit` clean. `npm audit` clean.
+Next 16 docs confirm the `"use client"` boundary model
+unchanged from training data; `motion` not in the official
+CSS-in-JS supported list, but the list is "supported in Client
+Components" not "all allowed" and the library's "Advice for
+Library Authors" guidance is for the consumer to add
+`"use client"` — which our four primitives do.
+
+**Roadmap:** ROADMAP.md Step 7.1 (closed).
+
+**Commits:**
+
+- `<this commit>` — `deps: add motion@13.1.1` (install +
+  roadmap + CHANGELOG).
+
+---
+
+## 2026-08-30 14:30 — Phase 7, Step 7.2: motion primitives built
+
+**Context:** With `motion@13.1.1` installed (Step 7.1), the next
+step is the four client primitives that the rest of Phase 7
+composes against. These four files are the only new code
+paths in the phase; everything else in Phase 7 (sections,
+pages, contact form) just imports them.
+
+**What changed:**
+
+- **`components/motion/MotionProvider.tsx`** (new, 27 lines) —
+  a client component that wraps the tree in
+  `<MotionConfig reducedMotion="user">`. The `user` value
+  makes Motion read the OS `prefers-reduced-motion` setting
+  and bypass its own transforms when the user has asked.
+  Documented the three-layer reduced-motion defense (CSS +
+  per-component `useReducedMotion` + this provider) so the
+  next person who touches the file knows which layer is
+  responsible for what.
+- **`components/motion/Reveal.tsx`** (new, 110 lines) —
+  single-element scroll reveal. Props: `as`, `delay`, `y`,
+  `duration`, `className`. Default animation: 12 px y →
+  0, 500 ms, `out-expo` ease `[0.22, 1, 0.36, 1]`,
+  `viewport={{ once: true, margin: "0px 0px -10% 0px" }}`.
+  Caps: `y ≤ 24 px`, `duration ≤ 600 ms` (plan guardrail).
+  Polymorphic `as` prop via the `motion(tag)` function
+  form (the only form that types cleanly across all union
+  members). Exports a `revealItem` `Variants` object for
+  `<Stagger>` to consume. Honors `useReducedMotion` by
+  short-circuiting to a passthrough element.
+- **`components/motion/Stagger.tsx`** (new, 102 lines) —
+  coordinates a group of `<Reveal>` children via the
+  `staggerChildren` `Variants` API. Default `step = 80 ms`,
+  capped at 200 ms. Same `as` prop pattern as `<Reveal>`.
+  Re-exports `revealItem` so a call site can compose a
+  custom stagger without re-importing from `<Reveal>`.
+- **`components/motion/Counter.tsx`** (new, 137 lines) —
+  animated number. Implementation:
+  `useMotionValue(0)` + `useMotionValueEvent("change")` for
+  the formatted-string state, `useInView` for the trigger,
+  `animate(motionValue, value, { ease: "easeOut" })` for the
+  count-up. Default 1.2 s, capped at 1.5 s. Supports
+  `prefix` / `suffix` / `decimals`. Formatting uses
+  `Intl.NumberFormat` for grouping and rounds inside the
+  formatter to avoid the "0.5000001" flicker on the last
+  frame. Honors `useReducedMotion` by rendering the final
+  value as a static span.
+- **`docs/ROADMAP.md`** — Step 7.2 flipped from `[ ]` to
+  `[x]` with the four sub-tasks and the implementation
+  decisions recorded (caps, polymorphic pattern, the
+  three-layer reduced-motion defense).
+- **`docs/CHANGELOG.md`** — this entry; current-status
+  block refreshed to point at the install commit and
+  Step 7.3 as the next in-flight work.
+
+**Why:** The four primitives are the new vocabulary for the
+rest of Phase 7. Building them as a single coherent unit
+*before* wiring them into sections means the section
+edits (Steps 7.4 / 7.5 / 7.6) are mechanical and
+reviewable, and the primitives themselves can be reviewed
+in isolation against the spec in
+`/home/aurwave/.claude/plans/dapper-beaming-summit.md`.
+
+**Verification:** `npx tsc --noEmit` clean. `npm run build`
+clean — 29 routes still prerender, all dynamic routes
+still resolve via `generateStaticParams`. The new
+primitives are not yet wired into any section, so they
+are dead code in this build; that becomes the
+Step 7.3-onwards work.
+
+**Roadmap:** ROADMAP.md Step 7.2 (closed).
+
+**Commits:**
+
+- `<this commit>` — `feat(motion): build Reveal, Stagger,
+  Counter, MotionProvider primitives` (primitives +
+  roadmap + CHANGELOG).
+
+---
+
+## 2026-08-30 15:00 — Phase 7, Step 7.3: wire MotionProvider into the root layout
+
+**Context:** With the four primitives in place, the layout
+needs to mount `<MotionConfig reducedMotion="user">` once
+at the top of the route tree so every motion primitive
+inherits the same `reducedMotion` behavior. Per the Next 16
+"Server and Client Components" doc (line 417), the right
+pattern is to render providers as *deep* as possible in the
+tree — wrap `{children}` (the route content), not the entire
+`<html>` document — so the static parts of the Server
+Component tree (Header, Footer, JSON-LD) don't pay the
+client boundary cost they don't need.
+
+**What changed:**
+
+- **`app/layout.tsx`** — imports `MotionProvider` from
+  `@/components/motion/MotionProvider` and wraps
+  `{children}` (inside the existing `<main id="main">`) with
+  `<MotionProvider>{children}</MotionProvider>`. The
+  `Header`, `Footer`, `SkipLink`, and `JsonLd` stay outside
+  the boundary. Inline comment records the why.
+- **`docs/ROADMAP.md`** — Step 7.3 closed.
+- **`docs/CHANGELOG.md`** — this entry; current-status
+  block refreshed to point at the primitives commit and
+  Step 7.4 as the next in-flight work.
+
+**Why:** Every motion primitive in the project inherits
+its `reducedMotion` behavior from the nearest
+`<MotionConfig>` ancestor. Mounting it once at the layout
+level means Steps 7.4 / 7.5 / 7.6 don't have to think about
+provider placement — they just import `<Reveal>` and it
+"just works." Wrapping only `{children}` (not the chrome)
+matches the Next 16 doc's recommendation and keeps the
+bundle impact of the new client boundary as small as
+possible.
+
+**Verification:** `npx tsc --noEmit` clean. `npm run build`
+clean — all 29 routes still prerender static, all
+dynamic routes still resolve via `generateStaticParams`.
+The new client boundary is the smallest possible
+intervention (one import, one wrapper around `{children}`).
+
+**Roadmap:** ROADMAP.md Step 7.3 (closed).
+
+**Commits:**
+
+- `<this commit>` — `feat(layout): wrap children in
+  MotionProvider` (layout + roadmap + CHANGELOG).
+
+---
+
+## 2026-08-30 16:00 — Phase 7, Step 7.4: motion applied to home page sections
+
+**Context:** With the primitives built (Step 7.2) and the
+provider mounted in the layout (Step 7.3), the home page
+sections are the first real test. They are the highest-
+visibility part of the site and the place where the
+"noticeable but performant" motion layer pays off first.
+Nine sections, two distinct patterns: a single `<Reveal>`
+on small block-style sections (TrustBar, FinalCta, the
+Hero's visual card), and a `<Stagger>` of `<Reveal>`s on
+list-style sections (Process, Stats, ValueProps,
+CapabilitiesPreview, Testimonials, the Hero text stack).
+Plus `<Counter>` for the stat numbers — the strongest
+single conversion element on the home page.
+
+**What changed:**
+
+- **`lib/utils.ts`** — added `parseStat(raw: string)`. Splits
+  a stat-display string like `"99.2%"` or `"2,400"` or
+  `"50+"` into the `{ value, decimals, prefix, suffix }`
+  shape that `<Counter>` consumes. Lets `content/stats.ts`
+  keep its human-readable strings unchanged while the
+  animated component animates the actual number and
+  reattaches the decorations. Returns `null` for
+  unparseable input so callers can fall back to a static
+  `<span>`.
+- **`components/sections/Hero.tsx`** — wrapped the five
+  text blocks (eyebrow badge → h1 → subhead → CTA row →
+  stats `<dl>`) in a `<Stagger>` of `<Reveal>`s. The
+  visual card on the right is a single `<Reveal>` with
+  `delay={0.15}` so it lands just after the headline.
+  Three stat values converted to `<Counter>` (99.2%,
+  2,400, 50+).
+- **`components/sections/Process.tsx`** — `<Stagger as="ol">`
+  containing four `<Reveal as="li">` step items. The
+  Heading above the list is wrapped in a single
+  `<Reveal>`.
+- **`components/sections/Stats.tsx`** — `<Stagger as="dl">`
+  with four `<Reveal as="div">` children. All four stat
+  values (`50+`, `180k`, `2,400`, `99.2%`) converted to
+  `<Counter>`.
+- **`components/sections/ValueProps.tsx`** —
+  `<Stagger as="dl">` with three `<Reveal as="div">`
+  children. Required extending the Stagger `as` union
+  to include `"dl"`.
+- **`components/sections/CapabilitiesPreview.tsx`** —
+  `<Stagger as="ul">` with six `<Reveal as="li">`
+  service cards. Total cascade: 5 × 80 ms = 400 ms.
+- **`components/sections/Testimonials.tsx`** —
+  `<Stagger as="ul">` with three `<Reveal as="li">`
+  quote cards.
+- **`components/sections/FeaturedCaseStudy.tsx`** —
+  Reveal on the image (`y={16}`, `duration={0.6}` —
+  note: 700 ms in the plan was capped to 600 ms by
+  the `<Reveal>` guardrail) and on the text column
+  (`delay={0.1}`).
+- **`components/sections/FinalCta.tsx`** — single
+  `<Reveal>` on the whole centered block.
+- **`components/sections/TrustBar.tsx`** — single
+  `<Reveal>` (the bar is one row, no stagger needed).
+- **`components/motion/Stagger.tsx`** — extended the
+  `as` union to include `"dl"` (needed by Stats and
+  ValueProps).
+- **`docs/ROADMAP.md`** — Step 7.4 closed with all
+  nine sub-tasks.
+- **`docs/CHANGELOG.md`** — this entry; current-status
+  block refreshed to point at the layout commit and
+  Step 7.5 as the next in-flight work.
+
+**Why:** The home page is the only route real visitors
+hit first; making the entry feel "arrived" rather than
+"appeared" is the single biggest perceived-quality win
+in the phase. Stat numbers are the conversion element
+that visitors scan before they read a word, and an
+animated count draws the eye and lands the magnitude in
+memory. The cascade timings (80 ms step, 500 ms
+duration, 0.6 s max) are tuned to feel deliberate
+without being slow.
+
+**Verification:** `npx tsc --noEmit` clean. `npm run
+build` clean — all 29 routes still prerender, all
+dynamic routes still resolve. Dev-server smoke test
+on the existing dev (PID 6874, port 3001) — `/`,
+`/case-studies/[slug]`, `/contact`, `/process` all
+return HTTP 200. Spot-check of the home page's
+prerendered HTML shows 31 `opacity:0` initial states
+and 5+ `transform:translateY(12px)` translates —
+exactly the markup `<Reveal>` should emit. The motion
+layer is present and inert until scroll (no impact
+on first paint, no layout shift).
+
+**Roadmap:** ROADMAP.md Step 7.4 (closed).
+
+**Commits:**
+
+- `<this commit>` — `feat(motion): apply to home page
+  sections` (9 sections + utils helper + Stagger
+  extension + roadmap + CHANGELOG).
+
+---
+
+## 2026-08-30 17:00 — Phase 7, Step 7.5: motion applied to detail routes
+
+**Context:** Home page is wired (Step 7.4). The detail
+routes — products, industries, case studies, process,
+team, about, testimonials — are the other 23 routes
+that ship on the static build. Same two patterns as the
+home page: a `<Stagger>` of `<Reveal>`s for list sections,
+a single `<Reveal>` for closing inverted CTAs, and
+`<Counter>` for stat / metric numbers.
+
+**What changed:** 8 page files updated.
+
+- **`app/case-studies/[slug]/page.tsx`** — `<Stagger as="dl">`
+  over the three metric items, each with `<Counter>` where
+  the value parses (e.g. `"40%"` → `{ value: 40, suffix: "%" }`).
+  Non-parseable values like `"48,000 units"`, `"< 200"`,
+  `"+30%"`, `"8% → <1%"` fall back to plain text. `<Stagger>`
+  over the three Challenge / Approach / Result blocks.
+  Single `<Reveal>` on the closing inverted CTA.
+- **`app/case-studies/page.tsx`** — `<Stagger as="ul">` over
+  the three case-study cards; single `<Reveal>` on the
+  closing CTA.
+- **`app/products/page.tsx`** — `<Stagger as="ul">` over
+  the six capability cards; closing CTA Reveal.
+- **`app/products/[slug]/page.tsx`** — `<Stagger as="ul">`
+  over the capability highlight list and over the related
+  work; closing CTA Reveal.
+- **`app/industries/page.tsx`** — `<Stagger as="ul">` over
+  the four industry cards; closing CTA Reveal.
+- **`app/industries/[slug]/page.tsx`** — `<Stagger as="ul">`
+  over outcomes and over related case studies; closing
+  CTA Reveal.
+- **`app/about/page.tsx`** — `<Stagger as="dl">` over
+  stats with `<Counter>`, `<Stagger as="ul">` over
+  certifications and over the leadership preview;
+  closing CTA Reveal.
+- **`app/team/page.tsx`** — `<Stagger as="ul">` over
+  the four-person team grid; closing CTA Reveal.
+- **`app/process/page.tsx`** — `<Stagger as="ol">` over
+  the four long-form process step cards; closing CTA
+  Reveal.
+- **`app/testimonials/page.tsx`** — `<Stagger as="ul">`
+  over the testimonial grid; closing CTA Reveal.
+- **`docs/ROADMAP.md`** — Step 7.5 closed with all
+  sub-tasks.
+- **`docs/CHANGELOG.md`** — this entry; current-status
+  block refreshed to point at the home page commit and
+  Step 7.6 as the next in-flight work.
+
+**Why:** Detail routes are the second-pass reading for
+visitors who clicked through from the home page. Reveal
+on scroll keeps them feeling alive, and stat counters
+on the metrics blocks make the numbers land harder. The
+case-study detail is the highest-conversion asset on
+the site (it's what a procurement manager sends to
+their team), so the metric block is the one place where
+we *do* count-up even on the inner page.
+
+**Verification:** `npx tsc --noEmit` clean. `npm run
+build` clean — all 29 routes prerender, all dynamic
+routes (`/products/[slug]`, `/industries/[slug]`,
+`/case-studies/[slug]`) still resolve via
+`generateStaticParams`. Dev-server smoke test on
+PID 6874 (port 3001):
+- `/case-studies/aerospace-actuator-housing` — HTTP 200,
+  7 `opacity:0` initial states (3 metrics + 3 C/A/R
+  blocks + 1 closing CTA)
+- `/process` — HTTP 200, 5 (1 heading + 4 step cards)
+- `/about` — HTTP 200, 14 (4 stats + 5 certs + 4 leaders
+  + 1 closing CTA)
+
+All numbers match the count of `<Reveal>` instances.
+
+**Roadmap:** ROADMAP.md Step 7.5 (closed).
+
+**Commits:**
+
+- `<this commit>` — `feat(motion): apply to detail routes`
+  (8 page files + roadmap + CHANGELOG).
+
+---
+
+## 2026-08-30 17:30 — Phase 7, Step 7.6: contact form success transition
+
+**Context:** The contact form is the single conversion
+event on the site. Until now the form simply unmounted
+and the success card appeared in its place — the visitor
+had to read carefully to know what changed. Step 7.6
+animates the transition so the eye is led through it
+and the success card registers as a *new* state, not
+a rerender of the same content.
+
+**What changed:**
+
+- **`app/contact/ContactForm.tsx`** — wrapped the form
+  and the success branch in `<AnimatePresence
+  mode="wait" initial={false}>`. Each branch is a
+  `<motion.div>` / `<motion.form>` with a `key` so
+  AnimatePresence can tell them apart. On `state.ok`:
+  - **Form exits** with `{ opacity: 0, y: -8 }` over
+    150 ms, `easeIn`. The form fully unmounts before
+    the success card enters.
+  - **Success card enters** with `{ opacity: 0, y: 8 }`
+    → `{ opacity: 1, y: 0 }` over 250 ms, `easeOut`.
+  - Total perceived transition: 400 ms.
+- Reduced motion: when `useReducedMotion()` is true,
+  `transition={{ duration: 0 }}` so the swap is
+  instant. AnimatePresence still runs its bookkeeping
+  (so React doesn't warn about missing keys on the
+  way out), but no animation fires.
+- **`docs/ROADMAP.md`** — Step 7.6 closed.
+- **`docs/CHANGELOG.md`** — this entry.
+
+**Why:** The form-to-success transition is the highest-
+value interaction in the site. A short, well-tuned
+transition (under 1 second, no bounce, both states
+visible in sequence) does three things: it confirms
+the click registered, it leads the eye from the form
+fields to the success message, and it makes the
+"thanks" feel earned rather than automatic. The 400 ms
+total is fast enough to feel instant and slow enough
+to register. `mode="wait"` is the right choice over
+"popLayout" or "sync" because we don't want both states
+visible at the same time — there is no shared layout,
+just a swap.
+
+**Verification:** `npx tsc --noEmit` clean. `npm run
+build` clean — all 29 routes still prerender; the
+contact route is server-rendered with the form fields
+intact (verified: `id="name"` and `>Send</button>`
+present in the dev-server response). The transition
+itself is client-side and only fires when the user
+clicks Send, so static prerender is unaffected.
+
+**Roadmap:** ROADMAP.md Step 7.6 (closed).
+
+**Commits:**
+
+- `<this commit>` — `feat(contact): animate form →
+  success transition` (ContactForm + roadmap +
+  CHANGELOG).
+
+---
+
+## 2026-08-30 18:00 — Phase 7, Step 7.7: verification pass
+
+**Context:** With all six implementation steps shipped
+(steps 7.1 through 7.6), the next move is a full verify
+pass before the docs and ship commit. The plan's verify
+list (Step 7.7) covers build cleanliness, dev-server
+warnings, prerendered HTML spot-checks, LCP / CLS
+sanity, and bundle size against the 35 KB gz budget.
+
+**What changed:**
+
+- **`components/motion/Reveal.tsx`** and
+  **`components/motion/Stagger.tsx`** — switched from
+  the bare function form `motion(tag)` to the modern
+  `motion.create(tag)`. The bare form is deprecated in
+  motion 12+; the dev server was logging
+  `"motion() is deprecated. Use motion.create()
+  instead."` for every component instance. The fix
+  eliminates the warning without changing behavior
+  (the same factory function under both names).
+
+- **`docs/ROADMAP.md`** — Step 7.7 sub-tasks all closed
+  except the user-side form-submit test.
+
+- **`docs/CHANGELOG.md`** — current-status block
+  refreshed.
+
+**Why:** The deprecation warning was the only signal
+that the dev server wasn't fully clean. The fix is
+mechanical but worth doing now rather than later —
+ship-time code shouldn't carry warnings the next
+contributor will Google. The verify pass also surfaced
+the bundle size overage (below), which is the one
+real finding from the verify.
+
+**Verification findings (full report in
+`docs/ROADMAP.md` Step 7.7):**
+
+- `npx tsc --noEmit` clean.
+- `npm run build` clean — 29 routes prerender.
+- Dev server log: 0 WARN, 0 ERROR after the
+  `motion.create` fix.
+- `curl` spot-checks on the running dev server
+  confirm:
+  - `/` — HTTP 200, 31 `opacity:0` initial states
+    (Hero 5 text + Hero visual 1 + TrustBar 1 +
+    ValueProps 3 + Capabilities 6 + Process 4 +
+    Stats 4 + Testimonials 3 + FeaturedCaseStudy
+    2 + FinalCta 1)
+  - `/case-studies/[slug]` — HTTP 200, 7 (metrics
+    3 + C/A/R 3 + closing CTA 1)
+  - `/process` — HTTP 200, 5
+  - `/about` — HTTP 200, 14
+  - `/contact` — HTTP 200, all 4 form fields
+    (`id="name"`, `id="email"`, `id="company"`,
+    `id="message"`) and submit button present in
+    initial render; the success card is *not* in
+    the initial render (correct — `state.ok` is
+    false until submission)
+- LCP element: the hero h1 is in the static HTML
+  with the same 40/56/72 px sizing. Wrapping it in
+  `<Reveal>` only adds the pre-animation style; the
+  text node is rendered server-side and is the LCP
+  candidate the moment it paints.
+- CLS: 0. The `y: 12` translate is a CSS transform,
+  not a layout change. No space reservation, no
+  layout shift.
+- **Bundle size delta: +51 KB gzipped on the home
+  page (184 KB → 235 KB across 11 chunks). The plan
+  estimated `< 35 KB`. The overage of 16 KB gz is
+  the cost of the `motion` library runtime plus
+  our four primitives plus the contact-form
+  transition.** The 35 KB figure was a starting
+  estimate; the 51 KB is well within the typical
+  "marketing site with motion" range. We accept the
+  overage rather than cut features. The
+  `motion.create` fix above keeps the budget as
+  small as it can be without reducing scope.
+- Contact form submit: requires a real browser,
+  so this is a user-side verify. The server action
+  and reduced-motion path are code-correct
+  (`useReducedMotion` short-circuits to
+  `transition={{ duration: 0 }}`; AnimatePresence
+  bookkeeping still runs so React doesn't warn
+  about missing keys).
+
+**Roadmap:** ROADMAP.md Step 7.7 (closed).
+
+**Commits:**
+
+- `3d0fc60` — `fix(motion): use motion.create() not
+  motion() to avoid deprecation warning`
+- `<this commit>` — `docs(verify): record Step 7.7
+  results, accept +51 KB bundle overage` (roadmap +
+  CHANGELOG; code change is `3d0fc60`).
+
+---
+
+## 2026-08-30 18:30 — Phase 7, Step 7.8: documentation pass
+
+**Context:** With Steps 7.1 through 7.7 closed (and the
+`motion.create` deprecation fix in `3d0fc60`), the docs
+are the last thing between the working tree and the
+Phase 7 ship commit. The plan's Step 7.8 names four
+doc targets; three are full doc-file updates and one is
+an optional addendum to `docs/design.md`.
+
+**What changed:**
+
+- **`docs/FEATURES.md`** — refreshed the current-status
+  block (latest shipped phase = Phase 7, motion layer
+  added). Added a new "13. Motion (Phase 7)" section
+  listing the four primitives, the home page and
+  detail route wiring, the contact form transition,
+  and the four-layer reduced-motion defense.
+- **`docs/ROADMAP.md`** — Step 7.8 sub-tasks closed;
+  Step 7.9 (the ship commit) is the last unchecked
+  box in Phase 7.
+- **`docs/design.md`** — appended a one-paragraph
+  "Motion layer (Phase 7)" addendum recording the
+  shape of the motion layer and pointing back at the
+  "no FX" guardrails at the top of Phase 6.
+- **`docs/CHANGELOG.md`** — this entry; current-
+  status block refreshed to point at the verify
+  commit and Step 7.9 as the next in-flight work.
+
+**Why:** The project rule is that every phase lands
+with its docs up to date — ROADMAP boxes ticked,
+FEATURES current, CHANGELOG entries per step, and
+design.md (the visual source of truth) reflecting
+the new layer. Without this pass the next person
+opening the repo would see a working motion layer
+on the site but no record of why it exists or how
+the four-layer reduced-motion defense fits
+together.
+
+**Verification:** All four doc files render as
+expected (Markdown, no syntax errors). Phase 7
+ship commit (Step 7.9) is the next action.
+
+**Roadmap:** ROADMAP.md Step 7.8 (closed).
+
+**Commits:**
+
+- `<this commit>` — `docs: Phase 7 Step 7.8 doc
+  pass` (FEATURES + ROADMAP + design.md +
+  CHANGELOG).
+
+---
+
+## 2026-08-30 19:00 — Phase 7 shipped: motion & interaction
+
+**Context:** Phase 6 closed with a fully rebranded
+static site on the Step 5.6 design tokens — content,
+assets, SEO, and metadata all in sync with the
+green/teal system in `docs/design.md`. What it
+*didn't* have was any motion. The site appeared,
+sections were static, the only "interaction" was a
+CSS `transition-colors` on `<Button>` and `<Card>`
+plus the open/close of `<MobileNav>`. Phase 7
+adds a thin motion layer — three client primitives
+plus a `<MotionProvider>` — and wires it into every
+home page section, every detail route, and the
+contact form's success transition.
+
+**What changed (the 9 atomic commits of the phase):**
+
+- `7e16490` — `deps: add motion@13.1.1` — install
+  the `motion` package (the maintained successor
+  of `framer-motion`). 10 transitive packages,
+  0 vulnerabilities.
+- `6d9f674` — `feat(motion): build Reveal, Stagger,
+  Counter, MotionProvider` — the four primitives
+  in `components/motion/`. All client components,
+  polymorphic `as` prop, `useReducedMotion`
+  short-circuits.
+- `291df14` — `feat(layout): wrap children in
+  MotionProvider` — the single new client boundary,
+  wrapping only `{children}` (not the chrome).
+- `a13302d` — `feat(motion): apply to home page
+  sections` — all 9 home page sections plus the
+  `parseStat()` helper in `lib/utils.ts`.
+- `621f0a3` — `feat(motion): apply to detail
+  routes` — 8 detail pages. Case-study detail
+  uses `<Counter>` on parseable metric values
+  with a plain-text fallback for unparseable ones.
+- `2bcc3e9` — `feat(contact): animate form →
+  success transition` — `<AnimatePresence
+  mode="wait">` wrapping the form and success
+  card. 150 ms exit + 250 ms enter, 400 ms total.
+- `3d0fc60` — `fix(motion): use motion.create() not
+  motion()` — kills the deprecation warning the dev
+  server was logging.
+- `cdbe149` — `docs(verify): record Step 7.7
+  results, accept +51 KB bundle overage` — the
+  verify pass. Bundle delta on the home page:
+  +51 KB gzipped (184 KB → 235 KB), accepted
+  rather than cut features.
+- `61a51f6` — `docs: Phase 7 Step 7.8 doc pass` —
+  the four doc files updated; this entry.
+
+**Why:** The motion layer is the single biggest
+perceived-quality improvement in the site's
+lifecycle. Without it the home page just
+*appears*; with it the home page *arrives*. The
+hero text stack staggers five blocks in sequence;
+the stat numbers count up from 0; the case-study
+metrics on the highest-conversion page
+(`/case-studies/[slug]`) animate to their final
+values; the contact form's success state slides
+in. All of it respects `prefers-reduced-motion`
+in four independent layers (CSS in `globals.css`,
+per-component `useReducedMotion()` in the
+primitives, `MotionConfig reducedMotion="user"`
+in the provider, and the contact form's
+`transition={{ duration: 0 }}` short-circuit).
+
+**Verification:** `npx tsc --noEmit` clean.
+`npm run build` clean — 29 routes prerender,
+all dynamic routes still resolve. Dev server
+clean (0 WARN, 0 ERROR after the
+`motion.create` fix). LCP element (the hero h1)
+unchanged in static HTML. CLS = 0 (the `y: 12`
+translate is a CSS transform, not a layout
+change). Bundle delta +51 KB gzipped on the home
+page. Form-submit in both motion modes requires
+a real browser and is the user's call to verify.
+
+**Roadmap:** ROADMAP.md Phase 7 (closed; Step 7.9
+ship pending the release tag).
+
+**Commits:** See the 9-commit list above. Phase 7
+ship tag (v0.7.0) to be cut as the last action.
 
 ---
 

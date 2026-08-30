@@ -396,3 +396,31 @@ components:
     typography: "{typography.body-sm}"
     padding: "{spacing.xxs} 0"
 ---
+---
+
+## Motion layer (Phase 7)
+
+The site has a thin motion layer on top of the static design
+system. It follows the same per-component `tone` pattern that
+the existing primitives use to mirror their parent context:
+
+- New motion components live in `components/motion/`. They
+  are all client components (`"use client"`) and stay out
+  of the existing primitive set (`Button`, `Card`,
+  `Heading`, etc.) so the static primitives remain
+  server-rendered and JS-free at the section level.
+- The motion layer is CSS-respecting: the existing
+  `prefers-reduced-motion` block in `app/globals.css`
+  remains the source of truth, augmented by a
+  `<MotionConfig reducedMotion="user">` provider at the
+  layout level and per-component `useReducedMotion()`
+  checks in the motion primitives. Three independent
+  layers, all required.
+- No new design tokens. Motion uses the existing
+  `ink`, `on-dark`, `surface-feature` color tokens and
+  inherits type sizing from the existing `Heading` and
+  `<dl>` patterns. The motion layer is purely additive.
+- The motion layer does not introduce any new visual
+  patterns (no pricing cards, search pills, tabs, etc.)
+  and follows the "no FX" guardrails spelled out at the
+  top of Phase 6 in `ROADMAP.md`.
