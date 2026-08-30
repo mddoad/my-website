@@ -36,7 +36,7 @@ export function Heading({
   return (
     <div
       className={cn(
-        "flex flex-col gap-1.5",
+        "flex flex-col gap-3",
         align === "center" && "items-center text-center",
       )}
     >
