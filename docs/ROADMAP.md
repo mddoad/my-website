@@ -325,3 +325,149 @@ rebrand flows through automatically when they are swapped.
   - [x] `git commit -m "Phase 6: rebrand to <new name>"`
   - [x] Update `docs/CHANGELOG.md` and `docs/FEATURES.md`
   - [x] Tag the release
+
+---
+
+## Phase 7 — Motion & interaction
+
+A thin motion layer on top of the static, fully-prerendered Phase 6
+site. The site has no scroll animations, no list staggers, and only
+one piece of state (`MobileNav`'s open/closed). Phase 7 adds craft
+through motion without changing layout, copy, or the design system.
+
+**Scope (per the user's choice):** *noticeable but performant* —
+section reveals, stat counters, and a contact-form success
+transition. Not full Motion parity with marketing sites that do
+parallax and route transitions; that would not fit a B2B
+manufacturer site.
+
+**Stack:** the `motion` package (the maintained successor of
+`framer-motion`). Preferred over `framer-motion` for new installs
+because it's the same API, smaller, and the upstream direction is
+"use `motion`." Only new third-party dep.
+
+**Guardrails (do not regress — carried from Phases 5.6 and 6):**
+- No pricing cards, search pills, tabs, code mockups, comparison
+  tables, FAQ accordions, or promo banners.
+- No motion longer than 600 ms for a single element. No bounce
+  easings. No parallax on text. No autoplaying video / audio /
+  carousels.
+- `prefers-reduced-motion: reduce` is honored two ways: the existing
+  `app/globals.css:146-155` block stays authoritative, and a new
+  `<MotionConfig reducedMotion="user">` at the layout adds the
+  JS-side gate. Both must be present.
+- The existing `<Button tone="inverted">` pattern (added in
+  `f064e39` / `caadcf5`) is the model for this phase: a small
+  per-component prop that mirrors the parent context, applied at
+  every call site, never as a per-site override.
+
+**Plan:** `/home/aurwave/.claude/plans/dapper-beaming-summit.md`
+
+- [ ] **Step 7.1 — Install `motion` and confirm App Router compatibility**
+  - [ ] `npm install motion@latest`
+  - [ ] Read `node_modules/next/dist/docs/` (per `AGENTS.md`) to
+        confirm `motion/react` imports are safe under App Router and
+        RSC streaming
+  - [ ] Pin the exact `motion` version in `CHANGELOG.md`
+- [ ] **Step 7.2 — Build the four motion primitives**
+  - [ ] `components/motion/Reveal.tsx` — single-element scroll
+        reveal (`initial`/`whileInView`, 12 px y, 500 ms,
+        `out-expo` ease, `viewport={{ once: true }}`). Honors
+        `useReducedMotion`. Exports a `revealItem` `Variants`
+        object for `<Stagger>` to consume.
+  - [ ] `components/motion/Stagger.tsx` — wraps a list and
+        reveals children 80 ms apart via the `staggerChildren`
+        `Variants` API. Honors `useReducedMotion`.
+  - [ ] `components/motion/Counter.tsx` — animated number from
+        `0` → target, `useMotionValue` + `useTransform` +
+        `useInView`, 1.2 s `easeOut`, supports `prefix` /
+        `suffix` / `decimals`. Renders the final value
+        immediately when `useReducedMotion` is true.
+  - [ ] `components/motion/MotionProvider.tsx` — client
+        component that wraps the tree in
+        `<MotionConfig reducedMotion="user">`. Imported once
+        from `app/layout.tsx`.
+- [ ] **Step 7.3 — Wire `<MotionProvider>` into the root layout**
+  - [ ] `app/layout.tsx` — wrap the body tree in
+        `<MotionProvider>`. Layout stays a server component;
+        the provider is the single new client boundary.
+- [ ] **Step 7.4 — Apply motion to the home page sections**
+  - [ ] `components/sections/Hero.tsx` — stagger eyebrow
+        badge → h1 → subhead → CTA row → stats `<dl>`.
+        Convert the three stat values to `<Counter>`
+        (`99.2%`, `2,400`, `50+`).
+  - [ ] `components/sections/Process.tsx` — stagger the four
+        `<li>` step items.
+  - [ ] `components/sections/Stats.tsx` — convert all four
+        `<dd>` values to `<Counter>`; stagger the four
+        columns.
+  - [ ] `components/sections/ValueProps.tsx` — stagger the
+        three `<div>` items.
+  - [ ] `components/sections/CapabilitiesPreview.tsx` —
+        stagger the six service cards.
+  - [ ] `components/sections/Testimonials.tsx` — stagger the
+        three quote cards.
+  - [ ] `components/sections/FeaturedCaseStudy.tsx` —
+        reveal the image (16 px y, 700 ms) and the text
+        column (12 px y, 500 ms) on slightly different
+        delays so the eye lands on the image first.
+  - [ ] `components/sections/FinalCta.tsx` — single
+        `<Reveal>` on the whole centered block.
+  - [ ] `components/sections/TrustBar.tsx` — single
+        `<Reveal>` (this is the only section that does
+        not need a stagger; the bar is one row).
+- [ ] **Step 7.5 — Apply motion to the detail routes**
+  - [ ] `app/case-studies/[slug]/page.tsx` — `<Counter>`
+        on each metric, stagger the three
+        Challenge / Approach / Result blocks, single
+        `<Reveal>` on the closing inverted CTA.
+  - [ ] `app/case-studies/page.tsx` — stagger the case-
+        study card grid.
+  - [ ] `app/products/page.tsx` + `app/products/[slug]/page.tsx`
+        — stagger the product grid; reveal each section
+        heading; animate closing CTA metrics where present.
+  - [ ] `app/industries/page.tsx` +
+        `app/industries/[slug]/page.tsx` — same patterns.
+  - [ ] `app/about/page.tsx` + `app/team/page.tsx` —
+        stagger the team grid; reveal the history
+        sections.
+  - [ ] `app/process/page.tsx` — stagger the four
+        process steps.
+  - [ ] `app/testimonials/page.tsx` — stagger the
+        testimonial grid.
+- [ ] **Step 7.6 — Animate the contact form success transition**
+  - [ ] `app/contact/ContactForm.tsx` — wrap the form and
+        success branch in `<AnimatePresence mode="wait">`.
+        On `state.ok`, the form slides up + fades, the
+        success card slides in from below. 250 ms total.
+        Honors `useReducedMotion` (instant swap, no
+        transition).
+- [ ] **Step 7.7 — Verify**
+  - [ ] `npm run build` clean (TypeScript, all routes
+        prerender)
+  - [ ] `npm run dev` boots without warnings
+  - [ ] Spot-check `/`, `/case-studies/[slug]`, `/contact`
+        with `prefers-reduced-motion: no-preference` (soft
+        fade-up) and with reduced motion enabled (instant
+        appearance, no transition)
+  - [ ] Submit the contact form in both motion modes
+  - [ ] Home page first-paint LCP element is unchanged
+        (still the hero h1 in static HTML)
+  - [ ] CLS stays 0 (no layout shift from `y: 12`
+        translates)
+  - [ ] Bundle size delta on the home page: `< 35 kb gz`
+        of new client JS
+- [ ] **Step 7.8 — Update documentation**
+  - [ ] `docs/CHANGELOG.md` — top entry: "Phase 7: motion
+        & interaction" with date, pinned `motion` version,
+        file list, and the bundle-size delta
+  - [ ] `docs/FEATURES.md` — new "13. Motion" section
+        listing the three primitives and the contact-form
+        transition
+  - [ ] `docs/ROADMAP.md` — this block (already added in
+        this commit)
+  - [ ] `docs/design.md` — optional one-paragraph
+        addendum on the motion layer
+- [ ] **Step 7.9 — Commit**
+  - [ ] `git commit -m "Phase 7: motion & interaction"`
+  - [ ] Tag the release
