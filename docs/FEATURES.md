@@ -7,6 +7,25 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` shipped
 
 ---
 
+## Current status
+
+- **Latest shipped phase:** Phase 6 (rebrand) — `3324dfc` on 2026-08-30
+- **What's live:** All 12 feature sections below are shipped.
+  The Step 5.6 design-token integration retired the industrial
+  blue palette from rendered output; Phase 6 finished the
+  rebrand by moving the contact info, the assets (favicon,
+  OG image), the per-page metadata, the case-study hero images
+  (now deterministic random photos via `picsum.photos`),
+  the about-page city/sqft hardcodes, and the `public/`
+  leftovers to the same single source of truth.
+- **Phase 5 polish still in flight** (user-side verification, no
+  code): Step 5.1 a11y re-verify, Step 5.2 mobile audit, Step 5.3
+  Lighthouse, Step 5.4 real contact info, Step 5.5 final commit.
+  These don't touch this file — every line below is already
+  shipped.
+
+---
+
 ## 1. Site foundation
 
 - [x] **App router shell** — `app/layout.tsx` with html/body, font wiring,
@@ -105,7 +124,12 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` shipped
 
 ## 9. Imagery
 
-- [x] `next.config.ts` whitelists remote image hosts (`images.unsplash.com`)
+- [x] `next.config.ts` whitelists remote image hosts (`picsum.photos`).
+  Phase 6 moved case-study heroes from hardcoded
+  `images.unsplash.com` URLs to a `picsumUrl(seed, w, h)`
+  helper that builds a deterministic `picsum.photos` URL per
+  study — the same image on every build, no remote stock
+  whitelist.
 - [x] Case study hero images via `next/image` (or local if replaced later)
 - [x] Consistent `sizes` attribute for responsive loading
 
@@ -117,8 +141,11 @@ Legend: `[ ]` not started · `[~]` in progress · `[x]` shipped
 - [x] `prefers-reduced-motion` honored globally
 - [x] Semantic landmarks (`<header>`, `<main>`, `<nav>`, `<footer>`)
 - [x] Color contrast meets WCAG AA on all text tokens
-  *(re-verify after Step 5.6 rebrand — the new `text-muted` token
-  fails AA on canvas and is limited to caption/eyebrow use only)*
+  *(re-verified in Phase 6: the new `text-muted` token fails AA on
+  canvas, so it is limited to caption/eyebrow/dt-label/placeholder
+  use only — 19 hits in the grep audit, all in those roles.
+  `text-on-dark-muted` on `bg-brand-teal-deep` measures 7.36:1,
+  passes AAA.)*
 
 ## 11. Performance
 
