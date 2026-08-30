@@ -135,7 +135,8 @@ export default async function CaseStudyDetailPage({
               as={2}
               align="center"
               eyebrow="Your move"
-              className="text-on-dark text-3xl font-semibold sm:text-4xl"
+              tone="inverted"
+              className="text-3xl font-semibold sm:text-4xl"
             >
               Want a result like this?
             </Heading>

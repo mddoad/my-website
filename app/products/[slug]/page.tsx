@@ -153,7 +153,8 @@ export default async function ProductDetailPage({
               as={2}
               align="center"
               eyebrow={service.name}
-              className="text-on-dark text-3xl font-semibold sm:text-4xl"
+              tone="inverted"
+              className="text-3xl font-semibold sm:text-4xl"
             >
               Have a drawing for {service.name.toLowerCase()}?
             </Heading>

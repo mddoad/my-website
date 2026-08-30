@@ -154,7 +154,8 @@ export default async function IndustryDetailPage({
               as={2}
               align="center"
               eyebrow={industry.name}
-              className="text-on-dark text-3xl font-semibold sm:text-4xl"
+              tone="inverted"
+              className="text-3xl font-semibold sm:text-4xl"
             >
               Building for {industry.name.toLowerCase()}?
             </Heading>

@@ -13,7 +13,8 @@ export function FinalCta() {
             as={2}
             align="center"
             eyebrow="Ready when you are"
-            className="text-on-dark text-3xl font-semibold sm:text-4xl"
+            tone="inverted"
+            className="text-3xl font-semibold sm:text-4xl"
           >
             Tell us about your program.
           </Heading>

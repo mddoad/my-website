@@ -90,7 +90,8 @@ export default function ProductsPage() {
               as={2}
               align="center"
               eyebrow="Not sure where to start?"
-              className="text-on-dark text-3xl font-semibold sm:text-4xl"
+              tone="inverted"
+              className="text-3xl font-semibold sm:text-4xl"
             >
               Send a drawing. We&rsquo;ll route it.
             </Heading>

@@ -94,7 +94,8 @@ export default function CaseStudiesPage() {
               as={2}
               align="center"
               eyebrow="Let&rsquo;s go"
-              className="text-on-dark text-3xl font-semibold sm:text-4xl"
+              tone="inverted"
+              className="text-3xl font-semibold sm:text-4xl"
             >
               Want a program like this on your side?
             </Heading>

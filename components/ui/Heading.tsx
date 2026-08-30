@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
 type HeadingLevel = 1 | 2 | 3 | 4;
+type HeadingTone = "default" | "inverted";
 
 type HeadingProps = {
   children: ReactNode;
@@ -9,6 +10,14 @@ type HeadingProps = {
   as?: HeadingLevel;
   eyebrow?: string;
   align?: "left" | "center";
+  /**
+   * Visual register. "default" pairs with a light canvas (ink
+   * title, brand-green-dark eyebrow). "inverted" pairs with the
+   * brand-teal-deep inverted section (on-dark title, brand-green
+   * eyebrow). Match the parent `Section` tone so contrast is
+   * correct without per-site overrides.
+   */
+  tone?: HeadingTone;
 };
 
 // Type scale from docs/design.md. Mobile drops to the lower
@@ -21,6 +30,11 @@ const sizeClasses: Record<HeadingLevel, string> = {
   4: "text-[20px] leading-[1.35] sm:text-[22px]",
 };
 
+const toneClasses: Record<HeadingTone, { eyebrow: string; title: string }> = {
+  default: { eyebrow: "text-brand-green-dark", title: "text-ink" },
+  inverted: { eyebrow: "text-brand-green", title: "text-on-dark" },
+};
+
 /**
  * Consistent heading with optional eyebrow label. Inter sets the
  * typeface (substitutes design.md's Euclid Circular A — paid).
@@ -31,8 +45,10 @@ export function Heading({
   as = 2,
   eyebrow,
   align = "left",
+  tone = "default",
 }: HeadingProps) {
   const Tag = `h${as}` as "h1" | "h2" | "h3" | "h4";
+  const toneTokens = toneClasses[tone];
   return (
     <div
       className={cn(
@@ -41,13 +57,19 @@ export function Heading({
       )}
     >
       {eyebrow && (
-        <span className="text-[11px] font-semibold uppercase tracking-[1px] text-brand-green-dark">
+        <span
+          className={cn(
+            "text-[11px] font-semibold uppercase tracking-[1px]",
+            toneTokens.eyebrow,
+          )}
+        >
           {eyebrow}
         </span>
       )}
       <Tag
         className={cn(
-          "text-ink font-medium",
+          "font-medium",
+          toneTokens.title,
           sizeClasses[as],
           className,
         )}

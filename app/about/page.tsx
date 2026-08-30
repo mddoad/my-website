@@ -157,7 +157,8 @@ export default function AboutPage() {
               as={2}
               align="center"
               eyebrow="Visit us"
-              className="text-on-dark text-3xl font-semibold sm:text-4xl"
+              tone="inverted"
+              className="text-3xl font-semibold sm:text-4xl"
             >
               Come see the floor.
             </Heading>

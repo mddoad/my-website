@@ -125,7 +125,8 @@ export default function ProcessPage() {
               as={2}
               align="center"
               eyebrow="Get started"
-              className="text-on-dark text-3xl font-semibold sm:text-4xl"
+              tone="inverted"
+              className="text-3xl font-semibold sm:text-4xl"
             >
               Start with Discover.
             </Heading>

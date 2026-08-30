@@ -7,7 +7,7 @@ export function Process() {
   return (
     <Section tone="inverted" padding="lg">
       <Container size="full">
-        <Heading as={2} eyebrow="Process" align="center">
+        <Heading as={2} eyebrow="Process" align="center" tone="inverted">
           How an OEM program moves at Meridian
         </Heading>
 

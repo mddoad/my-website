@@ -74,7 +74,8 @@ export default function TeamPage() {
               as={2}
               align="center"
               eyebrow="Talk to us"
-              className="text-on-dark text-3xl font-semibold sm:text-4xl"
+              tone="inverted"
+              className="text-3xl font-semibold sm:text-4xl"
             >
               Want to talk to one of them directly?
             </Heading>
