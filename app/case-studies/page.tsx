@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
-import { caseStudies } from "@/content/case-studies";
+import { caseStudies, picsumUrl } from "@/content/case-studies";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
@@ -48,7 +48,7 @@ export default function CaseStudiesPage() {
                 <Card as="article" className="flex h-full flex-col overflow-hidden p-0">
                   <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface-soft">
                     <Image
-                      src={cs.image}
+                      src={picsumUrl(cs.picsumSeed, 1600, 1200)}
                       alt={cs.title}
                       fill
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"

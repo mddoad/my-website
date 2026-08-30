@@ -12,8 +12,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "About",
-  description:
-    "Meridian Manufacturing was established in 1972. AS9100D, ISO 9001:2015, and ITAR registered. 180,000 sq ft of manufacturing in Cleveland, OH.",
+  description: `${site.name} was established in ${site.established}. AS9100D, ISO 9001:2015, and ITAR registered. ${stats[1].value} square feet of manufacturing in ${site.address.city}, ${site.address.region}.`,
   alternates: { canonical: "/about" },
 });
 
@@ -73,7 +72,8 @@ export default function AboutPage() {
             <div className="lg:col-span-8 space-y-6 text-lg text-slate">
               <p>
                 Meridian was founded in {site.established} as a small
-                tool-and-die shop serving the Cleveland industrial base.
+                tool-and-die shop serving the {site.address.city} industrial
+                base.
                 Through the 1980s and 90s we added CNC capacity and
                 entered aerospace and defense supply chains. The 2000s
                 brought ISO 9001 and AS9100 certifications; the 2010s
@@ -162,8 +162,8 @@ export default function AboutPage() {
               Come see the floor.
             </Heading>
             <p className="mt-4 text-lg text-on-dark-muted">
-              We host customer visits at our Cleveland facility by
-              appointment. Send a note and we&rsquo;ll set one up.
+              We host customer visits at our {site.address.city} facility
+              by appointment. Send a note and we&rsquo;ll set one up.
             </p>
             <div className="mt-8">
               <Button href="/contact" size="lg">

@@ -4,8 +4,12 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
+        // picsum.photos serves a deterministic random image for a given
+        // seed. The case-study hero URLs in `content/case-studies.ts`
+        // are built via `picsumUrl(seed, w, h)` so the same image
+        // appears on every build.
         protocol: "https",
-        hostname: "images.unsplash.com",
+        hostname: "picsum.photos",
         port: "",
         pathname: "/**",
       },

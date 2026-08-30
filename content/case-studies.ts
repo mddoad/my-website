@@ -11,8 +11,22 @@ export type CaseStudy = {
   approach: string;
   result: string;
   metrics: CaseStudyMetric[];
-  image: string;
+  /**
+   * Stable seed for the random hero image. The image URL is built
+   * at render time via `picsumUrl(seed, w, h)` so the same seed
+   * always yields the same image across builds.
+   */
+  picsumSeed: string;
 };
+
+/**
+ * Build a stable random image URL for a case study. picsum.photos
+ * serves a deterministic image for a given seed, so the hero
+ * image is the same on every build.
+ */
+export function picsumUrl(seed: string, w: number, h: number): string {
+  return `https://picsum.photos/seed/${encodeURIComponent(seed)}/${w}/${h}`;
+}
 
 export const caseStudies: CaseStudy[] = [
   {
@@ -34,8 +48,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "On-time delivery", value: "99.2%" },
       { label: "Annual volume", value: "48,000 units" },
     ],
-    image:
-      "https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=1600&q=80",
+    picsumSeed: "meridian-actuator-housing-2024",
   },
   {
     slug: "ev-battery-enclosure",
@@ -56,8 +69,7 @@ export const caseStudies: CaseStudy[] = [
       { label: "First 90-day PPM", value: "< 200" },
       { label: "Volume ramp", value: "+30%" },
     ],
-    image:
-      "https://images.unsplash.com/photo-1611174743420-3d7df880ce32?auto=format&fit=crop&w=1600&q=80",
+    picsumSeed: "meridian-ev-enclosure-2023",
   },
   {
     slug: "wind-turbine-hub",
@@ -78,7 +90,6 @@ export const caseStudies: CaseStudy[] = [
       { label: "Scrap reduction", value: "8% → <1%" },
       { label: "Fatigue life", value: "+35%" },
     ],
-    image:
-      "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1600&q=80",
+    picsumSeed: "meridian-wind-hub-2022",
   },
 ];

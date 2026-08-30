@@ -4,6 +4,7 @@ import { SkipLink } from "@/components/layout/SkipLink";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd, organizationJsonLd } from "@/components/seo/JsonLd";
+import { site } from "@/lib/site";
 import "./globals.css";
 
 const body = Inter({
@@ -20,15 +21,14 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Meridian Manufacturing — Precision components. Engineered to spec.",
-    template: "%s | Meridian Manufacturing",
+    default: `${site.name} — ${site.tagline}`,
+    template: `%s | ${site.name}`,
   },
-  description:
-    "Meridian Manufacturing is a B2B industrial manufacturer delivering precision components, assemblies, and engineered solutions for OEM customers.",
-  metadataBase: new URL("https://example.com"),
+  description: site.description,
+  metadataBase: new URL(site.url),
   openGraph: {
     type: "website",
-    siteName: "Meridian Manufacturing",
+    siteName: site.name,
   },
   robots: { index: true, follow: true },
 };

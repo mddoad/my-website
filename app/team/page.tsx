@@ -6,12 +6,12 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { team } from "@/content/team";
+import { site } from "@/lib/site";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Team",
-  description:
-    "Meridian Manufacturing's leadership team — CEO, VP of Engineering, VP of Operations, and Director of Quality.",
+  description: `${site.name}'s leadership team — CEO, VP of Engineering, VP of Operations, and Director of Quality.`,
   alternates: { canonical: "/team" },
 });
 

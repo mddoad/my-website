@@ -9,8 +9,7 @@ import { ContactForm } from "./ContactForm";
 
 export const metadata: Metadata = buildMetadata({
   title: "Contact",
-  description:
-    "Send Meridian Manufacturing a drawing, a volume profile, and a target date. We respond within five business days.",
+  description: `Send ${site.name} a drawing, a volume profile, and a target date. We respond within five business days.`,
   alternates: { canonical: "/contact" },
 });
 

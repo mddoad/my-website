@@ -6,12 +6,12 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
 import { testimonials } from "@/content/testimonials";
+import { site } from "@/lib/site";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title: "Testimonials",
-  description:
-    "What OEM partners say about working with Meridian Manufacturing.",
+  description: `What OEM partners say about working with ${site.name}.`,
   alternates: { canonical: "/testimonials" },
 });
 

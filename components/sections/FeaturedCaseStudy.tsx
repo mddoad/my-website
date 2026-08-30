@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
-import { caseStudies } from "@/content/case-studies";
+import { caseStudies, picsumUrl } from "@/content/case-studies";
 
 export function FeaturedCaseStudy() {
   const study = caseStudies[0];
@@ -15,7 +15,7 @@ export function FeaturedCaseStudy() {
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-hairline bg-surface-soft">
             <Image
-              src={study.image}
+              src={picsumUrl(study.picsumSeed, 1600, 1200)}
               alt={study.title}
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"

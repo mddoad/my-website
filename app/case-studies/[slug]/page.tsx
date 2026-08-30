@@ -8,7 +8,7 @@ import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/JsonLd";
-import { caseStudies } from "@/content/case-studies";
+import { caseStudies, picsumUrl } from "@/content/case-studies";
 import { buildMetadata } from "@/lib/seo";
 
 type Params = { slug: string };
@@ -74,7 +74,7 @@ export default async function CaseStudyDetailPage({
             </div>
             <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-hairline bg-surface-soft">
               <Image
-                src={study.image}
+                src={picsumUrl(study.picsumSeed, 1600, 1200)}
                 alt={study.title}
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"

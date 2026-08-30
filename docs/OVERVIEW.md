@@ -50,13 +50,12 @@ Three jobs, in order of priority:
 
 ## Visual system
 
-> **Note (2026-08-27):** Phase 5 Step 5.6 rebrand integrates
-> `docs/design.md` as the design-system source of truth. The
-> brand-green primary + brand-teal-deep surfaces (and the
-> supporting ink / charcoal / slate / steel / stone / muted
-> neutral scale, hairlines, full-radius buttons, and 13-step
-> spacing scale) come from that spec. The historic "industrial
-> blue 1972" description below is retained for context.
+> **Note (2026-08-30):** Phase 6 completed the content + assets
+> + SEO rebrand on top of the Step 5.6 design-token integration.
+> The green/teal palette below is the live system; the previous
+> "industrial blue 1972" identity is fully retired from rendered
+> output, the OG image, and the favicon. See `docs/CHANGELOG.md`
+> for the Phase 6 entry.
 
 - **Palette (current, per `docs/design.md`):** Brand green
   (`brand-green` `#00ed64`) as the primary CTA color, brand teal

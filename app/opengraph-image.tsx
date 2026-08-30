@@ -3,8 +3,10 @@ import { site } from "@/lib/site";
 
 /**
  * Default Open Graph image rendered at /opengraph-image. Used as the
- * fallback when a route doesn't override its own. Style: industrial
- * blue background, "M" mark, and the brand tagline.
+ * fallback when a route doesn't override its own. Palette per
+ * `docs/design.md`: brand-teal-deep surface, on-dark text,
+ * on-dark-muted subhead, hairline-dark divider, brand-green mark on
+ * on-dark (white).
  */
 
 export const alt = `${site.name} — ${site.tagline}`;
@@ -27,7 +29,9 @@ export default async function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 80,
-          background: "#0b1f3a",
+          // brand-teal-deep
+          background: "#001e2b",
+          // on-dark
           color: "#ffffff",
           fontFamily: "sans-serif",
         }}
@@ -41,9 +45,12 @@ export default async function OpengraphImage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              // rounded.md per the new radius scale
               borderRadius: 8,
+              // on-dark
               background: "#ffffff",
-              color: "#0b1f3a",
+              // brand-teal-deep
+              color: "#001e2b",
               fontSize: 48,
               fontWeight: 700,
             }}
@@ -65,7 +72,7 @@ export default async function OpengraphImage() {
           <div style={{ fontSize: 64, fontWeight: 600, lineHeight: 1.1 }}>
             {site.tagline}
           </div>
-          <div style={{ fontSize: 24, color: "#c9d1d9" }}>
+          <div style={{ fontSize: 24, color: "#a8b3bc" }}>
             Tier 1 supplier of precision components and assemblies for
             OEM programs in aerospace, automotive, energy, and medical.
           </div>
@@ -78,8 +85,10 @@ export default async function OpengraphImage() {
             alignItems: "center",
             gap: 16,
             fontSize: 20,
-            color: "#93acc6",
-            borderTop: "1px solid #234a78",
+            // on-dark-muted
+            color: "#a8b3bc",
+            // hairline-dark
+            borderTop: "1px solid #1c2d38",
             paddingTop: 24,
           }}
         >
