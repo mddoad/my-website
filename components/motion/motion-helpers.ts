@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import { motion } from "motion/react";
+import { motion, type HTMLMotionProps } from "motion/react";
 
 /**
  * Resolved element type for the polymorphic `as` prop on the
@@ -23,20 +23,58 @@ export type AsTag =
   | "footer";
 
 /**
- * Look up a `motion` element by tag name. `motion` is both a
- * function (`motion.create("div")`) and an object (`motion.div`);
- * the function form is what the type system actually infers for
- * dynamic tag names. The bare function form `motion(tag)` is
- * deprecated in motion 12+ — `motion.create` is the modern alias.
+ * A `motion`-wrapped HTML element. `motion.create()` returns a
+ * component that accepts the underlying element's HTML props
+ * plus the motion-only props (`initial`, `whileInView`,
+ * `variants`, …); both are surfaced through `HTMLMotionProps<T>`.
  */
-export function getMotionComponent(
-  tag: AsTag,
-): ComponentType<any> {
-  // The cast through `unknown` is necessary because `typeof
-  // motion` doesn't declare an index signature, but the function
-  // form (`motion.create("div")`) is part of its public type and
-  // is the documented polymorphic API.
-  return (
-    motion as unknown as { create: (t: AsTag) => ComponentType<any> }
-  ).create(tag);
+type MotionElement<T extends AsTag> = ComponentType<HTMLMotionProps<T>>;
+
+/**
+ * Pre-resolved motion components keyed by `AsTag`. Built once at
+ * module load rather than per render — creating a component
+ * mid-render is a `react-hooks/static-components` violation
+ * (it would unmount and remount on every parent render, losing
+ * the in-flight animation state).
+ *
+ * `motion.create()` is the motion 12+ replacement for the
+ * deprecated `motion(tag)` call form. The cast through `unknown`
+ * is necessary because `typeof motion` does not declare an index
+ * signature, but the function form is part of its public API.
+ */
+const createMotion = (
+  motion as unknown as {
+    create: <T extends AsTag>(t: T) => MotionElement<T>;
+  }
+).create;
+
+/**
+ * Pre-resolved motion components keyed by `AsTag`. Consumers
+ * should read directly from this map (`MOTION_BY_TAG[as]`) —
+ * the indirection through `getMotionComponent()` exists for
+ * older call sites, but direct lookup avoids the
+ * `react-hooks/static-components` warning that fires on any
+ * function call inside a render body, even one that just
+ * indexes into a frozen record.
+ */
+export const MOTION_BY_TAG: { [T in AsTag]: MotionElement<T> } = {
+  div: createMotion("div"),
+  section: createMotion("section"),
+  ul: createMotion("ul"),
+  ol: createMotion("ol"),
+  dl: createMotion("dl"),
+  li: createMotion("li"),
+  article: createMotion("article"),
+  header: createMotion("header"),
+  footer: createMotion("footer"),
+};
+
+/**
+ * Look up a `motion` element by tag name. Returns a stable
+ * component reference for each tag.
+ */
+export function getMotionComponent<T extends AsTag>(
+  tag: T,
+): MotionElement<T> {
+  return MOTION_BY_TAG[tag];
 }

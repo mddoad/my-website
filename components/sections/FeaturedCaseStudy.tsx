@@ -46,7 +46,7 @@ export function FeaturedCaseStudy() {
               <dl className="mt-8 grid grid-cols-3 gap-6 border-t border-hairline pt-6">
                 {study.metrics.map((m) => (
                   <div key={m.label}>
-                    <dt className="text-xs text-stone">{m.label}</dt>
+                    <dt className="text-xs text-slate">{m.label}</dt>
                     <dd className="mt-1 text-2xl text-ink">
                       {m.value}
                     </dd>
@@ -59,7 +59,7 @@ export function FeaturedCaseStudy() {
                   All case studies
                 </Button>
               </div>
-              <p className="mt-6 text-sm text-stone">
+              <p className="mt-6 text-sm text-slate">
                 <Link
                   href="/case-studies"
                   className="underline-offset-2 hover:underline"

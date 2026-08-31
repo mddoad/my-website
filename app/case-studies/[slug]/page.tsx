@@ -60,7 +60,7 @@ export default async function CaseStudyDetailPage({
       {/* Hero with image */}
       <section className="border-b border-hairline bg-surface">
         <Container size="full" className="py-12 sm:py-16">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
             <Link href="/case-studies" className="hover:text-ink">
               Case Studies
             </Link>{" "}
@@ -105,7 +105,7 @@ export default async function CaseStudyDetailPage({
                   key={m.label}
                   className="text-center sm:text-left"
                 >
-                  <dt className="text-sm text-muted">{m.label}</dt>
+                  <dt className="text-sm text-slate">{m.label}</dt>
                   <dd className="mt-1 text-4xl font-semibold text-ink sm:text-5xl">
                     {stat ? (
                       <Counter
@@ -160,7 +160,7 @@ export default async function CaseStudyDetailPage({
                 align="center"
                 eyebrow="Your move"
                 tone="inverted"
-                className="text-3xl font-semibold sm:text-4xl"
+              size="cta"
               >
                 Want a result like this?
               </Heading>

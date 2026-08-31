@@ -59,7 +59,7 @@ export default function ContactPage() {
             <aside className="lg:col-span-5">
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
                     Sales
                   </h3>
                   <a
@@ -77,7 +77,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
                     Facility
                   </h3>
                   <address className="mt-2 not-italic text-base text-charcoal">
@@ -93,7 +93,7 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
                     Hours
                   </h3>
                   <p className="mt-2 text-base text-charcoal">
@@ -102,7 +102,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="rounded-md border border-hairline bg-canvas p-5">
-                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
                     For urgent programs
                   </h3>
                   <p className="mt-2 text-sm text-slate">

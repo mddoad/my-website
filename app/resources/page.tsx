@@ -67,7 +67,7 @@ export default function ResourcesPage() {
                     {u.title}
                   </h2>
                   <p className="mt-3 text-sm text-slate">{u.body}</p>
-                  <p className="mt-6 text-xs uppercase tracking-[0.15em] text-muted">
+                  <p className="mt-6 text-xs uppercase tracking-[0.15em] text-slate">
                     Coming soon
                   </p>
                 </Card>
@@ -80,7 +80,7 @@ export default function ResourcesPage() {
       <Section padding="lg">
         <Container size="prose">
           <div className="rounded-lg border border-dashed border-hairline-strong bg-surface-soft p-10 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
               In the meantime
             </p>
             <h2 className="mt-3 text-2xl font-semibold text-ink">

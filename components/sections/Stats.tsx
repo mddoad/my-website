@@ -19,7 +19,7 @@ export function Stats() {
                 key={s.label}
                 className="text-center sm:text-left"
               >
-                <dt className="order-2 text-sm text-muted sm:order-1">
+                <dt className="order-2 text-sm text-slate sm:order-1">
                   {s.label}
                 </dt>
                 <dd className="order-1 text-4xl font-semibold text-ink sm:order-2 sm:text-5xl">

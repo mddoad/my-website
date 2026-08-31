@@ -86,7 +86,7 @@ export default function IndustriesPage() {
                 align="center"
                 eyebrow="Got something else?"
                 tone="inverted"
-                className="text-3xl font-semibold sm:text-4xl"
+              size="cta"
               >
                 Don&rsquo;t see your industry?
               </Heading>

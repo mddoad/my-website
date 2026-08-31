@@ -63,7 +63,7 @@ export default function AboutPage() {
                   key={s.label}
                   className="text-center sm:text-left"
                 >
-                  <dt className="text-sm text-muted">{s.label}</dt>
+                  <dt className="text-sm text-slate">{s.label}</dt>
                   <dd className="mt-1 text-4xl font-semibold text-ink sm:text-5xl">
                     {stat ? (
                       <Counter
@@ -189,7 +189,7 @@ export default function AboutPage() {
                 align="center"
                 eyebrow="Visit us"
                 tone="inverted"
-                className="text-3xl font-semibold sm:text-4xl"
+              size="cta"
               >
                 Come see the floor.
               </Heading>

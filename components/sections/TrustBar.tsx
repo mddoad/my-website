@@ -10,7 +10,7 @@ export function TrustBar() {
     >
       <Container size="full">
         <Reveal>
-          <p className="text-center text-[11px] font-semibold uppercase tracking-[1px] text-muted">
+          <p className="text-center text-[11px] font-semibold uppercase tracking-[1px] text-slate">
             Certified to the standards your industry requires
           </p>
           <ul className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3 lg:grid-cols-5">
@@ -22,7 +22,7 @@ export function TrustBar() {
                 <span className="text-base font-semibold text-ink">
                   {c.label}
                 </span>
-                <span className="text-xs text-stone">{c.note}</span>
+                <span className="text-xs text-slate">{c.note}</span>
               </li>
             ))}
           </ul>

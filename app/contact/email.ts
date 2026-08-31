@@ -36,7 +36,6 @@ export async function sendContactEmail(
   const from = process.env.CONTACT_EMAIL_FROM;
 
   if (!apiKey || !to || !from) {
-    // eslint-disable-next-line no-console
     console.warn(
       "[contact] email delivery skipped — missing one of " +
         "RESEND_API_KEY, CONTACT_EMAIL_TO, CONTACT_EMAIL_FROM. " +
@@ -81,7 +80,6 @@ export async function sendContactEmail(
 
     if (!res.ok) {
       const body = await res.text().catch(() => "");
-      // eslint-disable-next-line no-console
       console.error(
         "[contact] Resend returned non-2xx",
         res.status,
@@ -92,7 +90,6 @@ export async function sendContactEmail(
 
     return { ok: true };
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.error("[contact] email delivery threw", err);
     return { ok: false, reason: "delivery-exception" };
   }

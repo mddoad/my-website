@@ -130,7 +130,7 @@ export default function ProcessPage() {
                 align="center"
                 eyebrow="Get started"
                 tone="inverted"
-                className="text-3xl font-semibold sm:text-4xl"
+              size="cta"
               >
                 Start with Discover.
               </Heading>

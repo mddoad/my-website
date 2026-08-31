@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 
 type HeadingLevel = 1 | 2 | 3 | 4;
 type HeadingTone = "default" | "inverted";
+type HeadingSize = "default" | "cta";
 
 type HeadingProps = {
   children: ReactNode;
@@ -18,6 +19,17 @@ type HeadingProps = {
    * correct without per-site overrides.
    */
   tone?: HeadingTone;
+  /**
+   * "default" picks the standard type scale for the chosen `as`
+   * level. "cta" overrides the size to the smaller scale used in
+   * the closing inverted-CTA panels (text-3xl sm:text-4xl) so
+   * callers don't need to repeat the override className on every
+   * CTA. Combine with `as={2}` to keep the heading hierarchy
+   * consistent (h1 → h3 cards → h2 CTA reads as a regression
+   * in document outline; prefer `as={2}` here, the size is what
+   * differs).
+   */
+  size?: HeadingSize;
 };
 
 // Type scale from docs/design.md. Mobile drops to the lower
@@ -29,6 +41,12 @@ const sizeClasses: Record<HeadingLevel, string> = {
   3: "text-[24px] leading-[1.30] sm:text-[28px]",
   4: "text-[20px] leading-[1.35] sm:text-[22px]",
 };
+
+// CTA-size override. Lighter weight (font-semibold rather than
+// the default font-medium) matches the smaller scale and avoids
+// the heavy look that the level-2 size produces on the inverted
+// section. One class string keeps the override centralized.
+const ctaSizeClass = "text-3xl font-semibold leading-tight sm:text-4xl";
 
 const toneClasses: Record<HeadingTone, { eyebrow: string; title: string }> = {
   default: { eyebrow: "text-brand-green-dark", title: "text-ink" },
@@ -46,6 +64,7 @@ export function Heading({
   eyebrow,
   align = "left",
   tone = "default",
+  size = "default",
 }: HeadingProps) {
   const Tag = `h${as}` as "h1" | "h2" | "h3" | "h4";
   const toneTokens = toneClasses[tone];
@@ -70,7 +89,7 @@ export function Heading({
         className={cn(
           "font-medium",
           toneTokens.title,
-          sizeClasses[as],
+          size === "cta" ? ctaSizeClass : sizeClasses[as],
           className,
         )}
       >

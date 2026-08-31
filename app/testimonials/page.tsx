@@ -54,7 +54,7 @@ export default function TestimonialsPage() {
                   </blockquote>
                   <figcaption className="mt-8 border-t border-hairline pt-4 text-sm">
                     <p className="font-medium text-ink">{t.role}</p>
-                    <p className="text-stone">{t.company}</p>
+                    <p className="text-slate">{t.company}</p>
                   </figcaption>
                 </Card>
               </Reveal>
@@ -72,7 +72,7 @@ export default function TestimonialsPage() {
                 align="center"
                 eyebrow="Your turn"
                 tone="inverted"
-                className="text-3xl font-semibold sm:text-4xl"
+              size="cta"
               >
                 Become the next one.
               </Heading>

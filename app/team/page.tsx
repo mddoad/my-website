@@ -81,7 +81,7 @@ export default function TeamPage() {
                 align="center"
                 eyebrow="Talk to us"
                 tone="inverted"
-                className="text-3xl font-semibold sm:text-4xl"
+              size="cta"
               >
                 Want to talk to one of them directly?
               </Heading>

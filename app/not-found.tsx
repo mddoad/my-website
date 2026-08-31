@@ -28,7 +28,7 @@ export default function NotFound() {
               See capabilities
             </Button>
           </div>
-          <p className="mt-10 text-sm text-stone">
+          <p className="mt-10 text-sm text-slate">
             Looking for something specific?{" "}
             <Link
               href="/contact"

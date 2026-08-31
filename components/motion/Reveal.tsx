@@ -2,7 +2,7 @@
 
 import { useReducedMotion, type Variants } from "motion/react";
 import type { ReactNode, ElementType } from "react";
-import { getMotionComponent, type AsTag } from "./motion-helpers";
+import { MOTION_BY_TAG, type AsTag } from "./motion-helpers";
 
 /**
  * Single-element scroll reveal. Fades the wrapped content up by
@@ -86,7 +86,7 @@ export function Reveal({
   const safeY = Math.min(Math.max(y, 0), MAX_Y);
   const safeDuration = Math.min(Math.max(duration, 0), MAX_DURATION);
 
-  const MotionTag = getMotionComponent(as);
+  const MotionTag = MOTION_BY_TAG[as];
 
   return (
     <MotionTag

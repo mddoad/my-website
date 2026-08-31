@@ -26,7 +26,7 @@ export function Testimonials() {
                 </blockquote>
                 <figcaption className="mt-6 border-t border-hairline pt-4 text-sm">
                   <p className="font-medium text-ink">{t.role}</p>
-                  <p className="text-stone">{t.company}</p>
+                  <p className="text-slate">{t.company}</p>
                 </figcaption>
               </Card>
             </Reveal>

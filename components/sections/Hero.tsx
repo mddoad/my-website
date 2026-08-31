@@ -63,7 +63,7 @@ export function Hero() {
                   const stat = parseStat(raw);
                   return (
                     <div key={label}>
-                      <dt className="text-muted">{label}</dt>
+                      <dt className="text-slate">{label}</dt>
                       <dd className="mt-1 text-2xl text-ink">
                         {stat ? (
                           <Counter
@@ -108,12 +108,12 @@ export function Hero() {
                     />
                     <div>
                       <p className="font-medium text-ink">{title}</p>
-                      <p className="text-stone">{sub}</p>
+                      <p className="text-slate">{sub}</p>
                     </div>
                   </li>
                 ))}
               </ul>
-              <div className="mt-6 flex items-center justify-between border-t border-hairline pt-4 text-xs text-stone">
+              <div className="mt-6 flex items-center justify-between border-t border-hairline pt-4 text-xs text-slate">
                 <span>180,000 sq ft of manufacturing</span>
                 <Link
                   href="/products"

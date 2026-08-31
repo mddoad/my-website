@@ -2,7 +2,7 @@
 
 import { useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
-import { getMotionComponent, type AsTag } from "./motion-helpers";
+import { MOTION_BY_TAG, type AsTag } from "./motion-helpers";
 import { revealItem } from "./Reveal";
 
 /**
@@ -61,7 +61,7 @@ export function Stagger({
   const reduced = useReducedMotion();
 
   if (reduced) {
-    const MotionTag = getMotionComponent(as);
+    const MotionTag = MOTION_BY_TAG[as];
     return <MotionTag className={className}>{children}</MotionTag>;
   }
 
@@ -77,7 +77,7 @@ export function Stagger({
     },
   };
 
-  const MotionTag = getMotionComponent(as);
+  const MotionTag = MOTION_BY_TAG[as];
 
   return (
     <MotionTag

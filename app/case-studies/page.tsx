@@ -71,7 +71,7 @@ export default function CaseStudiesPage() {
                     <dl className="mt-5 grid grid-cols-3 gap-3 border-t border-hairline pt-4 text-xs">
                       {cs.metrics.map((m) => (
                         <div key={m.label}>
-                          <dt className="text-stone">{m.label}</dt>
+                          <dt className="text-slate">{m.label}</dt>
                           <dd className="mt-1 text-base font-semibold text-ink">
                             {m.value}
                           </dd>
@@ -101,7 +101,7 @@ export default function CaseStudiesPage() {
                 align="center"
                 eyebrow="Let&rsquo;s go"
                 tone="inverted"
-                className="text-3xl font-semibold sm:text-4xl"
+              size="cta"
               >
                 Want a program like this on your side?
               </Heading>

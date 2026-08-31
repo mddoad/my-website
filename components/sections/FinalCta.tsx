@@ -16,7 +16,7 @@ export function FinalCta() {
               align="center"
               eyebrow="Ready when you are"
               tone="inverted"
-              className="text-3xl font-semibold sm:text-4xl"
+              size="cta"
             >
               Tell us about your program.
             </Heading>

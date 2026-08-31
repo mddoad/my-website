@@ -65,7 +65,7 @@ export default async function IndustryDetailPage({
 
       <Section padding="lg">
         <Container size="wide">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
             <Link href="/industries" className="hover:text-ink">
               Industries
             </Link>{" "}
@@ -135,7 +135,7 @@ export default async function IndustryDetailPage({
               {related.map((cs) => (
                 <Reveal as="li" key={cs.slug}>
                   <Card as="article" className="h-full p-6">
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate">
                       {cs.industry} · {cs.year}
                     </p>
                     <h3 className="mt-3 text-xl font-semibold text-ink">
@@ -165,7 +165,7 @@ export default async function IndustryDetailPage({
                 align="center"
                 eyebrow={industry.name}
                 tone="inverted"
-                className="text-3xl font-semibold sm:text-4xl"
+              size="cta"
               >
                 Building for {industry.name.toLowerCase()}?
               </Heading>

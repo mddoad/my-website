@@ -33,7 +33,7 @@ export function CapabilitiesPreview() {
                 <h3 className="text-lg font-semibold text-ink">
                   {s.name}
                 </h3>
-                <p className="mt-2 text-sm text-stone">{s.short}</p>
+                <p className="mt-2 text-sm text-slate">{s.short}</p>
                 <ul className="mt-4 space-y-1.5 text-sm text-slate">
                   {s.capabilities.slice(0, 3).map((c) => (
                     <li key={c} className="flex gap-2">
